@@ -15,10 +15,27 @@ import SignupForm from './components/SignupForm'
 class App extends Component {
 
   state = {
+    username: null,
+
+    // ON home page
     searchQuery: "",
     bookResults: [],
+
+
     selectedBook: null,
-    userBooks: []
+
+
+
+    userBooks: [],
+    finishedReading: [],
+    currentlyReading: [],
+    
+    ProfileBox: []
+
+  }
+
+  addUserBooks = () => {
+    // pass down to component that needs to sue it
   }
 
   getBooks = (query) => {
@@ -38,6 +55,7 @@ class App extends Component {
     this.setState({ searchQuery: e.target.value })
   }
 
+  // SHOW BOOK
   selectBook = selectedBook => {
     this.setState({ selectedBook })
   }
@@ -46,9 +64,18 @@ class App extends Component {
     this.setState({ selectedBook: null })
   }
 
+
   // USER PROFILE
   addBookToUser = (book) => {
     this.setState({ userBooks: [...this.state.userBooks, book] })
+  }
+
+  removeBookFromUser = (title) => { 
+    const userBooks = [...this.state.userBooks]
+    const updatedUserBooks = userBooks.filter(book => book.title !== title)
+    this.setState({
+      userBooks: updatedUserBooks
+    })
   }
 
   // USER SIGNUP
@@ -66,7 +93,12 @@ class App extends Component {
         <div >
           <Navbar />
           <Route exact path='/profile' render={(routerProps) => 
-            <UserProfile {...routerProps} books={this.state.userBooks} /> }
+            <UserProfile {...routerProps}
+            books={this.state.userBooks} 
+            removeBookFromUser={this.removeBookFromUser}
+            // selectedBook={this.state.selectedBook}
+            // selectBook={this.selectBook}
+            /> }
           />
           <Route 
             exact path='/home'
@@ -77,6 +109,10 @@ class App extends Component {
                 selectBook={this.selectBook}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit} 
+                addBookToUser={this.addBookToUser}
+                deselectBook={this.deselectBook}
+                userBooks={this.state.userBooks}
+                removeBookFromUser={this.removeBookFromUser}
               />
             }
           />
@@ -88,8 +124,15 @@ class App extends Component {
               />
             }
           />
+          <div>
+            <h1>Welcome to the International Book Database (IBDB)</h1>
+            <div>
+              <img src="https://media.giphy.com/media/3o85xBwvWcj1Z11Gda/giphy.gif" />
+            </div>
+         </div>
         </div>
       </Router>
+      
         
         
       

@@ -42,7 +42,8 @@ import TextField from '@material-ui/core/TextField';
 
 const styles = {
   card: {
-    maxWidth: 345,
+    width: 200,
+    maxHeight: 400
   },
   media: {
     height: 140,
@@ -51,94 +52,56 @@ const styles = {
 
 class MediaCard extends React.Component {
 
+  
+
 
     render() {
-        const { classes, book } = this.props;
-  return (
-    <Card className={classes.card}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={
-            
-                book.image ?
-                book.image :
-                './comingsoon.jpeg'
+
+      console.log(this.props)
+
+      const { classes, book } = this.props;
+
+
+
+      return (
+        <Card className={classes.card}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={
                 
-          }
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-          {book.title}
-          </Typography>
-          <Typography component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary"  onClick={() => this.props.selectBook(book)} >
-             See more details
-        </Button>
-        <TextField
-          id="standard-password-input"
-          label="Password"
-          className={classes.textField}
-          type="password"
-          autoComplete="current-password"
-          margin="normal"
-        />
-      </CardActions>
-    </Card>
-  );
-    }
+                    book.image ?
+                    book.image :
+                    './comingsoon.jpeg'
+                    
+              }
+              title="Contemplative Reptile"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+              {book.title}
+              </Typography>
+              {/* <Typography component="p">
+                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                across all continents except Antarctica
+              </Typography> */}
+            </CardContent>
+          </CardActionArea>
+          <CardActions>
+            <Button size="small" color="primary"  onClick={() => this.props.selectBook(book)} >
+                See more details
+            </Button>
+            {
+              this.props.books ?
+              this.props.books.includes(book) && <Button onClick={() => this.props.removeBookFromUser(book.title)}>Remove from Read list</Button> :
+              null
+            }
+          </CardActions>
+        </Card>
+      );
+        }
 
 }
-
-// function MediaCard(props) {
-//   const { classes, book } = props;
-//   return (
-//     <Card className={classes.card}>
-//       <CardActionArea>
-//         <CardMedia
-//           className={classes.media}
-//           image={
-            
-//                 book.image ?
-//                 book.image :
-//                 './comingsoon.jpeg'
-                
-//           }
-//           title="Contemplative Reptile"
-//         />
-//         <CardContent>
-//           <Typography gutterBottom variant="h5" component="h2">
-//           {book.title}
-//           </Typography>
-//           <Typography component="p">
-//             Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-//             across all continents except Antarctica
-//           </Typography>
-//         </CardContent>
-//       </CardActionArea>
-//       <CardActions>
-//         <Button size="small" color="primary"  onClick={() => props.selectBook(book)} >
-//              See more details
-//         </Button>
-//         <TextField
-//           id="standard-password-input"
-//           label="Password"
-//           className={classes.textField}
-//           type="password"
-//           autoComplete="current-password"
-//           margin="normal"
-//         />
-//       </CardActions>
-//     </Card>
-//   );
-// }
 
 MediaCard.propTypes = {
   classes: PropTypes.object.isRequired,

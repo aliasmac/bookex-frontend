@@ -78,38 +78,25 @@ const styles = theme => ({
   },
 });
 
-const currencies = [
-  {
-    value: 'USD',
-    label: '$',
-  },
-  {
-    value: 'EUR',
-    label: '€',
-  },
-  {
-    value: 'BTC',
-    label: '฿',
-  },
-  {
-    value: 'JPY',
-    label: '¥',
-  },
-];
 
 class TextFields extends React.Component {
+  
   state = {
-    name: 'Cat in the Hat',
-    age: '',
-    multiline: 'Controlled',
-    currency: 'EUR',
+    name: "",
+    password: ""
   };
 
-  handleChange = name => event => {
+  handleChange = e => {
     this.setState({
-      [name]: event.target.value,
+      [e.target.name]: [e.target.value]
     });
   };
+
+  handleSubmit = event => {
+    event.preventDefault()
+    if (!this.state.username || !this.state.password) return
+    this.props.onSubmit(this.state)
+  }
 
   render() {
     const { classes } = this.props;
@@ -132,13 +119,13 @@ class TextFields extends React.Component {
           autoComplete="current-password"
           margin="normal"
         />
-        <TextField
+        {/* <TextField
           id="standard-search"
           label="Search field"
           type="search"
           className={classes.textField}
           margin="normal"
-        />
+        /> */}
       </form>
     );
   }

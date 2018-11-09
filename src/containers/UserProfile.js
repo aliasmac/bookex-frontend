@@ -7,10 +7,10 @@ class UserProfile extends React.Component {
 
     constructor(props) {
         super(props)
-        // state = {
-            
-        // }
+        
     }
+
+    // FETCH USER PROFILE
 
     render() {
 
@@ -18,9 +18,16 @@ class UserProfile extends React.Component {
 
         return (
             <div>
-                <ProfileBox />
-                {/* <ReadList /> */}
-                <ToReadList books={books} />
+                {/* <ProfileBox /> */}
+                <ToReadList
+                    books={books}
+                    removeBookFromUser={this.props.removeBookFromUser}
+                    selectedBook={this.props.selectedBook}
+                    selectBook={this.props.selectBook}
+                />
+                {/* <CurrentlyReading />
+                <FinsishedReading /> */}
+
                 
             </div>
             

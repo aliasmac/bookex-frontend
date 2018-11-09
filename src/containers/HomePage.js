@@ -20,7 +20,10 @@ class HomePage extends React.Component {
             this.props.selectedBook ? 
             <BookDetails
                 book={this.props.selectedBook}
+                addBookToUser={this.props.addBookToUser}
                 deselectBook={this.props.deselectBook}
+                userBooks={this.props.userBooks}
+                removeBookFromUser={this.props.removeBookFromUser}
             /> :
             <BookResults
                 className="results"

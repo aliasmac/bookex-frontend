@@ -24,7 +24,13 @@ const BookDetails = (props) => {
             <div>
                 <p>ISBN: {props.book.ISBN_13}</p>
             </div>
-            <button onClick={() => props.addBookToUser(props.book)} >Add to your read list</button>
+            {
+                props.userBooks.includes(props.book) ? 
+                <button onClick={() => props.removeBookFromUser(props.book.title)} >Remove from your reading list</button> :
+                <button onClick={() => props.addBookToUser(props.book)} >Add to your read list</button> 
+                
+            }
+            <button onClick={() => props.deselectBook()} >Back to search results</button>
 
         </div>
     )
