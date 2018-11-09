@@ -4,6 +4,8 @@ import Book from './Book'
 
 
 const BookResults = (props) => {
+    
+    console.log("BOOK RESULTS", props)
 
     return (
         <div className="results">

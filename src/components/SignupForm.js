@@ -1,58 +1,3 @@
-// import React from 'react'
-
-// class SignupForm extends React.Component {
-
-//     constructor(props) {
-//         super(props)
-
-//         this.state = {
-//             username: '',
-//             password: ''
-//           };
-
-//     }
-
-//     handlechange = (e) => {
-//         this.setState({
-//             [e.target.name]: [e.target.value]
-//         })
-//     }
-
-//     handleSubmit = () => {
-
-//     }
-
-//     render() {
-//         return (
-//             <form>
-//                 <div>
-//                     <label>Name</label>
-//                     <input
-//                         name="name"
-//                         type="text"
-//                         onChange={this.handleChange}
-//                         value={this.state.username}
-//                     />
-//                 </div>
-//                 <div>
-//                     <label>Password</label>
-//                     <input
-//                         name="password"
-//                         type="password"
-//                         onChange={this.handleChange}
-//                         value={this.state.password}
-//                     />
-//                 </div>
-//                 <button>Sign Up</button>
-//             </form>
-//         )
-//     }
-
-// }
-
-// export default SignupForm 
-
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -104,20 +49,18 @@ class TextFields extends React.Component {
     return (
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
-          id="standard-name"
-          label="Name"
-          className={classes.textField}
-          value={this.state.name}
-          onChange={this.handleChange('name')}
-          margin="normal"
+          name="name"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.username}
+          placeholder="Enter name"
         />
         <TextField
-          id="standard-password-input"
-          label="Password"
-          className={classes.textField}
+          name="password"
           type="password"
-          autoComplete="current-password"
-          margin="normal"
+          onChange={this.handleChange}
+          value={this.state.password}
+          placeholder="Enter password"
         />
         {/* <TextField
           id="standard-search"
