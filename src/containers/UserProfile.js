@@ -1,12 +1,15 @@
 import React from 'react'
 
+import ToReadList from '../components/ToReadList'
+import ProfileBox from '../components/ProfileBox'
+
 class UserProfile extends React.Component {
 
     constructor(props) {
         super(props)
-        state = {
-
-        }
+        // state = {
+            
+        // }
     }
 
     render() {
@@ -15,9 +18,10 @@ class UserProfile extends React.Component {
 
         return (
             <div>
-                <ReadList />
+                <ProfileBox />
+                {/* <ReadList /> */}
                 <ToReadList books={books} />
-                <Profile />
+                
             </div>
             
         )

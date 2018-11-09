@@ -9,12 +9,12 @@ const BookDetails = (props) => {
         <div className="book-details"> 
             <div>
                 <h2>{props.book.title}</h2>
-                <h3>Authors:</h3>{props.book.authors.map((author, idx) => <h3 key={idx} >{author}</h3>)}
+                <h3>Authors: {props.book.author}</h3>
             </div>
             <div>
                 <img src={
-                    props.book.imageLinks ?
-                    props.book.imageLinks.thumbnail :
+                    props.book.image ?
+                    props.book.image :
                     './comingsoon.jpeg'} 
                 />            
             </div>
@@ -22,7 +22,7 @@ const BookDetails = (props) => {
                 <p>{props.book.description}</p>
             </div>
             <div>
-                <p>{props.book.ISBN_13}</p>
+                <p>ISBN: {props.book.ISBN_13}</p>
             </div>
             <button onClick={() => props.addBookToUser(props.book)} >Add to your read list</button>
 

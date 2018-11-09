@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
 
-import Navbar from './components/Navbar'
-import SearchBar from './components/SearchBar'
-import BookResults from './components/BookResults'
-import BookDetails from './components/BookDetails'
+
 import UserProfile from './containers/UserProfile'
+import HomePage from './containers/HomePage'
+import Navbar from './components/Navbar'
+import SignupForm from './components/SignupForm'
 
 
 class App extends Component {
@@ -18,15 +22,14 @@ class App extends Component {
   }
 
   getBooks = (query) => {
-    console.log(query)
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`)
+    fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)
       .then(resp => resp.json())
-      .then(books => this.setState({ bookResults: books.items.volumeInfo }))
+      .then(books => this.setState({ bookResults: books }))
   }
 
+  // Search
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("Hello")
     this.getBooks(this.state.searchQuery)
   }
 
@@ -48,31 +51,55 @@ class App extends Component {
     this.setState({ userBooks: [...this.state.userBooks, book] })
   }
 
+  // USER SIGNUP
+  addUser = (user) => {
+    
+  }
 
   render() {
 
-    console.log(this.state.bookResults)
+    console.log("BOOKS RESULTS", this.state.bookResults)
 
     return (
-      <div className="homepage" >
-        {/* <Navbar /> */}
-        <SearchBar className="search-bar" handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-        <UserProfile books={this.state.userBooks} />
-        {
-          this.state.selectedBook ? 
-          <BookDetails
-            book={this.state.selectedBook}
-            deselectBook={this.deselectBook}
-          /> :
-          <BookResults
-            className="results"
-            books={this.state.bookResults}
-            selectBook={this.selectBook}
+      
+      <Router>
+        <div >
+          <Navbar />
+          <Route exact path='/profile' render={(routerProps) => 
+            <UserProfile {...routerProps} books={this.state.userBooks} /> }
           />
-        }
-      </div>
+          <Route 
+            exact path='/home'
+            render={(routerProps) => 
+              <HomePage {...routerProps}  
+                selectedBook={this.state.selectedBook}
+                bookResults={this.state.bookResults}
+                selectBook={this.selectBook}
+                handleChange={this.handleChange}
+                handleSubmit={this.handleSubmit} 
+              />
+            }
+          />
+          <Route
+            exact path='/signup'
+            render={(routerProps) => 
+              <SignupForm {...routerProps}
+
+              />
+            }
+          />
+        </div>
+      </Router>
+        
+        
+      
     );
   }
 }
 
 export default App;
+
+
+
+
+
