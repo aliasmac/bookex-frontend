@@ -53,8 +53,10 @@ class HomePage extends React.Component {
                 className="results"
                 books={this.state.bookResults}
                 selectBook={this.props.selectBook}
-            />
+            /> & 
+            // <PopularBooks />
             }
+
         </div>
 
         )

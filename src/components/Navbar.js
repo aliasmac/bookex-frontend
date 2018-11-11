@@ -18,9 +18,9 @@ const NavBar = () => {
       </NavLink>
       <NavLink
         style={{ marginRight: '10px' }} 
-        to="/signup"
+        to="/login"
       >
-         Signup 
+         Login 
       </NavLink>
     </div>
   );

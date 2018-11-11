@@ -10,21 +10,46 @@ import UserProfile from './containers/UserProfile'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
-
+import Header from './components/Header'
 
 class App extends Component {
 
   state = {
     username: null,
 
-    
     selectedBook: null,
+    // wishlist:
     userBooks: [],
     finishedReading: [],
+    favorites: [],
     currentlyReading: [],
     ProfileBox: []
 
   }
+
+  // USER LOGIN/LOGOUT
+  login = (user) => {
+    console.log("LOGIN:", user)
+    this.setState({ username: user.user.username })
+    // this.props.history.push('/profile')
+  }
+
+  logout = () => {
+    localStorage.removeItem('token')
+    this.setState({ username: null })
+    // this.props.history.push('/users/login')
+  }
+
+  // componentDidMount() {
+  //   if (!localStorage.getItem('token')) return
+  //   API.validate()
+  //     .then(user => {
+  //       this.signin(user)
+  //       this.props.history.push('/inventory')
+  //     })
+  //     .catch(error => this.props.history.push('/signin'))
+  // }
+
 
   // Reading List
   addBookToUser = (book) => {
@@ -67,23 +92,27 @@ class App extends Component {
     this.setState({ selectedBook: null })
   }  
 
-  // USER SIGNUP
-  addUser = (user) => {
-    
-  }
 
   render() {
 
     console.log("BOOKS RESULTS", this.state.bookResults)
+    console.log("USERNAME:", this.state.username)
+
+    const { username } = this.state
 
     return (
       
       <Router>
         <div >
           <Navbar />
+          <Header username={username} logout={this.logout} />
+                    
           <Route exact path='/profile' render={(routerProps) => 
             <UserProfile {...routerProps}
             userBooks={this.state.userBooks} 
+            favorites={this.state.favorites}
+            finishedReading={this.state.finishedReading}
+            currentlyReading={this.state.currentlyReading}
             removeBookFromUser={this.removeBookFromUser}
             selectedBook={this.state.selectedBook}
             selectBook={this.selectBook}
@@ -101,17 +130,14 @@ class App extends Component {
                 removeBookFromUser={this.removeBookFromUser}
               />
             }
-          />
+          /> 
           <Route
-            exact path='/signup'
-            render={(routerProps) =>  <SignupForm {...routerProps} /> }
+            exact path='/login'
+            render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
           />
-          <div>
-            <h1>Welcome to the International Book Database (IBDB)</h1>
-            <div>
-              <img src="https://media.giphy.com/media/3o85xBwvWcj1Z11Gda/giphy.gif" />
-            </div>
-         </div>
+          
+          
+          
         </div>
       </Router>
       

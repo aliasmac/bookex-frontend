@@ -30,11 +30,16 @@ class UserProfile extends React.Component {
                         removeBookFromUser={this.props.removeBookFromUser}
                     /> :
                     <ToReadList
-                    userBooks={userBooks}
-                    removeBookFromUser={this.props.removeBookFromUser}
-                    selectedBook={this.props.selectedBook}
-                    selectBook={this.props.selectBook}
-                />
+                        userBooks={userBooks}
+                        removeBookFromUser={this.props.removeBookFromUser}
+                        selectedBook={this.props.selectedBook}
+                        selectBook={this.props.selectBook}
+                    />
+                    <CurrentlyReading
+                    
+                    />
+                    <Favorites
+                    />
                     
                 }
                 

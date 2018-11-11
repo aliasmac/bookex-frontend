@@ -4,6 +4,9 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button'
+
+import API from '../API'
 
 const styles = theme => ({
   container: {
@@ -27,21 +30,28 @@ const styles = theme => ({
 class TextFields extends React.Component {
   
   state = {
-    name: "",
+    username: "",
     password: ""
   };
 
   handleChange = e => {
-    this.setState({
-      [e.target.name]: [e.target.value]
-    });
+    this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = event => {
-    event.preventDefault()
-    if (!this.state.username || !this.state.password) return
-    this.props.onSubmit(this.state)
+  handleSubmit = () => {
+    const { username, password } = this.state
+    let token 
+    API.signup(username, password)
+      .then(data => {
+          if (data.error) {
+            alert('Wrong!')
+          } else {
+            console.log(data)
+            this.props.login(data)
+          }
+        })
   }
+
 
   render() {
     const { classes } = this.props;
@@ -49,12 +59,13 @@ class TextFields extends React.Component {
     return (
       <form className={classes.container} noValidate autoComplete="off">
         <TextField
-          name="name"
+          name="username"
           type="text"
           onChange={this.handleChange}
           value={this.state.username}
-          placeholder="Enter name"
+          placeholder="Enter username"
         />
+        <br/>
         <TextField
           name="password"
           type="password"
@@ -62,6 +73,7 @@ class TextFields extends React.Component {
           value={this.state.password}
           placeholder="Enter password"
         />
+        <br/>
         {/* <TextField
           id="standard-search"
           label="Search field"
@@ -69,6 +81,9 @@ class TextFields extends React.Component {
           className={classes.textField}
           margin="normal"
         /> */}
+        <Button onClick={this.handleSubmit} variant='contained' color='primary'>
+          SUBMIT
+        </Button>
       </form>
     );
   }
@@ -79,3 +94,5 @@ TextFields.propTypes = {
 };
 
 export default withStyles(styles)(TextFields);
+
+

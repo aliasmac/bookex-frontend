@@ -18,3 +18,12 @@
 .book-details {
   width: 300px;
 }
+
+.app-header {
+  height: 250px;
+  background: gold;
+}
+
+.gif {
+  height: 100px;
+}
