@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "./App.css";
 import {
-  BrowserRouter as Router,
   Route,
   withRouter,
   Switch
@@ -20,8 +19,7 @@ class App extends Component {
   state = {
     username: null,
     // wishlist:
-    userBooks: [],
-    
+    userBooks: []
   }
 
   // USER LOGIN/LOGOUT
@@ -49,7 +47,6 @@ class App extends Component {
       .catch(error => this.props.history.push('/signup'))
   }
 
-
   // Reading List
   addBookToUser = (book) => {
     this.setState({ userBooks: [...this.state.userBooks, book] })
@@ -71,8 +68,7 @@ class App extends Component {
     const { username } = this.state
 
     return (
-      
-      
+    
         <div >
           <Navbar username={username} />
           <Header username={username} logout={this.logout} />   
@@ -80,7 +76,7 @@ class App extends Component {
           <Route path='/profile' render={(routerProps) => 
             <UserProfile {...routerProps}
             userBooks={this.state.userBooks} 
-            favorites={this.state.favorites}
+            favourite_books={this.state.favorites}
             finishedReading={this.state.finishedReading}
             currentlyReading={this.state.currentlyReading}
             removeBookFromUser={this.removeBookFromUser}
@@ -89,7 +85,7 @@ class App extends Component {
             /> }
           />
           <Route 
-            path='/home'
+            path='/'
             render={(routerProps) => 
               <HomePage {...routerProps}  
                 selectedBook={this.state.selectedBook}
@@ -111,12 +107,7 @@ class App extends Component {
           />
           </Switch>
              
-          
         </div>
-      
-      
-        
-        
       
     );
   }

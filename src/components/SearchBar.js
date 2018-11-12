@@ -1,22 +1,37 @@
 import React from 'react'
 
-const SearchBar = (props) => {
+class SearchBar extends React.Component {
 
-    
+  state = {
+    searchQuery: ""
+  }
+
+  handleChange = (e) => {
+    this.setState({ searchQuery: e.target.value })
+  }  
+
+  handleSubmit = e => {
+    e.preventDefault()
+    this.props.submitSearch(this.state.searchQuery)
+  }
+
+  render() {
+
     return (
         <div>
-            <form onSubmit={(e) => props.handleSubmit(e)} >
+            <form onSubmit={this.handleSubmit} className={'search'}>
                 <input
                     placeholder="Search for books"
                     type="text"
                     name="searchQuery"
-                    onChange={(e) => props.handleChange(e)}
+                    value={this.state.searchQuery}
+                    onChange={this.handleChange}
                 />
                 <button>Search</button>
-            </form>
-            
+            </form> 
         </div>
     )
+    }
 
 }
 

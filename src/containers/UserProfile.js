@@ -6,8 +6,8 @@ import BookDetails from '../components/BookDetails'
 
 class UserProfile extends React.Component {
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
 
         this.state = {
             finishedReading: [],
@@ -15,8 +15,6 @@ class UserProfile extends React.Component {
             currentlyReading: [],
             ProfileBox: []
         }
-   
-        
     }
 
     // Finished Reading List
