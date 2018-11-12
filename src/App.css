@@ -10,13 +10,17 @@ body {
   width: 70%;
 }
 
+.main-content {
+  margin-top: 50px;
+}
+
 .main-body {
   display: flex;
 }
 
 /* POPULAR BOOKS */
 .pop-books-div {
-  background: #7DCEA0;
+  background: whitesmoke;
   width: 30%;
   padding: 0.5rem;
 }
@@ -34,10 +38,29 @@ body {
   width: 100%;
   left: 0;
   top: 0;
-  background: white;
-  height: 30px;
+  padding: 15px;
+  background: #D1DFD1;
+  color: black;
+  height: 60px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+
+.navbar a {
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-transition-duration: 0.2s; 
+  transition-duration: 0.2s;
+}
+
+.navbar a:hover {
+  background: #DEEADE;
 }
 
 .results {
@@ -67,6 +90,8 @@ body {
   cursor: pointer;
   -webkit-transition-duration: 0.2s; 
   transition-duration: 0.2s;
+  text-align: center;
+  padding: 6px;
 }
 
 .card-btn:focus {
@@ -78,6 +103,17 @@ body {
   color: white
 }
 
+.btn-wanted {
+  border: #7DCEA0 solid 1px;
+  background-color: #80D681;
+  color: white
+}
+
+.btn-wanted:hover {
+  background-color: white;
+  color: #80D681;
+}
+
 .btn-green {
   border: #7DCEA0 solid 1px;
 }
@@ -85,6 +121,17 @@ body {
 .btn-green:hover {
   background-color: #80D681;
   color: white
+}
+
+.btn-favourite {
+  background-color: #F1948A ;
+  border: #EC7063 solid 1px;
+  color: white;
+}
+
+.btn-favourite:hover {
+  background-color: white;
+  color: #EC7063;
 }
 
 .btn-red {
@@ -104,7 +151,7 @@ body {
 .app-header {
   display: flex;
   height: 7rem;
-  padding-top: 30px;
+  padding-top: 50px;
   background: gold;
 }
 

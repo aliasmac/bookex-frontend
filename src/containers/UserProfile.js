@@ -8,7 +8,7 @@ class UserProfile extends React.Component {
 
     render() {
 
-      const {selectedBook, selectBook, deselectBook, user, addBookToList, removeBookFromList} = this.props
+      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite} = this.props
 
         return (
             <div>
@@ -19,14 +19,14 @@ class UserProfile extends React.Component {
                         book={selectedBook}
                         deselectBook={deselectBook}
                         user={user}
-                        addBookToList={addBookToList}
-                        removeBookFromList={removeBookFromList}
+                        handleWant={handleWant}
+                        handleFavourite={handleFavourite}
                     /> :
                     user ? 
                     <Wishlist
                         user={user}
-                        addBookToList={addBookToList}
-                        removeBookFromList={removeBookFromList}
+                        handleWant={handleWant}
+                        handleFavourite={handleFavourite}
                         selectedBook={selectedBook}
                         selectBook={selectBook}
                     /> : null

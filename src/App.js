@@ -11,7 +11,7 @@ import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
 import LoginForm from './components/LoginForm'
-import Header from './components/Header'
+// import Header from './components/Header'
 import API from './API';
 
 class App extends Component {
@@ -46,6 +46,27 @@ class App extends Component {
 
   }
 
+  handleWant = book => {
+    console.log(book)
+    this.state.user.wishlist.some(
+      x => x.ISBN_13 == book.ISBN_13
+    )
+    ?
+    this.removeBookFromList(book, 'wishlist')
+    :
+    this.addBookToList(book, 'wishlist')
+  }
+
+  handleFavourite = book => {
+    this.state.user.favourite_books.some(
+      x => x.ISBN_13 == book.ISBN_13
+    )
+    ?
+    this.removeBookFromList(book, 'favourite_books')
+    :
+    this.addBookToList(book, 'favourite_books')
+  }
+
   addBookToList = (book, list) => { 
     const newList = [...this.state.user[list], book]
     this.setState( {
@@ -57,7 +78,7 @@ class App extends Component {
 
   removeBookFromList = (book, list) => { 
     let newList = [...this.state.user[list]]
-    newList = newList.filter(x => book.ISBN_13 !== x.ISBN_13)
+    newList = newList.filter(x => book.ISBN_13 != x.ISBN_13)
     this.deselectBook()
     this.setState({
       user: { ...this.state.user, [list]: newList }
@@ -85,19 +106,20 @@ class App extends Component {
     return (
     
         <div >
-          <Navbar user={user} />
-          <Header user={user} logout={this.logout} />  
+          <Navbar user={user} logout={this.logout}/>
+          <div class='main-content'>
           <Switch>
+            {user &&
           <Route path='/profile' render={(routerProps) => 
             <UserProfile {...routerProps}
             user={user}
-            removeBookFromList={this.removeBookFromList}
-            selectedBook={selectedBook}
+            handleWant={this.handleWant}
+            handleFavourite={this.handleFavourite}
             selectBook={this.selectBook}
             deselectBook={this.deselectBook}
-            addBookToList={this.addBookToList}
             /> }
           />
+            }
           <Route
             path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
@@ -111,18 +133,17 @@ class App extends Component {
             path='/'
             render={(routerProps) =>
               <HomePage {...routerProps}
-                // STATE:
                 selectedBook={this.state.selectedBook}
-                // FUNCTIONS TO ADD/REMOVE STATE:
                 selectBook={this.selectBook}
                 deselectBook={this.deselectBook}
-                addBookToList={this.addBookToList}
-                removeBookFromList={this.removeBookFromList}
+                handleWant={this.handleWant}
+                handleFavourite={this.handleFavourite}
                 user={user}
               />
           }
+
         />  
-             
+         </div>
         </div>
       
     );

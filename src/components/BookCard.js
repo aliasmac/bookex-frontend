@@ -7,12 +7,22 @@ class BookCard extends React.Component {
 
     render() {
 
-      const { book, handleWant, wanted, books } = this.props
+      const { book, handleWant, handleFavourite, user } = this.props
+
+      let favourite
+      let wanted
+
+      if (user.wishlist.some(x => x.ISBN_13 == book.ISBN_13)) {
+        wanted = true
+      }
+      
+      if (user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
+        favourite = true
+      }
 
       return (
         <Card className={'book-card'}>
-            <img
-              className={'book-image'}
+            <img className={'book-image'}
               src={
                     book.image ?
                     book.image :
@@ -26,20 +36,18 @@ class BookCard extends React.Component {
               Info
             </button>
 
-            <button className={'card-btn btn-red'}
-              onClick={() => addBookToList(book, 'favourite_books')} >
+            <button 
+            className={'card-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
+              onClick={() => handleFavourite(book)} >
               &#10084;
             </button>
-            <button className={'card-btn btn-green'}
-               onClick={handleWant} >
+
+            <button 
+            className={'card-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) }
+               onClick={() => handleWant(book)} >
               { wanted ? 'Unwant' : 'Want'}
             </button>
 
-            {
-              books &&
-                books.includes(book) &&
-                  <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button>
-            }
           </CardActions>
         </Card>
       );
