@@ -1,64 +1,35 @@
 import React from 'react'
 
-import ToReadList from '../components/ToReadList'
+import Wishlist from '../components/Wishlist'
 import ProfileBox from '../components/ProfileBox'
 import BookDetails from '../components/BookDetails'
 
 class UserProfile extends React.Component {
 
-    constructor() {
-        super()
-
-        this.state = {
-            finishedReading: [],
-            favorites: [],
-            currentlyReading: [],
-            ProfileBox: []
-        }
-    }
-
-    // Finished Reading List
-    addToFinishReading = () => {
-
-    }
-
-    removeToFinishReading = () => {
-
-    }
-
-    // Currently Reading
-    addToCurrentlyReading = () => {
-
-    }
-
-    removeToCurrentlyReading = () => {
-
-    }
-
-    // FETCH USER PROFILE
-
     render() {
 
-        let { wishlist } = this.props;
+      const {selectedBook, selectBook, deselectBook, user, addBookToList, removeBookFromList} = this.props
 
         return (
             <div>
                 {/* <ProfileBox /> */}
                 {
-                    this.props.selectedBook ? 
+                    selectedBook ? 
                     <BookDetails
-                        book={this.props.selectedBook}
-                        deselectBook={this.props.deselectBook}
-                        wishlist={wishlist}
-                        addBookToUser={this.props.addBookToUser}
-                        removeBookFromUser={this.props.removeBookFromUser}
+                        book={selectedBook}
+                        deselectBook={deselectBook}
+                        user={user}
+                        addBookToList={addBookToList}
+                        removeBookFromList={removeBookFromList}
                     /> :
-                    <ToReadList
-                        wishlist={wishlist}
-                        removeBookFromUser={this.props.removeBookFromUser}
-                        selectedBook={this.props.selectedBook}
-                        selectBook={this.props.selectBook}
-                    />
+                    user ? 
+                    <Wishlist
+                        user={user}
+                        addBookToList={addBookToList}
+                        removeBookFromList={removeBookFromList}
+                        selectedBook={selectedBook}
+                        selectBook={selectBook}
+                    /> : null
                     // <CurrentlyReading
                     
                     // />
@@ -66,11 +37,7 @@ class UserProfile extends React.Component {
                     // />
                     
                 }
-                
-                {/* <CurrentlyReading />
-                <FinsishedReading /> */}
-
-                
+                              
             </div>
             
         )

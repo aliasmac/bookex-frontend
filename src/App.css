@@ -1,3 +1,7 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+
 .homepage {
   display: flex;
   flex-direction: column;
@@ -37,14 +41,19 @@
 }
 
 .results {
+<<<<<<< HEAD
   width: 70%;
+=======
+  width: 85%;
+>>>>>>> button-work
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .book-card {
-  margin: 20px;
+  margin: 30px;
   height: 350px;
   width: 200px;
   padding: 0px;
@@ -64,8 +73,12 @@
   transition-duration: 0.2s;
 }
 
+.card-btn:focus {
+  outline: none;
+}
+
 .btn-black:hover {
-  background: #7FB3D5;
+  background: #2480B8;
   color: white
 }
 
@@ -74,7 +87,7 @@
 }
 
 .btn-green:hover {
-  background-color: #7DCEA0;
+  background-color: #80D681;
   color: white
 }
 
@@ -103,3 +116,27 @@
   height: 100px;
 }
 
+.search {
+  display: inline;
+}
+
+.search input, .search button {
+  padding: 10px;
+  font-size: 1rem;
+  margin: 3px;
+  border: 1px solid grey;
+  border-radius: 6px;
+}
+
+.search-btn {
+  cursor: pointer;
+}
+
+.search-btn:focus {
+  outline: none;
+}
+
+.search-btn:hover {
+  background-color: #2480B8;
+  color: white;
+}

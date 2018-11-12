@@ -18,11 +18,7 @@ class App extends Component {
 
   state = {
     user: null,
-    // wishlist:
-    userBooks: [],
     selectedBook: null
-
-    
   }
 
   // USER LOGIN/LOGOUT
@@ -44,25 +40,30 @@ class App extends Component {
     API.validate()
       .then(user => {
         console.log("Component did mount:", user)
-        this.login(user)
-        // this.props.history.push('/profile')
+        this.setState({ user: user.user })
       })
       .catch(error => this.props.history.push('/'))
 
   }
 
-  // Reading List
-  addBookToUser = (book) => {
-    this.setState({ userBooks: [...this.state.userBooks, book] })
+  addBookToList = (book, list) => { 
+    const newList = [...this.state.user[list], book]
+    this.setState( {
+      user: { ...this.state.user, [list]: newList }
+    }, () => API.update(this.state.user)
+        .then(user => this.setState({ user: user.user }))
+    )
   }
 
-  removeBookFromUser = (title) => { 
-    const userBooks = [...this.state.userBooks]
-    const updatedUserBooks = userBooks.filter(book => book.title !== title)
+  removeBookFromList = (book, list) => { 
+    let newList = [...this.state.user[list]]
+    newList = newList.filter(x => book.ISBN_13 !== x.ISBN_13)
+    this.deselectBook()
     this.setState({
-      userBooks: updatedUserBooks
-    })
-    this.props.history.push('/profile')
+      user: { ...this.state.user, [list]: newList }
+    }, () => API.update(this.state.user)
+          .then(user => this.setState({ user: user.user }))
+    )
   } 
 
   // BOOK DETAILS 
@@ -70,18 +71,9 @@ class App extends Component {
     this.setState({ selectedBook }) 
   }
 
-  selectBookTwo = selectedBook => {
-    this.state.user ? this.setState({ selectedBook }) : alert("Please Signin to add to your wishlist") 
-    }
-   
-  selectBookThree = selectedBook => {
-    this.state.user ? this.setState({ selectedBook }) : alert("Please Signin to like a book!") 
-  }  
-
   deselectBook = () => {
     this.setState({ selectedBook: null })
   }  
-
 
   render() {
 
@@ -95,39 +87,17 @@ class App extends Component {
         <div >
           <Navbar user={user} />
           <Header user={user} logout={this.logout} />  
-          <Route 
-            exact path='/'
-            render={(routerProps) => 
-              <HomePage {...routerProps}  
-                // STATE:
-                selectedBook={this.state.selectedBook}
-                // FUNCTIONS TO ADD/REMOVE STATE:
-                selectBook={this.selectBook}
-                selectBookTwo={this.selectBookTwo}
-                selectBookThree={this.selectBookThree}
-                deselectBook={this.deselectBook}
-                //////////////////////////////////
-                addBookToUser={this.addBookToUser}
-                
-                wishlist={this.state.userBooks}
-                removeBookFromUser={this.removeBookFromUser}
-                isUser={user}
-              />
-            }
-          />  
           <Switch>
           <Route path='/profile' render={(routerProps) => 
             <UserProfile {...routerProps}
-            favourite_books={this.state.favourite_books}
-            wishlist={this.state.userBooks} 
-            currently_reading={this.state.currently_reading}
-            removeBookFromUser={this.removeBookFromUser}
-            // For BookDetails:
-            selectedBook={this.state.selectedBook}
+            user={user}
+            removeBookFromList={this.removeBookFromList}
+            selectedBook={selectedBook}
             selectBook={this.selectBook}
+            deselectBook={this.deselectBook}
+            addBookToList={this.addBookToList}
             /> }
           />
-           
           <Route
             path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
@@ -137,6 +107,21 @@ class App extends Component {
             render={(routerProps) =>  <LoginForm {...routerProps} login={this.login} /> }
           />
           </Switch>
+          <Route
+            path='/'
+            render={(routerProps) =>
+              <HomePage {...routerProps}
+                // STATE:
+                selectedBook={this.state.selectedBook}
+                // FUNCTIONS TO ADD/REMOVE STATE:
+                selectBook={this.selectBook}
+                deselectBook={this.deselectBook}
+                addBookToList={this.addBookToList}
+                removeBookFromList={this.removeBookFromList}
+                user={user}
+              />
+          }
+        />  
              
         </div>
       

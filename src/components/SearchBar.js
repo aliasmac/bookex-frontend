@@ -13,12 +13,13 @@ class SearchBar extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     this.props.submitSearch(this.state.searchQuery)
+    this.setState({ searchQuery: ""})
   }
 
   render() {
 
     return (
-        <div>
+        <div class="search">
             <form onSubmit={this.handleSubmit} className={'search'}>
                 <input
                     placeholder="Search for books"
@@ -27,8 +28,8 @@ class SearchBar extends React.Component {
                     value={this.state.searchQuery}
                     onChange={this.handleChange}
                 />
-                <button>Search</button>
-            </form> 
+                <button className='search-btn'>Search</button>
+            </form>
         </div>
     )
     }

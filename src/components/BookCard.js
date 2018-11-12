@@ -1,16 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
+import comingSoon from './comingsoon.jpeg'
 
 class BookCard extends React.Component {
 
     render() {
 
-      console.log("BOOKCARD:", this.props)
-      console.log("WISHLIST:", this.props.wishlist)
-
-      const { book } = this.props
+      const { book, addBookToList } = this.props
 
       return (
         <Card className={'book-card'}>
@@ -19,7 +16,7 @@ class BookCard extends React.Component {
               src={
                     book.image ?
                     book.image :
-                    './comingsoon.jpeg'
+                    comingSoon
               }
               alt={book.title}
             />
@@ -30,24 +27,17 @@ class BookCard extends React.Component {
             </button>
 
             <button className={'card-btn btn-red'}
-              onClick={() => this.props.selectBookThree(book)} >
+              onClick={() => addBookToList(book, 'favourite_books')} >
               &#10084;
             </button>
-            
-            { 
-              this.props.wishlist ?
-              this.props.wishlist.includes(book) && null :
-              <button
-                      className={'card-btn btn-green'}
-                      onClick={() => this.props.selectBookTwo(book)} >
-                      Want
-                      </button>
-              
-            }
+            <button className={'card-btn btn-green'}
+               onClick={() => addBookToList(book, 'wishlist')} >
+              Want
+            </button>
 
             {
-              this.props.wishlist ?
-              this.props.wishlist.includes(book) && <button onClick={() => this.props.removeBookFromUser(book.title)}>Remove from Read list</button> :
+              this.props.books ?
+              this.props.books.includes(book) && <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button> :
               null
             }
           </CardActions>

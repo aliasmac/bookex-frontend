@@ -43,8 +43,14 @@ class TextFields extends React.Component {
     const { username, password } = this.state
     API.login(username, password)
         .then(user => this.props.login(user))
-    this.state.username = ""
-    this.state.password = ""        
+        .catch(err => {
+          console.log('Invalid login caught')
+          this.props.history.push('/login')
+        })
+    this.setState({
+      username: '',
+      password: ''
+    }) 
   }
 
 

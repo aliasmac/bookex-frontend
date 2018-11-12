@@ -42,13 +42,15 @@ class TextFields extends React.Component {
     const { username, password } = this.state
     API.signup(username, password)
       .then(data => {
-          if (data.error) {
-            alert('Wrong!')
+          if (data.errmsg) {
+            console.log('Invalid signup caught')
+            this.props.history.push('/signup')
           } else {
             console.log(data)
             this.props.login(data)
           }
         })
+      .catch(err => console.log('Invalid signup caught'))
     this.setState({
       username: "",
       password: ""
