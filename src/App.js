@@ -18,9 +18,10 @@ import API from './API';
 class App extends Component {
 
   state = {
-    username: null,
+    user: null,
     // wishlist:
     userBooks: [],
+    selectedBook: null
     
   }
 
@@ -28,13 +29,13 @@ class App extends Component {
   login = (user) => {
     console.log("LOGIN:", user)
     this.props.history.push('/profile')
-    this.setState({ username: user.user })
+    this.setState({ user: user.user })
   }
 
   logout = () => {
     localStorage.removeItem('authorization')
-    this.setState({ username: null })
-    this.props.history.push('/login')
+    this.setState({ user: null })
+    this.props.history.push('/')
   }
 
   componentDidMount() {
@@ -42,7 +43,7 @@ class App extends Component {
     if (!localStorage.getItem('authorization')) return 
     API.validate()
       .then(user => {
-        console.log("Component did mount", user)
+        console.log("Component did mount:", user)
         this.login(user)
         // this.props.history.push('/profile')
       })
@@ -63,23 +64,61 @@ class App extends Component {
     })
   } 
 
+  // BOOK DETAILS 
+  selectBook = selectedBook => {
+    this.setState({ selectedBook }) 
+  }
+
+  selectBookTwo = selectedBook => {
+      this.props.isUser ? this.setState({ selectedBook }) : alert("Please Signin to add to your wishlist") 
+    }
+   
+  selectBookThree = selectedBook => {
+  this.props.isUser ? this.setState({ selectedBook }) : alert("Please Signin to like a book!") 
+  }  
+
+  deselectBook = () => {
+    this.setState({ selectedBook: null })
+  }  
+
+
   render() {
 
     console.log("BOOKS RESULTS", this.state.bookResults)
-    console.log("USERNAME:", this.state.username)
+    console.log("USER:", this.state.user)
 
-    const { username } = this.state
+    const { user, selectedBook } = this.state
 
     return (
       
       
         <div >
-          <Navbar username={username} />
-          <Header username={username} logout={this.logout} />   
+          <Navbar user={user} />
+          <Header user={user} logout={this.logout} />  
+          <Route 
+            exact path='/'
+            render={(routerProps) => 
+              <HomePage {...routerProps}  
+                // STATE:
+                selectedBook={this.state.selectedBook}
+                // FUNCTIONS TO ADD/REMOVE STATE:
+                selectBook={this.selectBook}
+                selectBookTwo={this.selectBookTwo}
+                selectBookThree={this.selectBookThree}
+                deselectBook={this.deselectBook}
+                //////////////////////////////////
+                addBookToUser={this.addBookToUser}
+                
+                wishlist={this.state.userBooks}
+                removeBookFromUser={this.removeBookFromUser}
+                isUser={user}
+              />
+            }
+          />  
           <Switch>
           <Route path='/profile' render={(routerProps) => 
             <UserProfile {...routerProps}
-            userBooks={this.state.userBooks} 
+            wishlist={this.state.userBooks} 
             favorites={this.state.favorites}
             finishedReading={this.state.finishedReading}
             currentlyReading={this.state.currentlyReading}
@@ -88,19 +127,7 @@ class App extends Component {
             selectBook={this.selectBook}
             /> }
           />
-          <Route 
-            path='/home'
-            render={(routerProps) => 
-              <HomePage {...routerProps}  
-                selectedBook={this.state.selectedBook}
-                selectBook={this.selectBook}
-                addBookToUser={this.addBookToUser}
-                deselectBook={this.deselectBook}
-                userBooks={this.state.userBooks}
-                removeBookFromUser={this.removeBookFromUser}
-              />
-            }
-          /> 
+          
           <Route
             path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }

@@ -41,7 +41,7 @@ class UserProfile extends React.Component {
 
     render() {
 
-        let { userBooks } = this.props;
+        let { wishlist } = this.props;
 
         return (
             <div>
@@ -51,12 +51,12 @@ class UserProfile extends React.Component {
                     <BookDetails
                         book={this.props.selectedBook}
                         deselectBook={this.props.deselectBook}
-                        userBooks={userBooks}
+                        wishlist={wishlist}
                         addBookToUser={this.props.addBookToUser}
                         removeBookFromUser={this.props.removeBookFromUser}
                     /> :
                     <ToReadList
-                        userBooks={userBooks}
+                        wishlist={wishlist}
                         removeBookFromUser={this.props.removeBookFromUser}
                         selectedBook={this.props.selectedBook}
                         selectBook={this.props.selectBook}

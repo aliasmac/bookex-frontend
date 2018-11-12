@@ -24,18 +24,14 @@ const BookDetails = (props) => {
             <div>
                 <p>ISBN: {props.book.ISBN_13}</p>
             </div>
-            {
-                props.userBooks.includes(props.book) ? 
-                <button onClick={() => props.removeBookFromUser(props.book.title)} >Remove from your reading list</button> :
-                <button onClick={() => {
+            { props.wishlist.includes(props.book) && <button onClick={() => props.removeBookFromUser(props.book.title)} >Remove from your reading list</button> }
+            { props.isUser && <button onClick={() => {
                     props.addBookToUser(props.book)
                     props.deselectBook()
                     }
-                } >Add to your read list</button> 
+                } >Add to your wishlist</button>  }
                 
-            }
 
-            
             <button onClick={() => props.deselectBook()} >Back to search results</button>
 
         </div>
@@ -44,4 +40,3 @@ const BookDetails = (props) => {
 
 
 export default BookDetails
-

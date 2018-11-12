@@ -7,13 +7,13 @@ const Header = props =>
     <img className="gif" src="https://media.giphy.com/media/3o85xBwvWcj1Z11Gda/giphy.gif" />
     <h2 className='App-title'>
       {
-        props.username ?
-          `Welcome back ${props.username.username}!` :
+        props.user ?
+          `Hi ${props.user.username}!` :
           `Welcome to the International Book Database (IBDB)`
       }
       <br />
       {
-        props.username &&
+        props.user &&
           <button onClick={props.logout}>SIGN OUT</button>
       }
     </h2>

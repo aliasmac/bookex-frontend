@@ -30,11 +30,11 @@ class MediaCard extends React.Component {
                 Details
             </Button>
             <Button size='small' variant="outlined" color="secondary" 
-             onClick={() => this.props.selectBook(book)} >
+             onClick={() => this.props.selectBookThree(book)} >
               &#10084;
             </Button>
             <Button size='small' variant="outlined" color="default"
-             onClick={() => this.props.selectBook(book)} >
+             onClick={() => this.props.selectBookTwo(book)} >
               Wishlist
             </Button>
             {

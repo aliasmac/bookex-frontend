@@ -31,33 +31,29 @@ class HomePage extends React.Component {
         this.setState({ searchQuery: e.target.value })
     }  
 
-    selectBook = selectedBook => {
-      this.setState({ selectedBook })
-    }
-
-    deselectBook = () => {
-      this.setState({ selectedBook: null })
-    }  
 
 
     render() {
         return(
         <div className="homepage" >
-            <h1>Search for the bestest book in the world</h1>
+            <h1>Search for the bestest books in the world</h1>
             <SearchBar className="search-bar" handleChange={this.handleChange} handleSubmit={this.handleSubmit} />   
             {
-            this.state.selectedBook ? 
+            this.props.selectedBook ? 
             <BookDetails
-                book={this.state.selectedBook}
-                deselectBook={this.deselectBook}
-                userBooks={this.props.userBooks}
+                book={this.props.selectedBook}
+                deselectBook={this.props.deselectBook}
+                wishlist={this.props.wishlist}
                 addBookToUser={this.props.addBookToUser}
                 removeBookFromUser={this.props.removeBookFromUser}
+                isUser={this.props.isUser}
             /> :
             <BookResults
                 className="results"
                 books={this.state.bookResults}
-                selectBook={this.selectBook}
+                selectBook={this.props.selectBook}
+                selectBookTwo={this.props.selectBookTwo}
+                selectBookThree={this.props.selectBookThree}
             /> 
             // <PopularBooks />
             }
