@@ -18,7 +18,10 @@ class HomePage extends React.Component {
     getBooks = (query) => {
         fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)
           .then(resp => resp.json())
-          .then(books => this.setState({ bookResults: books }))
+          .then(books => {
+            this.props.deselectBook()
+            this.setState({ bookResults: books })
+          })
           .catch(err => err)
       }
 
@@ -26,12 +29,9 @@ class HomePage extends React.Component {
         this.getBooks(query)
     }
 
-
-
     render() {
         return(
         <div className="homepage" >
-            <h1>Search for the bestest book in the world</h1>
             <SearchBar className="search-bar" 
               submitSearch={this.submitSearch} />   
             {
@@ -39,17 +39,16 @@ class HomePage extends React.Component {
             <BookDetails
                 book={this.props.selectedBook}
                 deselectBook={this.props.deselectBook}
-                wishlist={this.props.wishlist}
-                addBookToUser={this.props.addBookToUser}
-                removeBookFromUser={this.props.removeBookFromUser}
-                isUser={this.props.isUser}
+                user={this.props.user}
+                addBookToList={this.props.addBookToList}
+                removeBookFromList={this.props.removeBookFromList}
             /> :
             <BookResults
                 className="results"
                 books={this.state.bookResults}
                 selectBook={this.props.selectBook}
-                selectBookTwo={this.props.selectBookTwo}
-                selectBookThree={this.props.selectBookThree}
+                addBookToList={this.props.addBookToList}
+                removeBookFromList={this.props.removeBookFromList}
             /> 
             // <PopularBooks />
             }

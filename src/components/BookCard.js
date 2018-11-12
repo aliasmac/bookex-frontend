@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
+import comingSoon from './comingsoon.jpeg'
 
 class BookCard extends React.Component {
 
     render() {
 
-      console.log(this.props)
-
-      const { book } = this.props
+      const { book, addBookToList } = this.props
 
       return (
         <Card className={'book-card'}>
@@ -18,7 +16,7 @@ class BookCard extends React.Component {
               src={
                     book.image ?
                     book.image :
-                    './comingsoon.jpeg'
+                    comingSoon
               }
               alt={book.title}
             />
@@ -28,17 +26,17 @@ class BookCard extends React.Component {
               Info
             </button>
             <button className={'card-btn btn-red'}
-              onClick={() => this.props.selectBookThree(book)} >
+              onClick={() => addBookToList(book, 'favourite_books')} >
               &#10084;
             </button>
             <button className={'card-btn btn-green'}
-               onClick={() => this.props.selectBookTwo(book)} >
+               onClick={() => addBookToList(book, 'wishlist')} >
               Want
             </button>
 
             {
               this.props.books ?
-              this.props.books.includes(book) && <button onClick={() => this.props.removeBookFromUser(book.title)}>Remove from Read list</button> :
+              this.props.books.includes(book) && <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button> :
               null
             }
           </CardActions>
