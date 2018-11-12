@@ -32,10 +32,7 @@ class HomePage extends React.Component {
         this.setState({ searchQuery: e.target.value })
     }  
 
-
-
     render() {
-
         return(
         <div className="homepage" >
             <h1>Search for the bestest book in the world</h1>
@@ -53,7 +50,7 @@ class HomePage extends React.Component {
                 className="results"
                 books={this.state.bookResults}
                 selectBook={this.props.selectBook}
-            /> & 
+            /> 
             // <PopularBooks />
             }
 

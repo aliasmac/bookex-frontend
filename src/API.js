@@ -20,6 +20,14 @@ class API {
     }
 
 
+    static validate () {
+      const token = localStorage.getItem('token')
+      return fetch('https://still-plateau-95838.herokuapp.com/users/profile', {
+        headers: {'Authorization': token}
+      }).then(resp => resp.json())
+    }
+
+
     static login (username, password) {
       return fetch('https://still-plateau-95838.herokuapp.com/users/login', {
         method: 'POST',

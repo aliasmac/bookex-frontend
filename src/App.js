@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import "./App.css";
 import {
   BrowserRouter as Router,
-  Route
+  Route,
+  withRouter
 } from 'react-router-dom';
 
 
@@ -11,6 +12,7 @@ import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
 import Header from './components/Header'
+import API from './API';
 
 class App extends Component {
 
@@ -20,11 +22,7 @@ class App extends Component {
     selectedBook: null,
     // wishlist:
     userBooks: [],
-    finishedReading: [],
-    favorites: [],
-    currentlyReading: [],
-    ProfileBox: []
-
+    
   }
 
   // USER LOGIN/LOGOUT
@@ -40,15 +38,15 @@ class App extends Component {
     // this.props.history.push('/users/login')
   }
 
-  // componentDidMount() {
-  //   if (!localStorage.getItem('token')) return
-  //   API.validate()
-  //     .then(user => {
-  //       this.signin(user)
-  //       this.props.history.push('/inventory')
-  //     })
-  //     .catch(error => this.props.history.push('/signin'))
-  // }
+  componentDidMount() {
+    console.log("IBDB ONLINE")
+    if (!localStorage.getItem('token')) return
+    API.validate()
+      .then(user => {
+        this.login(user)
+        this.props.history.push('/login')
+      })
+  }
 
 
   // Reading List
@@ -64,23 +62,7 @@ class App extends Component {
     })
   }
 
-  // Finished Reading List
-  addToFinishReading = () => {
-
-  }
-
-  removeToFinishReading = () => {
-
-  }
-
-  // Currently Reading
-  addToCurrentlyReading = () => {
-
-  }
-
-  removeToCurrentlyReading = () => {
-
-  }
+  
 
 
   // SHOW BOOK

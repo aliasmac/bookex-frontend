@@ -8,7 +8,33 @@ class UserProfile extends React.Component {
 
     constructor(props) {
         super(props)
+
+        this.state = {
+            finishedReading: [],
+            favorites: [],
+            currentlyReading: [],
+            ProfileBox: []
+        }
+   
         
+    }
+
+    // Finished Reading List
+    addToFinishReading = () => {
+
+    }
+
+    removeToFinishReading = () => {
+
+    }
+
+    // Currently Reading
+    addToCurrentlyReading = () => {
+
+    }
+
+    removeToCurrentlyReading = () => {
+
     }
 
     // FETCH USER PROFILE
@@ -35,11 +61,11 @@ class UserProfile extends React.Component {
                         selectedBook={this.props.selectedBook}
                         selectBook={this.props.selectBook}
                     />
-                    <CurrentlyReading
+                    // <CurrentlyReading
                     
-                    />
-                    <Favorites
-                    />
+                    // />
+                    // <Favorites
+                    // />
                     
                 }
                 
