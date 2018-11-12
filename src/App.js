@@ -21,6 +21,7 @@ class App extends Component {
     // wishlist:
     userBooks: [],
     selectedBook: null
+
     
   }
 
@@ -46,7 +47,8 @@ class App extends Component {
         this.login(user)
         // this.props.history.push('/profile')
       })
-      .catch(error => this.props.history.push('/signup'))
+      .catch(error => this.props.history.push('/'))
+
   }
 
   // Reading List
@@ -60,6 +62,7 @@ class App extends Component {
     this.setState({
       userBooks: updatedUserBooks
     })
+    this.props.history.push('/profile')
   } 
 
   // BOOK DETAILS 
@@ -68,11 +71,11 @@ class App extends Component {
   }
 
   selectBookTwo = selectedBook => {
-      this.props.isUser ? this.setState({ selectedBook }) : alert("Please Signin to add to your wishlist") 
+    this.state.user ? this.setState({ selectedBook }) : alert("Please Signin to add to your wishlist") 
     }
    
   selectBookThree = selectedBook => {
-  this.props.isUser ? this.setState({ selectedBook }) : alert("Please Signin to like a book!") 
+    this.state.user ? this.setState({ selectedBook }) : alert("Please Signin to like a book!") 
   }  
 
   deselectBook = () => {
@@ -119,30 +122,12 @@ class App extends Component {
             wishlist={this.state.userBooks} 
             currently_reading={this.state.currently_reading}
             removeBookFromUser={this.removeBookFromUser}
+            // For BookDetails:
             selectedBook={this.state.selectedBook}
             selectBook={this.selectBook}
             /> }
           />
-          <Route 
-            exact path='/'
-            render={(routerProps) => 
-              <HomePage {...routerProps}  
-                // STATE:
-                selectedBook={this.state.selectedBook}
-                // FUNCTIONS TO ADD/REMOVE STATE:
-                selectBook={this.selectBook}
-                selectBookTwo={this.selectBookTwo}
-                selectBookThree={this.selectBookThree}
-                deselectBook={this.deselectBook}
-                //////////////////////////////////
-                addBookToUser={this.addBookToUser}
-                
-                wishlist={this.state.userBooks}
-                removeBookFromUser={this.removeBookFromUser}
-                isUser={user}
-              />
-            }
-          />  
+           
           <Route
             path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }

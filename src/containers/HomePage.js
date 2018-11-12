@@ -3,6 +3,7 @@ import React from 'react'
 import SearchBar from '../components/SearchBar'
 import BookResults from '../components/BookResults'
 import BookDetails from '../components/BookDetails'
+import PopularBooks from '../components/PopularBooks'
 
 class HomePage extends React.Component {
 
@@ -11,8 +12,36 @@ class HomePage extends React.Component {
         this.state = {
             searchQuery: "",
             bookResults: [],    
+            popularBooks: [],
         }
     }
+
+    // LIVE FETCHING OF POPULAR BOOKS
+    componentDidMount() { 
+        console.log("FETCHING")
+        this.getPopularBooks()
+        this.interval = setInterval(this.getPopularBooks(), 1000)
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    getPopularBooks = () => {
+        fetch('https://still-plateau-95838.herokuapp.com/books/popular')
+            .then(resp => resp.json())
+            .then(books => this.setState({  popularBooks: books }))
+            .catch(err => err)
+    }
+
+
+    componentDidMount() {
+        fetch('https://still-plateau-95838.herokuapp.com/books/popular')
+            .then(resp => resp.json())
+            .then(books => this.setState({  popularBooks: books }))
+            .catch(err => err)
+    } 
+
 
     // Search
     getBooks = (query) => {
@@ -27,11 +56,14 @@ class HomePage extends React.Component {
     }
 
 
-
     render() {
         return(
+        <div className="main-body">
+            <div className="pop-books-div">
+                <PopularBooks popularBooks={this.state.popularBooks} />   
+            </div>
         <div className="homepage" >
-            <h1>Search for the bestest book in the world</h1>
+            <h1>Search for the bestest books in the world</h1>
             <SearchBar className="search-bar" 
               submitSearch={this.submitSearch} />   
             {
@@ -55,6 +87,7 @@ class HomePage extends React.Component {
             }
 
         </div>
+        </div>    
 
         )
       

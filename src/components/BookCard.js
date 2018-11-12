@@ -7,7 +7,8 @@ class BookCard extends React.Component {
 
     render() {
 
-      console.log(this.props)
+      console.log("BOOKCARD:", this.props)
+      console.log("WISHLIST:", this.props.wishlist)
 
       const { book } = this.props
 
@@ -27,18 +28,26 @@ class BookCard extends React.Component {
               onClick={() => this.props.selectBook(book)} >
               Info
             </button>
+
             <button className={'card-btn btn-red'}
               onClick={() => this.props.selectBookThree(book)} >
               &#10084;
             </button>
-            <button className={'card-btn btn-green'}
-               onClick={() => this.props.selectBookTwo(book)} >
-              Want
-            </button>
+            
+            { 
+              this.props.wishlist ?
+              this.props.wishlist.includes(book) && null :
+              <button
+                      className={'card-btn btn-green'}
+                      onClick={() => this.props.selectBookTwo(book)} >
+                      Want
+                      </button>
+              
+            }
 
             {
-              this.props.books ?
-              this.props.books.includes(book) && <button onClick={() => this.props.removeBookFromUser(book.title)}>Remove from Read list</button> :
+              this.props.wishlist ?
+              this.props.wishlist.includes(book) && <button onClick={() => this.props.removeBookFromUser(book.title)}>Remove from Read list</button> :
               null
             }
           </CardActions>

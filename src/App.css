@@ -3,6 +3,26 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  width: 70%;
+}
+
+.main-body {
+  display: flex;
+}
+
+/* POPULAR BOOKS */
+.pop-books-div {
+  background: #7DCEA0;
+  width: 30%;
+  padding: 0.5rem;
+}
+
+.popular-books {
+  background: #EC7063;
+}
+
+.popular-book-div {
+  background: whitesmoke;
 }
 
 .navbar { 
@@ -17,7 +37,7 @@
 }
 
 .results {
-  width: 80%;
+  width: 70%;
   display: flex;
   flex-wrap: wrap;
   margin: 0 auto;
@@ -73,7 +93,8 @@
 }
 
 .app-header {
-  height: 250px;
+  display: flex;
+  height: 7rem;
   padding-top: 30px;
   background: gold;
 }

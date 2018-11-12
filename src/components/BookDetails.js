@@ -31,9 +31,12 @@ const BookDetails = (props) => {
                     }
                 } >Add to your wishlist</button>  }
                 
-
-            <button onClick={() => props.deselectBook()} >Back to search results</button>
-
+            {
+                props.wishlist ?
+                props.wishlist.includes(props.book) && null :
+                <button onClick={() => props.deselectBook()} >Back to search results</button>
+            }    
+            
         </div>
     )
 }

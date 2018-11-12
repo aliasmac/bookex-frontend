@@ -13,9 +13,10 @@ const ToReadList = (props) => {
                props.wishlist.map((book, idx) => <BookCard
                 key={idx}
                 book={book}
-                books={props.userBooks}
-                removeBookFromUser={props.removeBookFromUser}
+                wishlist={props.wishlist}
+                selectedBook={props.selectedBook}
                 selectBook={props.selectBook}
+                removeBookFromUser={props.removeBookFromUser}
                /> ) 
             }
         </div>
