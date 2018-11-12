@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
   render() {
 
     return (
-        <div class="search">
+        <div className="search">
             <form onSubmit={this.handleSubmit} className={'search'}>
                 <input
                     placeholder="Search for books"

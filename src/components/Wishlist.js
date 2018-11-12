@@ -1,7 +1,6 @@
 import React from 'react'
 import BookCard from './BookCard'
 
-
 const Wishlist = ({user, selectBook, addBookToList, removeBookFromList}) => {
 
     return (
@@ -18,7 +17,6 @@ const Wishlist = ({user, selectBook, addBookToList, removeBookFromList}) => {
             }
         </div>
     )
-
 }
 
 export default Wishlist

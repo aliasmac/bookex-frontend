@@ -41,11 +41,7 @@ body {
 }
 
 .results {
-<<<<<<< HEAD
-  width: 70%;
-=======
-  width: 85%;
->>>>>>> button-work
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

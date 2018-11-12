@@ -26,7 +26,6 @@ const styles = theme => ({
   },
 });
 
-
 class TextFields extends React.Component {
   
   state = {
