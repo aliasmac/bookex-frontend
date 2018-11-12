@@ -7,7 +7,7 @@ class BookCard extends React.Component {
 
     render() {
 
-      const { book, addBookToList } = this.props
+      const { book, handleWant, wanted, books } = this.props
 
       return (
         <Card className={'book-card'}>
@@ -31,14 +31,14 @@ class BookCard extends React.Component {
               &#10084;
             </button>
             <button className={'card-btn btn-green'}
-               onClick={() => addBookToList(book, 'wishlist')} >
-              Want
+               onClick={handleWant} >
+              { wanted ? 'Unwant' : 'Want'}
             </button>
 
             {
-              this.props.books ?
-              this.props.books.includes(book) && <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button> :
-              null
+              books &&
+                books.includes(book) &&
+                  <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button>
             }
           </CardActions>
         </Card>

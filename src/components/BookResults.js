@@ -13,6 +13,9 @@ const BookResults = (props) => {
                             /> ) }
         </div>
     ) 
+
+    
 }
 
+handleWant={() => addBookToList(book, 'wishlist')}
 export default BookResults

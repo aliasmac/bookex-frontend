@@ -10,9 +10,9 @@ const Wishlist = ({user, selectBook, addBookToList, removeBookFromList}) => {
                user.wishlist.map(book => <BookCard
                 key={book.id}
                 book={book}
-                addBookToList={addBookToList}
-                removeBookFromList={removeBookFromList}
+                handleWant={() => removeBookFromList(book, 'wishlist')}
                 selectBook={selectBook}
+                wanted
                /> ) 
             }
         </div>
