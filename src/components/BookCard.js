@@ -28,13 +28,14 @@ class BookCard extends React.Component {
               Info
             </button>
             <button className={'card-btn btn-red'}
-              onClick={() => this.props.selectBook(book)} >
+              onClick={() => this.props.selectBookThree(book)} >
               &#10084;
             </button>
             <button className={'card-btn btn-green'}
-              onClick={() => this.props.selectBook(book)} >
+               onClick={() => this.props.selectBookTwo(book)} >
               Want
             </button>
+
             {
               this.props.books ?
               this.props.books.includes(book) && <button onClick={() => this.props.removeBookFromUser(book.title)}>Remove from Read list</button> :

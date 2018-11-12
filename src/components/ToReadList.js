@@ -8,9 +8,9 @@ const ToReadList = (props) => {
 
     return (
         <div>
-            <h2>Your Reading List</h2>
+            <h2>Your Wishlist</h2>
             {
-               props.userBooks.map((book, idx) => <BookCard
+               props.wishlist.map((book, idx) => <BookCard
                 key={idx}
                 book={book}
                 books={props.userBooks}

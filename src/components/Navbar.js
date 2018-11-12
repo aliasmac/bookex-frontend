@@ -6,7 +6,7 @@ const NavBar = (props) => {
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
 
     {
-      props.username ?
+      props.user ?
       <div> 
       <NavLink 
         style={{ marginRight: '10px' }} 
@@ -16,7 +16,7 @@ const NavBar = (props) => {
       </NavLink>
       <NavLink 
         style={{ marginRight: '10px' }} 
-        to="/home"
+        to="/"
       >
         HomePage
       </NavLink> 
@@ -37,7 +37,7 @@ const NavBar = (props) => {
      </NavLink>
       <NavLink
         style={{ marginRight: '10px' }}
-        to="/home"
+        to="/"
       >
         HomePage
       </NavLink> 

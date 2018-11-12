@@ -9,7 +9,11 @@ const BookResults = (props) => {
 
     return (
         <div className="results">
-            {props.books.map((book, idx) => <BookCard key={idx} book={book} selectBook={props.selectBook} /> ) }
+            {props.books.map((book, idx) => <BookCard key={idx} book={book}
+                            selectBook={props.selectBook}
+                            selectBookTwo={props.selectBookTwo}
+                            selectBookThree={props.selectBookThree}
+                            /> ) }
         </div>
     ) 
 
