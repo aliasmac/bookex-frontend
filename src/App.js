@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "./App.css";
 import {
-  BrowserRouter as Router,
   Route,
   withRouter,
   Switch
@@ -50,7 +49,6 @@ class App extends Component {
       .catch(error => this.props.history.push('/signup'))
   }
 
-
   // Reading List
   addBookToUser = (book) => {
     this.setState({ userBooks: [...this.state.userBooks, book] })
@@ -90,8 +88,7 @@ class App extends Component {
     const { user, selectedBook } = this.state
 
     return (
-      
-      
+    
         <div >
           <Navbar user={user} />
           <Header user={user} logout={this.logout} />  
@@ -118,16 +115,34 @@ class App extends Component {
           <Switch>
           <Route path='/profile' render={(routerProps) => 
             <UserProfile {...routerProps}
+            favourite_books={this.state.favourite_books}
             wishlist={this.state.userBooks} 
-            favorites={this.state.favorites}
-            finishedReading={this.state.finishedReading}
-            currentlyReading={this.state.currentlyReading}
+            currently_reading={this.state.currently_reading}
             removeBookFromUser={this.removeBookFromUser}
             selectedBook={this.state.selectedBook}
             selectBook={this.selectBook}
             /> }
           />
-          
+          <Route 
+            exact path='/'
+            render={(routerProps) => 
+              <HomePage {...routerProps}  
+                // STATE:
+                selectedBook={this.state.selectedBook}
+                // FUNCTIONS TO ADD/REMOVE STATE:
+                selectBook={this.selectBook}
+                selectBookTwo={this.selectBookTwo}
+                selectBookThree={this.selectBookThree}
+                deselectBook={this.deselectBook}
+                //////////////////////////////////
+                addBookToUser={this.addBookToUser}
+                
+                wishlist={this.state.userBooks}
+                removeBookFromUser={this.removeBookFromUser}
+                isUser={user}
+              />
+            }
+          />  
           <Route
             path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
@@ -138,12 +153,7 @@ class App extends Component {
           />
           </Switch>
              
-          
         </div>
-      
-      
-        
-        
       
     );
   }

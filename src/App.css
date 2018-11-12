@@ -27,11 +27,45 @@
   margin: 20px;
   height: 350px;
   width: 200px;
+  padding: 0px;
 }
 
 .book-image {
   height: 85%;
   width: auto;
+}
+
+.card-btn {
+  min-width: 50px;
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.2s; 
+  transition-duration: 0.2s;
+}
+
+.btn-black:hover {
+  background: #7FB3D5;
+  color: white
+}
+
+.btn-green {
+  border: #7DCEA0 solid 1px;
+}
+
+.btn-green:hover {
+  background-color: #7DCEA0;
+  color: white
+}
+
+.btn-red {
+  border: #EC7063 solid 1px;
+  color: #EC7063;
+}
+
+.btn-red:hover {
+  background-color: #F1948A ;
+  color: white;
 }
 
 .book-details {
@@ -47,3 +81,4 @@
 .gif {
   height: 100px;
 }
+

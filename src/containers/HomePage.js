@@ -19,25 +19,21 @@ class HomePage extends React.Component {
         fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)
           .then(resp => resp.json())
           .then(books => this.setState({ bookResults: books }))
+          .catch(err => err)
       }
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        this.getBooks(this.state.searchQuery)
+    submitSearch = query => {
+        this.getBooks(query)
     }
-
-    handleChange = (e) => {
-        console.log(e.target.value)
-        this.setState({ searchQuery: e.target.value })
-    }  
 
 
 
     render() {
         return(
         <div className="homepage" >
-            <h1>Search for the bestest books in the world</h1>
-            <SearchBar className="search-bar" handleChange={this.handleChange} handleSubmit={this.handleSubmit} />   
+            <h1>Search for the bestest book in the world</h1>
+            <SearchBar className="search-bar" 
+              submitSearch={this.submitSearch} />   
             {
             this.props.selectedBook ? 
             <BookDetails
