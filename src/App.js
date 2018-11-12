@@ -7,7 +7,6 @@ import {
   Switch
 } from 'react-router-dom';
 
-
 import UserProfile from './containers/UserProfile'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
@@ -20,8 +19,6 @@ class App extends Component {
 
   state = {
     username: null,
-
-    selectedBook: null,
     // wishlist:
     userBooks: [],
     
@@ -65,17 +62,6 @@ class App extends Component {
       userBooks: updatedUserBooks
     })
   } 
-
-
-  // SHOW BOOK
-  selectBook = selectedBook => {
-    this.setState({ selectedBook })
-  }
-
-  deselectBook = () => {
-    this.setState({ selectedBook: null })
-  }  
-
 
   render() {
 
