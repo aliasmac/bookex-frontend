@@ -8,7 +8,7 @@ const Header = props =>
     <h2 className='App-title'>
       {
         props.username ?
-          `Welcome back, ${props.username}!` :
+          `Welcome back ${props.username.username}!` :
           `Welcome to the International Book Database (IBDB)`
       }
       <br />

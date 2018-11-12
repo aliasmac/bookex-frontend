@@ -25,6 +25,12 @@ const NavBar = (props) => {
       <div>
        <NavLink
        style={{ marginRight: '10px' }} 
+       to="/signup"
+      >
+        Signup
+      </NavLink>
+      <NavLink
+       style={{ marginRight: '10px' }} 
        to="/login"
      >
         Login 
