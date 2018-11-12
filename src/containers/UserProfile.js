@@ -3,6 +3,7 @@ import React from 'react'
 import Wishlist from '../components/Wishlist'
 import ProfileBox from '../components/ProfileBox'
 import BookDetails from '../components/BookDetails'
+import Favourites from '../components/Favourites'
 
 class UserProfile extends React.Component {
 
@@ -22,18 +23,22 @@ class UserProfile extends React.Component {
                         addBookToList={addBookToList}
                         removeBookFromList={removeBookFromList}
                     /> :
-                    user ? 
+                    user && 
+                    <div>
                     <Wishlist
                         user={user}
                         addBookToList={addBookToList}
                         removeBookFromList={removeBookFromList}
                         selectedBook={selectedBook}
                         selectBook={selectBook}
-                    /> : null
-                    // <CurrentlyReading
-                    
-                    // />
-                    // <Favorites
+
+                    />
+                    <Favourites
+                        user={user}
+                    /> 
+                    </div>
+                    // <CurrentlyReading/>
+            
                     // />
                     
                 }

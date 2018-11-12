@@ -10,12 +10,10 @@ const BookResults = (props) => {
             {props.books.map((book, idx) => <BookCard key={idx} book={book}
                             selectBook={props.selectBook}
                             addBookToList={props.addBookToList}
+                            true={false}
                             /> ) }
         </div>
     ) 
-
-    
 }
 
-handleWant={() => addBookToList(book, 'wishlist')}
 export default BookResults

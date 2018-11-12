@@ -7,10 +7,11 @@ class BookCard extends React.Component {
 
     render() {
 
-      const { book, handleWant, wanted, books } = this.props
+      const { book, addBookToList, list, removeBookFromList } = this.props
 
       return (
-        <Card className={'book-card'}>
+        <Card className={'book-card' + (list ? '-hidden' : '-show' )}
+              onClick={() => this.props.selectBook(book)}>
             <img
               className={'book-image'}
               src={
@@ -21,24 +22,24 @@ class BookCard extends React.Component {
               alt={book.title}
             />
           <CardActions>
-            <button className={'card-btn btn-black'}
+            <button className={'card-btn btn-black' + (list ? '-hidden' : '-show')}
               onClick={() => this.props.selectBook(book)} >
               Info
             </button>
 
-            <button className={'card-btn btn-red'}
+            <button className={'card-btn btn-red' + (list ? '-hidden' : '-show')}
               onClick={() => addBookToList(book, 'favourite_books')} >
               &#10084;
             </button>
-            <button className={'card-btn btn-green'}
-               onClick={handleWant} >
-              { wanted ? 'Unwant' : 'Want'}
+            <button className={'card-btn btn-green' + (list ? '-hidden' : '-show')}
+               onClick={() => addBookToList(book, 'wishlist')} >
+              Want
             </button>
 
             {
-              books &&
-                books.includes(book) &&
-                  <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button>
+              list ?
+              list.includes(book) && <button onClick={() => removeBookFromList(book, 'wishlist')}>Remove from Read list</button> :
+              null
             }
           </CardActions>
         </Card>

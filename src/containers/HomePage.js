@@ -11,27 +11,8 @@ class HomePage extends React.Component {
         super()
         this.state = {
             searchQuery: "",
-            bookResults: [],    
-            popularBooks: [],
+            bookResults: [],      
         }
-    }
-
-    // LIVE FETCHING OF POPULAR BOOKS
-    componentDidMount() { 
-        console.log("FETCHING")
-        this.getPopularBooks()
-        this.interval = setInterval(this.getPopularBooks(), 1000)
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-    }
-
-    getPopularBooks = () => {
-        fetch('https://still-plateau-95838.herokuapp.com/books/popular')
-            .then(resp => resp.json())
-            .then(books => this.setState({  popularBooks: books }))
-            .catch(err => err)
     }
 
 
