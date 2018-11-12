@@ -36,9 +36,9 @@ class BookCard extends React.Component {
             </button>
 
             {
-              this.props.books ?
-              this.props.books.includes(book) && <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button> :
-              null
+              this.props.books &&
+                this.props.books.includes(book) &&
+                  <button onClick={() => this.props.removeBookFromList(book.title)}>Remove from Read list</button>
             }
           </CardActions>
         </Card>
