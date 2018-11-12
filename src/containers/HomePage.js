@@ -6,8 +6,8 @@ import BookDetails from '../components/BookDetails'
 
 class HomePage extends React.Component {
 
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             searchQuery: "",
             bookResults: [],    
@@ -31,16 +31,25 @@ class HomePage extends React.Component {
         this.setState({ searchQuery: e.target.value })
     }  
 
+    selectBook = selectedBook => {
+      this.setState({ selectedBook })
+    }
+
+    deselectBook = () => {
+      this.setState({ selectedBook: null })
+    }  
+
+
     render() {
         return(
         <div className="homepage" >
             <h1>Search for the bestest book in the world</h1>
             <SearchBar className="search-bar" handleChange={this.handleChange} handleSubmit={this.handleSubmit} />   
             {
-            this.props.selectedBook ? 
+            this.state.selectedBook ? 
             <BookDetails
-                book={this.props.selectedBook}
-                deselectBook={this.props.deselectBook}
+                book={this.state.selectedBook}
+                deselectBook={this.deselectBook}
                 userBooks={this.props.userBooks}
                 addBookToUser={this.props.addBookToUser}
                 removeBookFromUser={this.props.removeBookFromUser}
@@ -48,7 +57,7 @@ class HomePage extends React.Component {
             <BookResults
                 className="results"
                 books={this.state.bookResults}
-                selectBook={this.props.selectBook}
+                selectBook={this.selectBook}
             /> 
             // <PopularBooks />
             }
@@ -56,10 +65,8 @@ class HomePage extends React.Component {
         </div>
 
         )
-        
-        
+      
     }
-
 
 }
 

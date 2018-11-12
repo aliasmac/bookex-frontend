@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const NavBar = (props) => {
   return (
-    <div style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
+    <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
 
     {
       props.username ?
@@ -29,6 +29,12 @@ const NavBar = (props) => {
      >
         Login 
      </NavLink>
+      <NavLink
+        style={{ marginRight: '10px' }}
+        to="/home"
+      >
+        HomePage
+      </NavLink> 
       </div>
     }
       

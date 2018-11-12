@@ -1,7 +1,7 @@
 import React from 'react'
 import BookResults from './BookResults';
 
-import Book from './Book'
+import BookCard from './BookCard'
 
 
 const ToReadList = (props) => {
@@ -10,7 +10,7 @@ const ToReadList = (props) => {
         <div>
             <h2>Your Reading List</h2>
             {
-               props.userBooks.map((book, idx) => <Book
+               props.userBooks.map((book, idx) => <BookCard
                 key={idx}
                 book={book}
                 books={props.userBooks}
@@ -20,7 +20,6 @@ const ToReadList = (props) => {
             }
         </div>
     )
-
 
 }
 
