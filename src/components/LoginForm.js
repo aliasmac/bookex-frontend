@@ -39,20 +39,12 @@ class TextFields extends React.Component {
   };
 
   handleSubmit = () => {
+    console.log("LOGIN FORM", this.state)  
     const { username, password } = this.state
-    API.signup(username, password)
-      .then(data => {
-          if (data.error) {
-            alert('Wrong!')
-          } else {
-            console.log(data)
-            this.props.login(data)
-          }
-        })
-    this.setState({
-      username: "",
-      password: ""
-    })    
+    API.login(username, password)
+        .then(user => this.props.login(user))
+    this.state.username = ""
+    this.state.password = ""        
   }
 
 
@@ -61,8 +53,7 @@ class TextFields extends React.Component {
 
     return (
       <form className={classes.container} noValidate autoComplete="off">
-        <h2>Signup</h2>
-        <div>
+        <h2>Login</h2>
         <TextField
           name="username"
           type="text"
@@ -70,8 +61,7 @@ class TextFields extends React.Component {
           value={this.state.username}
           placeholder="Enter username"
         />
-        </div>
-        <div>
+        <br/>
         <TextField
           name="password"
           type="password"
@@ -79,7 +69,7 @@ class TextFields extends React.Component {
           value={this.state.password}
           placeholder="Enter password"
         />
-        </div>
+        <br/>
         {/* <TextField
           id="standard-search"
           label="Search field"

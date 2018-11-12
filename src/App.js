@@ -3,7 +3,8 @@ import "./App.css";
 import {
   BrowserRouter as Router,
   Route,
-  withRouter
+  withRouter,
+  Switch
 } from 'react-router-dom';
 
 
@@ -11,6 +12,7 @@ import UserProfile from './containers/UserProfile'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
+import LoginForm from './components/LoginForm'
 import Header from './components/Header'
 import API from './API';
 
@@ -28,25 +30,26 @@ class App extends Component {
   // USER LOGIN/LOGOUT
   login = (user) => {
     console.log("LOGIN:", user)
-    this.setState({ username: user.user.username })
-    // this.props.history.push('/profile')
+    this.props.history.push('/profile')
+    this.setState({ username: user.user })
   }
 
   logout = () => {
-    localStorage.removeItem('token')
+    localStorage.removeItem('authorization')
     this.setState({ username: null })
-    // this.props.history.push('/users/login')
+    this.props.history.push('/login')
   }
 
   componentDidMount() {
     console.log("IBDB ONLINE")
-    // if (!localStorage.getItem('token')) return
+    if (!localStorage.getItem('authorization')) return 
     API.validate()
       .then(user => {
+        console.log("Component did mount", user)
         this.login(user)
-        this.props.history.push('/profile')
+        // this.props.history.push('/profile')
       })
-      .catch(error => this.props.history.push('/login'))
+      .catch(error => this.props.history.push('/signup'))
   }
 
 
@@ -62,8 +65,6 @@ class App extends Component {
       userBooks: updatedUserBooks
     })
   } 
-
-  
 
 
   // SHOW BOOK
@@ -85,12 +86,12 @@ class App extends Component {
 
     return (
       
-      <Router>
+      
         <div >
           <Navbar username={username} />
-          <Header username={username} logout={this.logout} />
-                    
-          <Route exact path='/profile' render={(routerProps) => 
+          <Header username={username} logout={this.logout} />   
+          <Switch>
+          <Route path='/profile' render={(routerProps) => 
             <UserProfile {...routerProps}
             userBooks={this.state.userBooks} 
             favorites={this.state.favorites}
@@ -102,7 +103,7 @@ class App extends Component {
             /> }
           />
           <Route 
-            exact path='/home'
+            path='/home'
             render={(routerProps) => 
               <HomePage {...routerProps}  
                 selectedBook={this.state.selectedBook}
@@ -115,12 +116,18 @@ class App extends Component {
             }
           /> 
           <Route
-            exact path='/login'
+            path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
           />
+          <Route
+            path='/login'
+            render={(routerProps) =>  <LoginForm {...routerProps} login={this.login} /> }
+          />
+          </Switch>
+             
           
         </div>
-      </Router>
+      
       
         
         
