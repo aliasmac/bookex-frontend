@@ -14,7 +14,6 @@ class HomePage extends React.Component {
         }
     }
 
-    
     // Search
     getBooks = (query) => {
         fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)

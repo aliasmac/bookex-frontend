@@ -40,12 +40,13 @@ class App extends Component {
 
   componentDidMount() {
     console.log("IBDB ONLINE")
-    if (!localStorage.getItem('token')) return
+    // if (!localStorage.getItem('token')) return
     API.validate()
       .then(user => {
         this.login(user)
-        this.props.history.push('/login')
+        this.props.history.push('/profile')
       })
+      .catch(error => this.props.history.push('/login'))
   }
 
 
@@ -60,7 +61,7 @@ class App extends Component {
     this.setState({
       userBooks: updatedUserBooks
     })
-  }
+  } 
 
   
 
@@ -86,7 +87,7 @@ class App extends Component {
       
       <Router>
         <div >
-          <Navbar />
+          <Navbar username={username} />
           <Header username={username} logout={this.logout} />
                     
           <Route exact path='/profile' render={(routerProps) => 
@@ -118,8 +119,6 @@ class App extends Component {
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
           />
           
-          
-          
         </div>
       </Router>
       
@@ -130,7 +129,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App)
 
 
 
