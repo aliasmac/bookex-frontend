@@ -1,33 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button'
 
-import API from '../API'
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  dense: {
-    marginTop: 19,
-  },
-  menu: {
-    width: 200,
-  },
-});
-
-
-class TextFields extends React.Component {
+class LoginForm extends React.Component {
   
   state = {
     username: "",
@@ -38,63 +11,43 @@ class TextFields extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = () => {
-    console.log("LOGIN FORM", this.state)  
+  handleSubmit = e => {
+    e.preventDefault()
     const { username, password } = this.state
-    API.login(username, password)
-        .then(user => this.props.login(user))
-        .catch(err => {
-          console.log('Invalid login caught')
-          this.props.history.push('/login')
-        })
+    this.props.login(username, password)
     this.setState({
       username: '',
       password: ''
     }) 
   }
 
-
   render() {
-    const { classes } = this.props;
-
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <h2>Login</h2>
-        <TextField
+      <form noValidate autoComplete="off">
+        <input
           name="username"
           type="text"
+          className={'login-input'}
           onChange={this.handleChange}
           value={this.state.username}
-          placeholder="Enter username"
+          placeholder="Username"
         />
-        <br/>
-        <TextField
+        <input
           name="password"
           type="password"
+          className={'login-input'}
           onChange={this.handleChange}
           value={this.state.password}
-          placeholder="Enter password"
+          placeholder="Password"
         />
-        <br/>
-        {/* <TextField
-          id="standard-search"
-          label="Search field"
-          type="search"
-          className={classes.textField}
-          margin="normal"
-        /> */}
-        <Button onClick={this.handleSubmit} variant='contained' color='primary'>
-          SUBMIT
-        </Button>
+        <button className='btn-black login-btn' onClick={this.handleSubmit}>
+          Login
+        </button>
       </form>
     );
   }
 }
 
-TextFields.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(TextFields);
+export default LoginForm
 
 

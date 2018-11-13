@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import LoginForm from './LoginForm'
 
-const NavBar = ({user, logout}) => {
+const NavBar = ({user, login, logout}) => {
   return (
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
       <div className='left-nav'>
@@ -9,40 +10,39 @@ const NavBar = ({user, logout}) => {
           user 
           ?
             <div> 
-              <NavLink to="/"style={{ marginRight: '10px' }} >
+              <NavLink to="/" className={'block-link'} >
                 Home
               </NavLink> 
-              <NavLink to="/profile" style={{ marginRight: '10px' }} >
+              <NavLink to="/profile" className={'block-link'} >
                 Profile
               </NavLink>
             </div>
           :
             <div>
-            <NavLink to="/" style={{ marginRight: '10px' }} >
+            <NavLink to="/" className={'block-link'} >
               Home
             </NavLink> 
-            <NavLink to="/signup" style={{ marginRight: '10px' }} >
+            <NavLink to="/signup" className={'block-link'} >
               Signup
-            </NavLink>
-            <NavLink to="/login" style={{ marginRight: '10px' }} >
-              Login 
             </NavLink>
 
             </div>
         }
       </div>
-      <div className='right-nav'>
+      <div className='center-nav'>
         {
           user ?
-            `Hello, ${user.username}!` 
+            `Hello, ${user.username}!`
             :
             `International Book Database (IBDB)`
         }
+      </div>
+      <div className='right-nav'>
         {
           user ? 
-            <button onClick={logout}>SIGN OUT</button> 
+            <span onClick={logout} className={'block-link'}>Sign out</span>
             :
-            null
+            <LoginForm login={login} />
         }
       </div>
     </div>

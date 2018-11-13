@@ -3,12 +3,9 @@ import React from 'react'
 
 class PopularBooks extends React.Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            popularBooks: []
-        }  
-    }
+    state = {
+      popularBooks: []
+    }  
 
     // LIVE FETCHING OF POPULAR BOOKS
     componentDidMount() { 
@@ -24,14 +21,13 @@ class PopularBooks extends React.Component {
     getPopularBooks = () => {
         fetch('https://still-plateau-95838.herokuapp.com/books/popular')
             .then(resp => resp.json())
-            .then(books => this.setState({  popularBooks: books }))
+            .then(books => this.setState({popularBooks: books}))
             .catch(err => err)
     }
 
-
     render() {
 
-        console.log("POPULARBOOKS:", this.props)
+        console.log("POPULARBOOKS:", this.state.popularBooks)
 
         return (
             <div className="popular-books" >

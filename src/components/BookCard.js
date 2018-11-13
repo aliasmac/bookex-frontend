@@ -7,17 +7,16 @@ class BookCard extends React.Component {
   
     render() {
 
-
       const { book, handleWant, handleFavourite, handleRemove, user, listType } = this.props
 
       let favourite
       let wanted
 
-      if (user.wishlist.some(x => x.ISBN_13 == book.ISBN_13)) {
+      if (user && user.wishlist.some(x => x.ISBN_13 == book.ISBN_13)) {
         wanted = true
       }
       
-      if (user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
+      if (user && user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
         favourite = true
       }
 
@@ -45,6 +44,7 @@ class BookCard extends React.Component {
             <button 
             className={'card-btn ' + (favourite ? 'btn-favourite' : 'btn-red')
                 + (listType ? ' hidden' : ' show')}
+              disabled={!user}
               onClick={() => handleFavourite(book)} >
               &#10084;
             </button>
@@ -52,7 +52,8 @@ class BookCard extends React.Component {
             <button 
             className={'card-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) 
                 + (listType ? ' hidden' : ' show')}
-               onClick={() => handleWant(book)} >
+              disabled={!user}
+              onClick={() => handleWant(book)} >
               { wanted ? 'Unwant' : 'Want'}
             </button>
 
