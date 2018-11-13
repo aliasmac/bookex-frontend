@@ -1,11 +1,14 @@
 import React from 'react'
 
 
+
 const BookDetails = ({ book, user, handleFavourite, 
     handleWant, deselectBook, currentlyReading}) => {
 
+
       console.log("BOOK DETAILS", book)
       console.log(user)
+
 
       let favourite
       let wanted
@@ -40,7 +43,7 @@ const BookDetails = ({ book, user, handleFavourite,
                       alt={book.title}
                   />            
               </div>
-              <div>
+              <div class="book-description">
                   <p>{book.description}</p>
               </div>
               <div>
@@ -65,6 +68,7 @@ const BookDetails = ({ book, user, handleFavourite,
 
           </div>
       )
+
 }
 
 

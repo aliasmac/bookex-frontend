@@ -45,6 +45,10 @@ class App extends Component {
     this.setState({bookResults})
   }
 
+  updateResults = bookResults => {
+    this.setState({bookResults})
+  }
+
   componentDidMount() {
     console.log("IBDB ONLINE")
     if (!localStorage.getItem('authorization')) return 
@@ -116,13 +120,14 @@ class App extends Component {
 
   render() {
 
-    console.log("BOOKS RESULTS", this.state.bookResults)
+https://github.com/thexyman/IBDB-front-end/pull/6/conflict?name=src%252Fcomponents%252FBookCard.js&ancestor_oid=47225e480bd7ac24afaf7eac7582af6e4b41c539&base_oid=b8dc77650856452ffdcdf797948dfa199b3066cb&head_oid=bb8f24ba6941fbeee85ca070a498a23ec02c4339    console.log("BOOKS RESULTS", this.state.bookResults)
     console.log("USER:", this.state.user)
 
     const { user, selectedBook, bookResults } = this.state
 
     return (
     
+
       <div >
         <Navbar user={user} login={this.login} logout={this.logout}/>
         
@@ -141,16 +146,22 @@ class App extends Component {
               /> }
             />
           }
+
           <Route
             path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
           />
+
           <Route
+
+
             path='/'
             render={(routerProps) =>
               <HomePage {...routerProps}
                 bookResults={bookResults}
+
                 currentlyReading={this.currentlyReading}
+
                 selectedBook={selectedBook}
                 selectBook={this.selectBook}
                 deselectBook={this.deselectBook}
@@ -158,9 +169,11 @@ class App extends Component {
                 handleFavourite={this.handleFavourite}
                 updateResults={this.updateResults}
                 user={user}
+
               /> }
             />
         </Switch>
+
         </div>
       </div>
       

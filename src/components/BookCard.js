@@ -35,7 +35,7 @@ class BookCard extends React.Component {
               alt={book.title}
             />
 
-          <CardActions >
+          <CardActions className="card-actions">
             <button className={'card-btn btn-black' + (listType ? ' hidden' : ' show')}
                 onClick={() => this.props.selectBook(book)} >
                 Info
@@ -45,6 +45,7 @@ class BookCard extends React.Component {
             className={'card-btn ' + (favourite ? 'btn-favourite' : 'btn-red')
                 + (listType ? ' hidden' : ' show')}
               disabled={!user}
+
               onClick={() => handleFavourite(book)} >
               &#10084;
             </button>
@@ -52,6 +53,7 @@ class BookCard extends React.Component {
             <button 
             className={'card-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) 
                 + (listType ? ' hidden' : ' show')}
+
               disabled={!user}
               onClick={() => handleWant(book)} >
               { wanted ? 'Unwant' : 'Want'}
@@ -63,6 +65,12 @@ class BookCard extends React.Component {
               }
 
           </CardActions>
+
+          {listType  ?
+               <button className="remove-btn" onClick={() => handleRemove(book, listType)}>X</button> :
+                null
+              }
+
         </Card>
       );
         }

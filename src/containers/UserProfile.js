@@ -20,8 +20,28 @@ class UserProfile extends React.Component {
       const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite, currentlyReading} = this.props
 
         return (
-            <div>
-                {/* <ProfileBox /> */}
+            <div  className="user-profile-main" >
+    
+                {
+                     user && 
+                     <div  >
+                         <div>
+                             <Wishlist
+                                 user={user}
+                                 handleRemove={this.handleRemove}
+                                 selectedBook={selectedBook}
+                                 selectBook={selectBook}
+                             />
+                             <Favourites
+                                 user={user}
+                                 handleRemove={this.handleRemove}
+                                 selectedBook={selectedBook}
+                                 selectBook={selectBook}
+                             /> 
+                         </div>
+                     
+                     </div>
+                }
                 {
                     selectedBook ? 
                     <BookDetails
@@ -32,24 +52,13 @@ class UserProfile extends React.Component {
                         handleWant={handleWant}
                         handleFavourite={handleFavourite}
                     /> :
-                    user && 
-                    <div>
-                    <Wishlist
-                        user={user}
-                        handleRemove={this.handleRemove}
-                        selectedBook={selectedBook}
-                        selectBook={selectBook}
-                    />
-                    <Favourites
-                        user={user}
-                        handleRemove={this.handleRemove}
-                        selectedBook={selectedBook}
-                        selectBook={selectBook}
+
+                    <ProfileBox
+                       user={user}  
+                          
+
                     /> 
-                    </div>
-                    // <CurrentlyReading/>
-            
-                    // />
+                    
                     
                 }
                               

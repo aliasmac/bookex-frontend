@@ -9,6 +9,7 @@ class HomePage extends React.Component {
 
     state = {
       searchQuery: "",     
+
     }
 
     componentWillUnmount() {

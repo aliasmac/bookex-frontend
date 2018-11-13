@@ -5,8 +5,9 @@ import BookCard from './BookCard'
 const Favourites = ({ user, handleRemove, selectBook, selectedBook}) => {
 
     return (
-        <div className="favourites-list">
+        <div className="favourites-list-container">
             <h2>Your Favourites:</h2>
+            <div className="favourites-list">
             {
                 user.favourite_books.map(book => <BookCard
                 key={book.id}
@@ -19,6 +20,7 @@ const Favourites = ({ user, handleRemove, selectBook, selectedBook}) => {
 
                /> ) 
             }
+            </div>
         </div>
     )
 }

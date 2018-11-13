@@ -16,21 +16,39 @@ body {
 
 .main-body {
   display: flex;
+  
 }
 
 /* POPULAR BOOKS */
 .pop-books-div {
   background: whitesmoke;
-  width: 30%;
+  width: 26%;
   padding: 0.5rem;
+  margin: 1rem;
+  border: 1px solid black;
+  /* -webkit-box-shadow: -5px -4px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: -5px -4px 5px 0px rgba(0,0,0,0.75);
+box-shadow: -5px -4px 5px 0px rgba(0,0,0,0.75); */
 }
 
 .popular-books {
+  display: flex;
+  flex-direction: column;
   background: #EC7063;
+  
+}
+
+.popular-books h2 {
+  font-family: 'Roboto';
 }
 
 .popular-book-div {
   background: whitesmoke;
+}
+
+.popular-book-div p {
+  font-size: 0.8rem;
+  font-family: 'Roboto';
 }
 
 .navbar { 
@@ -109,13 +127,17 @@ body {
   padding: 0px;
 }
 
+
+
 .book-card-small {
-  margin: 10px;
+  /* margin: 10px; */
   height: 240px;
-  width: 130px;
+  max-width: 130px;
+  min-width: 130px;
   padding: 0px;
   margin: 20px;
 }
+
 
 .book-image {
   height: 85%;
@@ -223,8 +245,31 @@ body {
   display: inline-block;
 }    
 
+/* BOOK DETAILS */
 .book-details {
-  width: 60%;
+  display: flex;
+  flex-direction: column;
+  min-width: 17rem;
+  max-width: 17rem;
+  background: #7DCEA0;
+  margin-left: -8rem;
+  height: 40rem;
+  text-align: center;
+  align-items: center;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+}
+
+.book-details img {
+  height: 16rem;
+}
+
+
+.book-description {
+  background: pink;
+  max-height: 13rem;
+  overflow: auto
 }
 
 .search {
@@ -272,8 +317,45 @@ body {
   color: white;
 }
 
+/* USER PROFILE */
+.user-profile-main {
+  display: flex;
+}
+
+
+.favourites-list-container, .wishlist-container {
+  background: lightblue;
+  margin-left: 2rem;
+  max-width: 80%;
+  
+}
+
 .favourites-list, .wishlist {
   display: flex;
+  overflow-x: scroll;
+  background: orange;
+  max-width: 65rem;
+}
 
+.book-card-small, .book-card {
+  position: relative;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 5%;
+  right: 0;
+}
+
+
+.profile-box {
+  margin-left: -8rem;
+  margin-top: 1.2rem;
+  width: 13rem;
+  padding: 1rem;
+  border-radius: 3px;
+  /* box-shadow: 5px 15px #888888; */
+  height: 19rem;
+  background: #EC7063;
 }
 

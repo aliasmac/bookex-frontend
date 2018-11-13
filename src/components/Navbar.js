@@ -4,7 +4,7 @@ import LoginForm from './LoginForm'
 
 const NavBar = ({user, login, logout}) => {
   return (
-    <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
+    <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px', zIndex: 1 }}>
       <div className='left-nav'>
         {
           user 
