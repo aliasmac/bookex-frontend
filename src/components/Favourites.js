@@ -5,7 +5,7 @@ import BookCard from './BookCard'
 const Favourites = ({user, removeBookFromList}) => {
 
     return (
-        <div>
+        <div className="favourites-list">
             <h2>Your Favourites:</h2>
             {
                 user.favourite_books.map(book => <BookCard

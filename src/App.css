@@ -149,3 +149,8 @@ body {
   color: white;
 }
 
+.favourites-list, .wishlist {
+  display: flex;
+
+}
+
