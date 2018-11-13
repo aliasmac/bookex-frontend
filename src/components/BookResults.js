@@ -2,15 +2,18 @@ import React from 'react'
 
 import BookCard from './BookCard'
 
-
-const BookResults = (props) => {
+const BookResults = ({selectBook, handleWant, handleFavourite, books, user}) => {
 
     return (
         <div className="results">
-            {props.books.map((book, idx) => <BookCard key={idx} book={book}
-                            selectBook={props.selectBook}
-                            addBookToList={props.addBookToList}
-                            true={false}
+
+            {books.map((book, idx) => <BookCard key={idx} book={book}
+                            selectBook={selectBook}
+                            handleWant={handleWant}
+                            handleFavourite={handleFavourite}
+                            user={user}
+
+
                             /> ) }
         </div>
     ) 

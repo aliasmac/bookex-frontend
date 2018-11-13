@@ -1,50 +1,50 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const NavBar = (props) => {
+const NavBar = ({user, logout}) => {
   return (
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px' }}>
+      <div className='left-nav'>
+        {
+          user 
+          ?
+            <div> 
+              <NavLink to="/"style={{ marginRight: '10px' }} >
+                Home
+              </NavLink> 
+              <NavLink to="/profile" style={{ marginRight: '10px' }} >
+                Profile
+              </NavLink>
+            </div>
+          :
+            <div>
+            <NavLink to="/" style={{ marginRight: '10px' }} >
+              Home
+            </NavLink> 
+            <NavLink to="/signup" style={{ marginRight: '10px' }} >
+              Signup
+            </NavLink>
+            <NavLink to="/login" style={{ marginRight: '10px' }} >
+              Login 
+            </NavLink>
 
-    {
-      props.user ?
-      <div> 
-      <NavLink 
-        style={{ marginRight: '10px' }} 
-        to="/profile"
-      >
-        Profile
-      </NavLink>
-      <NavLink 
-        style={{ marginRight: '10px' }} 
-        to="/"
-      >
-        HomePage
-      </NavLink> 
+            </div>
+        }
       </div>
-      :
-      <div>
-       <NavLink
-       style={{ marginRight: '10px' }} 
-       to="/signup"
-      >
-        Signup
-      </NavLink>
-      <NavLink
-       style={{ marginRight: '10px' }} 
-       to="/login"
-     >
-        Login 
-     </NavLink>
-      <NavLink
-        style={{ marginRight: '10px' }}
-        to="/"
-      >
-        HomePage
-      </NavLink> 
+      <div className='right-nav'>
+        {
+          user ?
+            `Hello, ${user.username}!` 
+            :
+            `International Book Database (IBDB)`
+        }
+        {
+          user ? 
+            <button onClick={logout}>SIGN OUT</button> 
+            :
+            null
+        }
       </div>
-    }
-      
-     
     </div>
   );
 }

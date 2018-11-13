@@ -15,13 +15,23 @@ class HomePage extends React.Component {
         }
     }
 
+    // LIVE FETCHING OF POPULAR BOOKS
+    componentDidMount() { 
+        console.log("FETCHING")
+        this.getPopularBooks()
+        this.interval = setInterval(this.getPopularBooks(), 1000)
+    }
 
-    componentDidMount() {
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
+
+    getPopularBooks = () => {
         fetch('https://still-plateau-95838.herokuapp.com/books/popular')
             .then(resp => resp.json())
             .then(books => this.setState({  popularBooks: books }))
             .catch(err => err)
-    } 
+    }
 
 
     // Search
@@ -43,7 +53,7 @@ class HomePage extends React.Component {
         return(
         <div className="main-body">
             <div className="pop-books-div">
-                <PopularBooks popularBooks={this.state.popularBooks} />   
+              <PopularBooks popularBooks={this.state.popularBooks} />   
             </div>
         <div className="homepage" >
             <SearchBar className="search-bar" 
@@ -54,15 +64,16 @@ class HomePage extends React.Component {
                 book={this.props.selectedBook}
                 deselectBook={this.props.deselectBook}
                 user={this.props.user}
-                addBookToList={this.props.addBookToList}
-                removeBookFromList={this.props.removeBookFromList}
+                handleWant={this.props.handleWant}
+                handleFavourite={this.props.handleFavourite}
             /> :
             <BookResults
                 className="results"
                 books={this.state.bookResults}
                 selectBook={this.props.selectBook}
-                addBookToList={this.props.addBookToList}
-                removeBookFromList={this.props.removeBookFromList}
+                handleWant={this.props.handleWant}
+                handleFavourite={this.props.handleFavourite}
+                user={this.props.user}
             /> 
             // <PopularBooks />
             }

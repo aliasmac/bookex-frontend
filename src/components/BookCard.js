@@ -4,16 +4,37 @@ import CardActions from '@material-ui/core/CardActions';
 import comingSoon from './comingsoon.jpeg'
 
 class BookCard extends React.Component {
+  
+    
 
     render() {
 
-      const { book, addBookToList, list, removeBookFromList } = this.props
+
+      const { book, handleWant, handleFavourite, user, listType, list } = this.props
+
+      let favourite
+      let wanted
+
+      if (user.wishlist.some(x => x.ISBN_13 == book.ISBN_13)) {
+        wanted = true
+      }
+      
+      if (user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
+        favourite = true
+      }
 
       return (
-        <Card className={'book-card' + (list ? '-hidden' : '-show' )}
+        <Card className={'book-card'}>
+            <img className={'book-image'}
+   
+
+      return (
+        
+        <Card className={'book-card' + (list ? '-small' : null )}
               onClick={() => this.props.selectBook(book)}>
             <img
               className={'book-image'}
+
               src={
                     book.image ?
                     book.image :
@@ -21,24 +42,29 @@ class BookCard extends React.Component {
               }
               alt={book.title}
             />
-          <CardActions>
-            <button className={'card-btn btn-black' + (list ? '-hidden' : '-show')}
+          <CardActions >
+            < React.Fragment  className= list ? 'hidden' : 'show') >
+            <button className={'card-btn btn-black'}
               onClick={() => this.props.selectBook(book)} >
               Info
             </button>
 
-            <button className={'card-btn btn-red' + (list ? '-hidden' : '-show')}
-              onClick={() => addBookToList(book, 'favourite_books')} >
+            <button 
+            className={'card-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
+              onClick={() => handleFavourite(book)} >
               &#10084;
             </button>
-            <button className={'card-btn btn-green' + (list ? '-hidden' : '-show')}
-               onClick={() => addBookToList(book, 'wishlist')} >
-              Want
-            </button>
 
+            <button 
+            className={'card-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) }
+               onClick={() => handleWant(book)} >
+              { wanted ? 'Unwant' : 'Want'}
+            </button>
+            
+            </ React.Fragment >
             {
               list ?
-              list.includes(book) && <button onClick={() => removeBookFromList(book, 'wishlist')}>Remove from Read list</button> :
+              list.includes(book) && <button onClick={() => removeBookFromList(book, listType )}>Remove from Read list</button> :
               null
             }
           </CardActions>
