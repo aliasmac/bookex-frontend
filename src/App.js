@@ -120,7 +120,7 @@ class App extends Component {
 
   render() {
 
-https://github.com/thexyman/IBDB-front-end/pull/6/conflict?name=src%252Fcomponents%252FBookCard.js&ancestor_oid=47225e480bd7ac24afaf7eac7582af6e4b41c539&base_oid=b8dc77650856452ffdcdf797948dfa199b3066cb&head_oid=bb8f24ba6941fbeee85ca070a498a23ec02c4339    console.log("BOOKS RESULTS", this.state.bookResults)
+
     console.log("USER:", this.state.user)
 
     const { user, selectedBook, bookResults } = this.state
