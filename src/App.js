@@ -123,6 +123,7 @@ class App extends Component {
             selectBook={this.selectBook}
             selectedBook={selectedBook}
             deselectBook={this.deselectBook}
+            historyProps={this.props.history}
             /> }
           />
             }

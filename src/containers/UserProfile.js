@@ -17,29 +17,30 @@ class UserProfile extends React.Component {
 
     render() {
 
-      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite} = this.props
+      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite, historyProps} = this.props
 
         return (
             <div  className="user-profile-main" >
     
                 {
                      user && 
-                     <div  >
+                     <div>
                          <div>
                              <Wishlist
                                  user={user}
                                  handleRemove={this.handleRemove}
                                  selectedBook={selectedBook}
                                  selectBook={selectBook}
+                                 historyProps={historyProps}
                              />
                              <Favourites
                                  user={user}
                                  handleRemove={this.handleRemove}
                                  selectedBook={selectedBook}
                                  selectBook={selectBook}
+                                 historyProps={historyProps}
                              /> 
                          </div>
-                     
                      </div>
                 }
                 {

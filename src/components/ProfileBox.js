@@ -6,7 +6,7 @@ const ProfileBox = (props) => {
         <div className="profile-box">
             <h1>Profile</h1>
             <h3>Name: {props.user.username}</h3>
-            <p>Currently Reading: {props.user.currently_reading}</p>
+            <p>Currently Reading: {props.user.currently_reading.title}</p>
             <p>Location: {props.user.location}</p>
         </div>
     )

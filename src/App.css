@@ -190,7 +190,7 @@ box-shadow: -5px -4px 5px 0px rgba(0,0,0,0.75); */
   min-width: 17rem;
   max-width: 17rem;
   background: #7DCEA0;
-  margin-left: -8rem;
+  margin-left: 2rem;
   height: 40rem;
   text-align: center;
   align-items: center;
@@ -249,21 +249,27 @@ box-shadow: -5px -4px 5px 0px rgba(0,0,0,0.75); */
 /* USER PROFILE */
 .user-profile-main {
   display: flex;
+  
 }
 
+.wishlist-container {
+  margin-bottom: 4rem;
+}
 
 .favourites-list-container, .wishlist-container {
   background: lightblue;
   margin-left: 2rem;
-  max-width: 80%;
-  
+  max-width: 55rem;
+  min-width: 55rem;
+  height: 19rem;
 }
 
 .favourites-list, .wishlist {
   display: flex;
   overflow-x: scroll;
   background: orange;
-  max-width: 65rem;
+  max-width: 55rem;
+  min-width: 55rem;
 }
 
 .book-card-small, .book-card {
@@ -278,7 +284,7 @@ box-shadow: -5px -4px 5px 0px rgba(0,0,0,0.75); */
 
 
 .profile-box {
-  margin-left: -8rem;
+  margin-left: 2rem;
   margin-top: 1.2rem;
   width: 13rem;
   padding: 1rem;
