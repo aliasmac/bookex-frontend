@@ -7,13 +7,41 @@ import Favourites from '../components/Favourites'
 
 class UserProfile extends React.Component {
 
+    handleRemove = (book, listType) => {
+      if (listType === 'wishlist') {
+        this.props.handleWant(book)
+      } else if (listType === 'favourite_books') {
+        this.props.handleFavourite(book)
+      }
+    }
+
     render() {
 
       const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite} = this.props
 
         return (
-            <div>
-                {/* <ProfileBox /> */}
+            <div  className="user-profile-main" >
+    
+                {
+                     user && 
+                     <div  >
+                         <div>
+                             <Wishlist
+                                 user={user}
+                                 handleRemove={this.handleRemove}
+                                 selectedBook={selectedBook}
+                                 selectBook={selectBook}
+                             />
+                             <Favourites
+                                 user={user}
+                                 handleRemove={this.handleRemove}
+                                 selectedBook={selectedBook}
+                                 selectBook={selectBook}
+                             /> 
+                         </div>
+                     
+                     </div>
+                }
                 {
                     selectedBook ? 
                     <BookDetails
@@ -23,23 +51,11 @@ class UserProfile extends React.Component {
                         handleWant={handleWant}
                         handleFavourite={handleFavourite}
                     /> :
-                    user && 
-                    <div>
-                    <Wishlist
-                        user={user}
-                        handleWant={handleWant}
-                        handleFavourite={handleFavourite}
-                        selectedBook={selectedBook}
-                        selectBook={selectBook}
-
-                    />
-                    <Favourites
-                        user={user}
+                    <ProfileBox
+                       user={user}  
+                          
                     /> 
-                    </div>
-                    // <CurrentlyReading/>
-            
-                    // />
+                    
                     
                 }
                               

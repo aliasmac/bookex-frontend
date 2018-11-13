@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const BookDetails = 
-  ({ book, user, addBookToList, removeBookFromList, deselectBook}) => {
+  ({ book, user, handleFavourite, handleWant, deselectBook}) => {
 
     console.log("BOOK DETAILS", book)
     console.log(user)
@@ -21,21 +21,23 @@ const BookDetails =
                     alt={book.title}
                 />            
             </div>
-            <div>
+            <div class="book-description">
                 <p>{book.description}</p>
             </div>
             <div>
                 <p>ISBN: {book.ISBN_13}</p>
             </div>
-            { user && user.wishlist.includes(book) && <button onClick={() => removeBookFromList(book, 'wishlist')} >Remove from your reading list</button> }
-            { user && <button onClick={() => {
-                    addBookToList(book, 'wishlist')
-                    deselectBook()
-                    }
-                } >Add to your wishlist</button>  }
-                
-
-            <button onClick={() => deselectBook()} >Back to search results</button>
+            <div>
+                { user && user.wishlist.includes(book) && 
+                <button onClick={() => handleWant(book)} >Remove from your wishlist</button> }
+                { user && <button onClick={() => {
+                        handleWant(book)
+                        deselectBook()
+                        }
+                    } >Add to your wishlist</button>  }
+                    
+            </div>    
+            <button onClick={() => deselectBook()} >Back</button>
 
         </div>
     )

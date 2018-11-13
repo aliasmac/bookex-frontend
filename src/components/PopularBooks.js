@@ -39,8 +39,7 @@ class PopularBooks extends React.Component {
             {
                 this.state.popularBooks.map((book, idx) => 
                 <div key={idx} className="popular-book-div">
-                    <h3>{book.book.title}</h3>
-                    <p>No. of readers: {book.readers}</p>
+                    <p>{book.readers} IBDB'r (s) currently reading {book.book.title}</p>
                 </div>)
             }
         </div>

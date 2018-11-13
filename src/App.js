@@ -18,7 +18,8 @@ class App extends Component {
 
   state = {
     user: null,
-    selectedBook: null
+    selectedBook: null,
+    bookResults: []
   }
 
   // USER LOGIN/LOGOUT
@@ -32,6 +33,10 @@ class App extends Component {
     localStorage.removeItem('authorization')
     this.setState({ user: null })
     this.props.history.push('/')
+  }
+
+  updateResults = bookResults => {
+    this.setState({bookResults})
   }
 
   componentDidMount() {
@@ -79,9 +84,9 @@ class App extends Component {
   removeBookFromList = (book, list) => { 
     let newList = [...this.state.user[list]]
     newList = newList.filter(x => book.ISBN_13 != x.ISBN_13)
-    this.deselectBook()
     this.setState({
-      user: { ...this.state.user, [list]: newList }
+      user: { ...this.state.user, [list]: newList },
+      selectedBook: false
     }, () => API.update(this.state.user)
           .then(user => this.setState({ user: user.user }))
     )
@@ -101,7 +106,7 @@ class App extends Component {
     console.log("BOOKS RESULTS", this.state.bookResults)
     console.log("USER:", this.state.user)
 
-    const { user, selectedBook } = this.state
+    const { user, selectedBook, bookResults } = this.state
 
     return (
     
@@ -116,6 +121,7 @@ class App extends Component {
             handleWant={this.handleWant}
             handleFavourite={this.handleFavourite}
             selectBook={this.selectBook}
+            selectedBook={selectedBook}
             deselectBook={this.deselectBook}
             /> }
           />
@@ -128,21 +134,25 @@ class App extends Component {
             path='/login'
             render={(routerProps) =>  <LoginForm {...routerProps} login={this.login} /> }
           />
-          </Switch>
+
           <Route
             path='/'
             render={(routerProps) =>
               <HomePage {...routerProps}
-                selectedBook={this.state.selectedBook}
+                bookResults={bookResults}
+                selectedBook={selectedBook}
                 selectBook={this.selectBook}
                 deselectBook={this.deselectBook}
                 handleWant={this.handleWant}
                 handleFavourite={this.handleFavourite}
+                updateResults={this.updateResults}
                 user={user}
               />
-          }
+            }
+          /> 
 
-        />  
+          </Switch>
+
          </div>
         </div>
       

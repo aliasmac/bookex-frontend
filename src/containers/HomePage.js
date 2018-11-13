@@ -7,12 +7,8 @@ import PopularBooks from '../components/PopularBooks'
 
 class HomePage extends React.Component {
 
-    constructor() {
-        super()
-        this.state = {
-            searchQuery: "",
-            bookResults: [],      
-        }
+    state = {
+      searchQuery: "",     
     }
 
     // LIVE FETCHING OF POPULAR BOOKS
@@ -33,14 +29,13 @@ class HomePage extends React.Component {
             .catch(err => err)
     }
 
-
     // Search
     getBooks = (query) => {
         fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)
           .then(resp => resp.json())
           .then(books => {
             this.props.deselectBook()
-            this.setState({ bookResults: books })
+            this.props.updateResults(books)
           })
           .catch(err => err)
       }
@@ -66,10 +61,10 @@ class HomePage extends React.Component {
                 user={this.props.user}
                 handleWant={this.props.handleWant}
                 handleFavourite={this.props.handleFavourite}
-            /> :
+            /> : 
             <BookResults
                 className="results"
-                books={this.state.bookResults}
+                books={this.props.bookResults}
                 selectBook={this.props.selectBook}
                 handleWant={this.props.handleWant}
                 handleFavourite={this.props.handleFavourite}

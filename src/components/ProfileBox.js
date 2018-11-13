@@ -3,8 +3,11 @@ import React from 'react'
 const ProfileBox = (props) => {
 
     return (
-        <div>
-            <h1>User profile Box</h1>
+        <div className="profile-box">
+            <h1>Profile</h1>
+            <h3>Name: {props.user.username}</h3>
+            <p>Currently Reading: {props.user.currently_reading}</p>
+            <p>Location: {props.user.location}</p>
         </div>
     )
 
