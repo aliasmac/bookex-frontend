@@ -5,7 +5,7 @@ const Wishlist = ({user, selectBook, handleWant, handleFavourite}) => {
 
     return (
 
-        <div>
+        <div className="wishlist">
             <h2>Your Wishlist</h2>
             {
                user.wishlist.map(book => <BookCard
@@ -15,6 +15,7 @@ const Wishlist = ({user, selectBook, handleWant, handleFavourite}) => {
                 handleFavourite={handleFavourite}
                 selectBook={selectBook}
                 user={user}
+                list={user.wishlist}
                /> ) 
             }
         </div>

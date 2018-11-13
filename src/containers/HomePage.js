@@ -11,8 +11,7 @@ class HomePage extends React.Component {
         super()
         this.state = {
             searchQuery: "",
-            bookResults: [],    
-            popularBooks: [],
+            bookResults: [],      
         }
     }
 
@@ -33,6 +32,7 @@ class HomePage extends React.Component {
             .then(books => this.setState({  popularBooks: books }))
             .catch(err => err)
     }
+
 
     // Search
     getBooks = (query) => {

@@ -78,6 +78,13 @@ body {
   padding: 0px;
 }
 
+.book-card-small {
+  margin: 10px;
+  height: 150px;
+  width: 150px;
+  padding: 0px;
+}
+
 .book-image {
   height: 85%;
   width: auto;
@@ -114,9 +121,10 @@ body {
   color: #80D681;
 }
 
-.btn-green {
+.btn-green-show {
   border: #7DCEA0 solid 1px;
 }
+
 
 .btn-green:hover {
   background-color: #80D681;
@@ -143,6 +151,15 @@ body {
   background-color: #F1948A ;
   color: white;
 }
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: inline-block;
+}    
+
 
 .book-details {
   width: 60%;
@@ -183,3 +200,9 @@ body {
   background-color: #2480B8;
   color: white;
 }
+
+.favourites-list, .wishlist {
+  display: flex;
+
+}
+

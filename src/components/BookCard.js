@@ -4,10 +4,13 @@ import CardActions from '@material-ui/core/CardActions';
 import comingSoon from './comingsoon.jpeg'
 
 class BookCard extends React.Component {
+  
+    
 
     render() {
 
-      const { book, handleWant, handleFavourite, user } = this.props
+
+      const { book, handleWant, handleFavourite, user, listType, list } = this.props
 
       let favourite
       let wanted
@@ -23,6 +26,15 @@ class BookCard extends React.Component {
       return (
         <Card className={'book-card'}>
             <img className={'book-image'}
+   
+
+      return (
+        
+        <Card className={'book-card' + (list ? '-small' : null )}
+              onClick={() => this.props.selectBook(book)}>
+            <img
+              className={'book-image'}
+
               src={
                     book.image ?
                     book.image :
@@ -30,7 +42,8 @@ class BookCard extends React.Component {
               }
               alt={book.title}
             />
-          <CardActions>
+          <CardActions >
+            < React.Fragment  className= list ? 'hidden' : 'show') >
             <button className={'card-btn btn-black'}
               onClick={() => this.props.selectBook(book)} >
               Info
@@ -47,7 +60,13 @@ class BookCard extends React.Component {
                onClick={() => handleWant(book)} >
               { wanted ? 'Unwant' : 'Want'}
             </button>
-
+            
+            </ React.Fragment >
+            {
+              list ?
+              list.includes(book) && <button onClick={() => removeBookFromList(book, listType )}>Remove from Read list</button> :
+              null
+            }
           </CardActions>
         </Card>
       );
