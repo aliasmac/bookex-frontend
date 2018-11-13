@@ -24,12 +24,7 @@ class BookCard extends React.Component {
       }
 
       return (
-        <Card className={'book-card'}>
-            <img className={'book-image'}
-   
-
-      return (
-        
+            
         <Card className={'book-card' + (list ? '-small' : null )}
               onClick={() => this.props.selectBook(book)}>
             <img
@@ -43,7 +38,7 @@ class BookCard extends React.Component {
               alt={book.title}
             />
           <CardActions >
-            < React.Fragment  className= list ? 'hidden' : 'show') >
+            < React.Fragment  className={list ? 'hidden' : 'show'} >
             <button className={'card-btn btn-black'}
               onClick={() => this.props.selectBook(book)} >
               Info
