@@ -1,46 +1,74 @@
 import React from 'react'
 
 
-const BookDetails = 
-  ({ book, user, handleFavourite, handleWant, deselectBook}) => {
 
-    console.log("BOOK DETAILS", book)
-    console.log(user)
+const BookDetails = ({ book, user, handleFavourite, 
+    handleWant, deselectBook, currentlyReading}) => {
 
-    return (
-        <div className="book-details"> 
-            <div>
-                <h2>{book.title}</h2>
-                <h3>Authors: {book.author}</h3>
-            </div>
-            <div>
-                <img src={
-                    book.image ?
-                    book.image :
-                    './comingsoon.jpeg'} 
-                    alt={book.title}
-                />            
-            </div>
-            <div class="book-description">
-                <p>{book.description}</p>
-            </div>
-            <div>
-                <p>ISBN: {book.ISBN_13}</p>
-            </div>
-            <div>
-                { user && user.wishlist.includes(book) && 
-                <button onClick={() => handleWant(book)} >Remove from your wishlist</button> }
-                { user && <button onClick={() => {
-                        handleWant(book)
-                        deselectBook()
-                        }
-                    } >Add to your wishlist</button>  }
-                    
-            </div>    
-            <button onClick={() => deselectBook()} >Back</button>
 
-        </div>
-    )
+      console.log("BOOK DETAILS", book)
+      console.log(user)
+
+
+      let favourite
+      let wanted
+      let current
+      if (user && user.wishlist.some(x => x.ISBN_13 == book.ISBN_13)) {
+        wanted = true
+      }
+      if (user && user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
+        favourite = true
+      }
+      if (user && user.currently_reading.ISBN_13 == book.ISBN_13) {
+        current = true
+      }
+
+      return (
+          <div className="book-details"> 
+            <div>
+              <h2>{book.title}</h2>
+              <h3>Author(s): {book.author}</h3>
+            <button onClick={() => currentlyReading(book)} 
+              className='card-btn btn-black'
+              disabled={current} >
+                  {!current ? "I'm currently reading this book!" : "You are currently reading this book" }
+                  </button>
+            <br /><br />
+              </div>
+              <div>
+                  <img src={
+                      book.image ?
+                      book.image :
+                      './comingsoon.jpeg'} 
+                      alt={book.title}
+                  />            
+              </div>
+              <div class="book-description">
+                  <p>{book.description}</p>
+              </div>
+              <div>
+                  <p>ISBN: {book.ISBN_13}</p>
+              </div>
+
+              <button className={'card-btn details-btn btn-black'} onClick={() => deselectBook()} >Go back</button>
+
+              <button
+                className={'card-btn details-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
+                onClick={() => handleFavourite(book)} 
+                disabled={!user}>
+                {favourite ? 'De-favourite' : 'Add to favourites'}
+                  </button>
+
+              <button
+                className={'card-btn details-btn ' + (wanted ? 'btn-wanted' : 'btn-green')}
+                onClick={() => handleWant(book)}
+                disabled={!user} >
+                {wanted ? 'Un-wishlist' : 'Add to wishlist'}
+              </button>
+
+          </div>
+      )
+
 }
 
 

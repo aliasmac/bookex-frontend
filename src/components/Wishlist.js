@@ -17,7 +17,7 @@ const Wishlist = ({user, selectBook, selectedBook, handleRemove}) => {
                 selectedBook={selectedBook}
                 user={user}
                 listType="wishlist"
-                className="list-book"
+
                /> ) 
             }
             </div>

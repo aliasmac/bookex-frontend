@@ -10,9 +10,7 @@ import UserProfile from './containers/UserProfile'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
-import LoginForm from './components/LoginForm'
-// import Header from './components/Header'
-import API from './API';
+import API from './API'
 
 class App extends Component {
 
@@ -22,17 +20,29 @@ class App extends Component {
     bookResults: []
   }
 
-  // USER LOGIN/LOGOUT
-  login = (user) => {
-    console.log("LOGIN:", user)
-    this.props.history.push('/profile')
-    this.setState({ user: user.user })
+  login = (username, password) => {
+    API.login(username, password)
+      .then(user => {
+        console.log("LOGIN:", user)
+        this.setState({ user: user.user })
+        this.props.history.push('/profile')
+      })
+      .catch(err => {
+        console.log('Invalid login caught')
+        this.props.history.push('/login')
+      })
   }
 
   logout = () => {
-    localStorage.removeItem('authorization')
-    this.setState({ user: null })
-    this.props.history.push('/')
+    API.logout().then(() => {
+      localStorage.removeItem('authorization')
+      this.setState({ user: null })
+      this.props.history.push('/')
+    })
+  }
+
+  updateResults = bookResults => {
+    this.setState({bookResults})
   }
 
   updateResults = bookResults => {
@@ -42,13 +52,20 @@ class App extends Component {
   componentDidMount() {
     console.log("IBDB ONLINE")
     if (!localStorage.getItem('authorization')) return 
-    API.validate()
+    API.getUser()
       .then(user => {
         console.log("Component did mount:", user)
         this.setState({ user: user.user })
       })
       .catch(error => this.props.history.push('/'))
+  }
 
+  currentlyReading = book => {
+    let user = {...this.state.user, currently_reading: book}
+    this.setState({ user }, () => 
+      API.update(this.state.user) 
+          .then(user => this.setState({ user: user.user }))
+    )
   }
 
   handleWant = book => {
@@ -103,43 +120,48 @@ class App extends Component {
 
   render() {
 
-    console.log("BOOKS RESULTS", this.state.bookResults)
+https://github.com/thexyman/IBDB-front-end/pull/6/conflict?name=src%252Fcomponents%252FBookCard.js&ancestor_oid=47225e480bd7ac24afaf7eac7582af6e4b41c539&base_oid=b8dc77650856452ffdcdf797948dfa199b3066cb&head_oid=bb8f24ba6941fbeee85ca070a498a23ec02c4339    console.log("BOOKS RESULTS", this.state.bookResults)
     console.log("USER:", this.state.user)
 
     const { user, selectedBook, bookResults } = this.state
 
     return (
     
-        <div >
-          <Navbar user={user} logout={this.logout}/>
-          <div class='main-content'>
-          <Switch>
-            {user &&
-          <Route path='/profile' render={(routerProps) => 
-            <UserProfile {...routerProps}
-            user={user}
-            handleWant={this.handleWant}
-            handleFavourite={this.handleFavourite}
-            selectBook={this.selectBook}
-            selectedBook={selectedBook}
-            deselectBook={this.deselectBook}
-            /> }
-          />
-            }
+
+      <div >
+        <Navbar user={user} login={this.login} logout={this.logout}/>
+        
+        <div className='main-content'>
+        <Switch>
+          {user &&
+            <Route path='/profile' render={(routerProps) => 
+              <UserProfile {...routerProps}
+              user={user}
+              currentlyReading={this.currentlyReading}
+              handleWant={this.handleWant}
+              handleFavourite={this.handleFavourite}
+              selectBook={this.selectBook}
+              selectedBook={selectedBook}
+              deselectBook={this.deselectBook}
+              /> }
+            />
+          }
+
           <Route
             path='/signup'
             render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
           />
-          <Route
-            path='/login'
-            render={(routerProps) =>  <LoginForm {...routerProps} login={this.login} /> }
-          />
 
           <Route
+
+
             path='/'
             render={(routerProps) =>
               <HomePage {...routerProps}
                 bookResults={bookResults}
+
+                currentlyReading={this.currentlyReading}
+
                 selectedBook={selectedBook}
                 selectBook={this.selectBook}
                 deselectBook={this.deselectBook}
@@ -147,14 +169,13 @@ class App extends Component {
                 handleFavourite={this.handleFavourite}
                 updateResults={this.updateResults}
                 user={user}
-              />
-            }
-          /> 
 
-          </Switch>
+              /> }
+            />
+        </Switch>
 
-         </div>
         </div>
+      </div>
       
     );
   }

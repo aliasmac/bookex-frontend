@@ -17,7 +17,7 @@ const Favourites = ({ user, handleRemove, selectBook, selectedBook}) => {
                 selectedBook={selectedBook}
                 user={user}
                 listType="favourite_books"
-                className="list-book"    
+
                /> ) 
             }
             </div>

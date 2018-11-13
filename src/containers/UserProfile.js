@@ -17,7 +17,7 @@ class UserProfile extends React.Component {
 
     render() {
 
-      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite} = this.props
+      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite, currentlyReading} = this.props
 
         return (
             <div  className="user-profile-main" >
@@ -48,12 +48,15 @@ class UserProfile extends React.Component {
                         book={selectedBook}
                         deselectBook={deselectBook}
                         user={user}
+                        currentlyReading={currentlyReading}
                         handleWant={handleWant}
                         handleFavourite={handleFavourite}
                     /> :
+
                     <ProfileBox
                        user={user}  
                           
+
                     /> 
                     
                     

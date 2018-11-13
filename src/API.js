@@ -1,8 +1,6 @@
 class API {
-    static init () {
-      this.baseUrl = 'https://still-plateau-95838.herokuapp.com'
-      this.loginUrl = this.baseUrl + '/users/login'
-    }
+
+    static baseUrl = 'https://still-plateau-95838.herokuapp.com'
 
     static signup (username, password) {
       return fetch(this.baseUrl + '/users', {
@@ -16,7 +14,7 @@ class API {
           let token = resp.headers.get("authorization")
           localStorage.setItem('authorization', token)
           return resp.json()
-      })
+      }).catch(err => console.log('Error in signup', err))
     }
 
     static update (userObj) {
@@ -29,10 +27,11 @@ class API {
         },
         body: JSON.stringify(userObj)
       }).then(resp => resp.json())
+      .catch(err => console.log('Error in update', err))
     }
 
     // Will return a user object
-    static validate () {
+    static getUser () {
       const token = localStorage.getItem('authorization')
       return fetch(this.baseUrl + '/users/profile', {
         headers: {'authorization': token}
@@ -52,13 +51,20 @@ class API {
         let token = resp.headers.get("authorization")
         localStorage.setItem('authorization', token)
         return resp.json()
-      })
+        }).catch(err => console.log('Error in login', err))
     }
 
+    static logout() {
+      const token = localStorage.getItem('authorization')
+      return fetch(this.baseUrl + '/users/logout', {
+        method: 'POST',
+        headers: { 'authorization': token },
+      }).then(resp => {
+        return resp.json()
+      }).catch(err => console.log('Error in logout', err))
+    }
 
   }
-  
-  API.init()
   
   window.API = API
   

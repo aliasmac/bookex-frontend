@@ -9,24 +9,11 @@ class HomePage extends React.Component {
 
     state = {
       searchQuery: "",     
-    }
 
-    // LIVE FETCHING OF POPULAR BOOKS
-    componentDidMount() { 
-        console.log("FETCHING")
-        this.getPopularBooks()
-        this.interval = setInterval(this.getPopularBooks(), 1000)
     }
 
     componentWillUnmount() {
         clearInterval(this.interval);
-    }
-
-    getPopularBooks = () => {
-        fetch('https://still-plateau-95838.herokuapp.com/books/popular')
-            .then(resp => resp.json())
-            .then(books => this.setState({  popularBooks: books }))
-            .catch(err => err)
     }
 
     // Search
@@ -48,7 +35,7 @@ class HomePage extends React.Component {
         return(
         <div className="main-body">
             <div className="pop-books-div">
-              <PopularBooks popularBooks={this.state.popularBooks} />   
+              <PopularBooks />   
             </div>
         <div className="homepage" >
             <SearchBar className="search-bar" 
@@ -57,6 +44,7 @@ class HomePage extends React.Component {
             this.props.selectedBook ? 
             <BookDetails
                 book={this.props.selectedBook}
+                currentlyReading={this.props.currentlyReading}
                 deselectBook={this.props.deselectBook}
                 user={this.props.user}
                 handleWant={this.props.handleWant}
@@ -70,7 +58,6 @@ class HomePage extends React.Component {
                 handleFavourite={this.props.handleFavourite}
                 user={this.props.user}
             /> 
-            // <PopularBooks />
             }
 
         </div>
