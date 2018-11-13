@@ -19,9 +19,11 @@ const BookDetails = ({ book, user, handleFavourite,
       if (user && user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
         favourite = true
       }
-      if (user && user.currently_reading.ISBN_13 == book.ISBN_13) {
+      if (user && user.currently_reading && user.currently_reading.ISBN_13 == book.ISBN_13) {
         current = true
       }
+
+  
 
       return (
           <div className="book-details"> 
