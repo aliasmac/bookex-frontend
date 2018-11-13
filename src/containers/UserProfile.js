@@ -55,8 +55,6 @@ class UserProfile extends React.Component {
 
                     <ProfileBox
                        user={user}  
-                          
-
                     /> 
                     
                     
