@@ -5,12 +5,10 @@ import comingSoon from './comingsoon.jpeg'
 
 class BookCard extends React.Component {
   
-    
-
     render() {
 
 
-      const { book, handleWant, handleFavourite, user, listType, list } = this.props
+      const { book, handleWant, handleFavourite, handleRemove, user, listType } = this.props
 
       let favourite
       let wanted
@@ -24,17 +22,12 @@ class BookCard extends React.Component {
       }
 
       return (
-        <Card className={'book-card'}>
-            <img className={'book-image'}
-   
 
-      return (
-        
-        <Card className={'book-card' + (list ? '-small' : null )}
-              onClick={() => this.props.selectBook(book)}>
+        <Card className={(listType ? 'book-card-small' : 'book-card' )}>
+
             <img
               className={'book-image'}
-
+              onClick={() => this.props.selectBook(book)}
               src={
                     book.image ?
                     book.image :
@@ -42,31 +35,32 @@ class BookCard extends React.Component {
               }
               alt={book.title}
             />
+
           <CardActions >
-            < React.Fragment  className= list ? 'hidden' : 'show') >
-            <button className={'card-btn btn-black'}
-              onClick={() => this.props.selectBook(book)} >
-              Info
-            </button>
+            <button className={'card-btn btn-black' + (listType ? ' hidden' : ' show')}
+                onClick={() => this.props.selectBook(book)} >
+                Info
+              </button>
 
             <button 
-            className={'card-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
+            className={'card-btn ' + (favourite ? 'btn-favourite' : 'btn-red')
+                + (listType ? ' hidden' : ' show')}
               onClick={() => handleFavourite(book)} >
               &#10084;
             </button>
 
             <button 
-            className={'card-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) }
+            className={'card-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) 
+                + (listType ? ' hidden' : ' show')}
                onClick={() => handleWant(book)} >
               { wanted ? 'Unwant' : 'Want'}
             </button>
-            
-            </ React.Fragment >
-            {
-              list ?
-              list.includes(book) && <button onClick={() => removeBookFromList(book, listType )}>Remove from Read list</button> :
-              null
-            }
+
+            {listType  ?
+               <button onClick={() => handleRemove(book, listType)}>Remove</button> :
+                null
+              }
+
           </CardActions>
         </Card>
       );

@@ -12,8 +12,6 @@ const BookResults = ({selectBook, handleWant, handleFavourite, books, user}) => 
                             handleWant={handleWant}
                             handleFavourite={handleFavourite}
                             user={user}
-
-
                             /> ) }
         </div>
     ) 

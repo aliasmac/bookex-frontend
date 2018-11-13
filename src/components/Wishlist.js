@@ -1,7 +1,7 @@
 import React from 'react'
 import BookCard from './BookCard'
 
-const Wishlist = ({user, selectBook, handleWant, handleFavourite}) => {
+const Wishlist = ({user, selectBook, selectedBook, handleRemove}) => {
 
     return (
 
@@ -11,11 +11,11 @@ const Wishlist = ({user, selectBook, handleWant, handleFavourite}) => {
                user.wishlist.map(book => <BookCard
                 key={book.id}
                 book={book}
-                handleWant={handleWant}
-                handleFavourite={handleFavourite}
+                handleRemove={handleRemove}
                 selectBook={selectBook}
+                selectedBook={selectedBook}
                 user={user}
-                list={user.wishlist}
+                listType="wishlist"
                /> ) 
             }
         </div>

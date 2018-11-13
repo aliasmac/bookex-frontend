@@ -80,9 +80,10 @@ body {
 
 .book-card-small {
   margin: 10px;
-  height: 150px;
-  width: 150px;
+  height: 240px;
+  width: 130px;
   padding: 0px;
+  margin: 20px;
 }
 
 .book-image {

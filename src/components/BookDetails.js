@@ -2,7 +2,7 @@ import React from 'react'
 
 
 const BookDetails = 
-  ({ book, user, addBookToList, removeBookFromList, deselectBook}) => {
+  ({ book, user, handleFavourite, handleWant, deselectBook}) => {
 
     console.log("BOOK DETAILS", book)
     console.log(user)
@@ -27,9 +27,10 @@ const BookDetails =
             <div>
                 <p>ISBN: {book.ISBN_13}</p>
             </div>
-            { user && user.wishlist.includes(book) && <button onClick={() => removeBookFromList(book, 'wishlist')} >Remove from your reading list</button> }
+            { user && user.wishlist.includes(book) && 
+            <button onClick={() => handleWant(book)} >Remove from your wishlist</button> }
             { user && <button onClick={() => {
-                    addBookToList(book, 'wishlist')
+                    handleWant(book)
                     deselectBook()
                     }
                 } >Add to your wishlist</button>  }

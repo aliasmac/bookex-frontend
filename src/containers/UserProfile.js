@@ -7,6 +7,14 @@ import Favourites from '../components/Favourites'
 
 class UserProfile extends React.Component {
 
+    handleRemove = (book, listType) => {
+      if (listType === 'wishlist') {
+        this.props.handleWant(book)
+      } else if (listType === 'favourite_books') {
+        this.props.handleFavourite(book)
+      }
+    }
+
     render() {
 
       const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite} = this.props
@@ -27,14 +35,15 @@ class UserProfile extends React.Component {
                     <div>
                     <Wishlist
                         user={user}
-                        handleWant={handleWant}
-                        handleFavourite={handleFavourite}
+                        handleRemove={this.handleRemove}
                         selectedBook={selectedBook}
                         selectBook={selectBook}
-
                     />
                     <Favourites
                         user={user}
+                        handleRemove={this.handleRemove}
+                        selectedBook={selectedBook}
+                        selectBook={selectBook}
                     /> 
                     </div>
                     // <CurrentlyReading/>
