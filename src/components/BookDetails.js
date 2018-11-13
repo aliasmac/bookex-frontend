@@ -20,6 +20,8 @@ const BookDetails = ({ book, user, handleFavourite,
         current = true
       }
 
+  
+
       return (
           <div className="book-details"> 
             <div>
