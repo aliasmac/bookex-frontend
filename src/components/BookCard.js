@@ -25,7 +25,7 @@ class BookCard extends React.Component {
         <Card className={(listType ? 'book-card-small' : 'book-card' )}>
 
             <img
-              className={'book-image'}
+              className={(listType ? 'book-image-small' : 'book-image' )}
               onClick={() => this.props.selectBook(book)}
               src={
                     book.image ?
@@ -35,7 +35,8 @@ class BookCard extends React.Component {
               alt={book.title}
             />
 
-          <CardActions className="card-actions">
+          <CardActions className="card-actions" >
+
             <button className={'card-btn btn-black' + (listType ? ' hidden' : ' show')}
                 onClick={() => this.props.selectBook(book)} >
                 Info
@@ -58,12 +59,6 @@ class BookCard extends React.Component {
               onClick={() => handleWant(book)} >
               { wanted ? 'Unwant' : 'Want'}
             </button>
-
-            {listType  ?
-               <button onClick={() => handleRemove(book, listType)}>Remove</button> :
-                null
-              }
-
           </CardActions>
 
           {listType  ?

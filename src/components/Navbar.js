@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginForm from './LoginForm'
+import SearchBar from './SearchBar'
 
-const NavBar = ({user, login, logout}) => {
+const NavBar = ({user, login, logout, submitSearch}) => {
   return (
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px', zIndex: 1 }}>
       <div className='left-nav'>
@@ -30,12 +31,15 @@ const NavBar = ({user, login, logout}) => {
         }
       </div>
       <div className='center-nav'>
+        <SearchBar className="search-bar"
+          submitSearch={submitSearch} />   
         {
           user ?
             `Hello, ${user.username}!`
             :
-            `International Book Database (IBDB)`
+            `International Book Database`
         }
+
       </div>
       <div className='right-nav'>
         {

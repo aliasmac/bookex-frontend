@@ -49,7 +49,7 @@ const BookDetails = ({ book, user, handleFavourite,
                   <p>ISBN: {book.ISBN_13}</p>
               </div>
 
-              <button className={'card-btn details-btn btn-black'} onClick={() => deselectBook()} >Go back</button>
+              <button className={'card-btn details-btn btn-black'} onClick={() => deselectBook()} >Close details</button>
 
               <button
                 className={'card-btn details-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
@@ -64,7 +64,6 @@ const BookDetails = ({ book, user, handleFavourite,
                 disabled={!user} >
                 {wanted ? 'Un-wishlist' : 'Add to wishlist'}
               </button>
-
           </div>
       )
 

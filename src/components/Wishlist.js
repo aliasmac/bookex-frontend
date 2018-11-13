@@ -11,9 +11,9 @@ const Wishlist = ({user, selectBook, selectedBook, handleRemove, historyProps}) 
 
             <div className="wishlist">
            
-            {
-                user.wishlist.length === 0 ? <button onClick={() => historyProps.push('/')} >Search Books to add to your wishlist</button> : null
-            }
+          {
+            user.wishlist.length === 0 ? <h2>You have no books on your wishlist - get searching!</h2> : null
+          }
             
             {
                user.wishlist.map(book => <BookCard

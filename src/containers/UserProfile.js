@@ -21,11 +21,11 @@ class UserProfile extends React.Component {
 
         return (
             <div  className="user-profile-main" >
-    
+              <div className="profile-lists-container">
                 {
                      user && 
-                     <div>
-                         <div>
+                     <React.Fragment>
+    
                              <Wishlist
                                  user={user}
                                  handleRemove={this.handleRemove}
@@ -33,6 +33,7 @@ class UserProfile extends React.Component {
                                  selectBook={selectBook}
                                  historyProps={historyProps}
                              />
+    
                              <Favourites
                                  user={user}
                                  handleRemove={this.handleRemove}
@@ -40,9 +41,11 @@ class UserProfile extends React.Component {
                                  selectBook={selectBook}
                                  historyProps={historyProps}
                              /> 
-                         </div>
-                     </div>
+                     </React.Fragment>
+           
                 }
+              </div>
+                <div className='profile-container'>
                 {
                     selectedBook ? 
                     <BookDetails
@@ -57,10 +60,8 @@ class UserProfile extends React.Component {
                     <ProfileBox
                        user={user}  
                     /> 
-                    
-                    
                 }
-                              
+              </div>       
             </div>
             
         )

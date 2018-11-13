@@ -109,6 +109,22 @@ class App extends Component {
     )
   } 
 
+  // Search
+  getBooks = query => {
+    fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)
+      .then(resp => resp.json())
+      .then(books => {
+        this.deselectBook()
+        this.updateResults(books)
+        this.props.history.push('/')
+      })
+      .catch(err => err)
+  }
+
+  submitSearch = query => {
+    this.getBooks(query)
+  }
+
   // BOOK DETAILS 
   selectBook = selectedBook => {
     this.setState({ selectedBook }) 
@@ -129,7 +145,8 @@ class App extends Component {
     
 
       <div >
-        <Navbar user={user} login={this.login} logout={this.logout}/>
+        <Navbar user={user} login={this.login} logout={this.logout}
+          submitSearch={this.submitSearch} />
         
         <div className='main-content'>
         <Switch>
@@ -153,8 +170,6 @@ class App extends Component {
           />
 
           <Route
-
-
             path='/'
             render={(routerProps) =>
               <HomePage {...routerProps}
@@ -169,7 +184,6 @@ class App extends Component {
                 handleFavourite={this.handleFavourite}
                 updateResults={this.updateResults}
                 user={user}
-
               /> }
             />
         </Switch>

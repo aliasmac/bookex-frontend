@@ -9,8 +9,8 @@ const Favourites = ({ user, handleRemove, selectBook, selectedBook, historyProps
             <h2>Your Favourites:</h2>
             <div className="favourites-list">
             {
-                user.favourite_books.length === 0 ? <button onClick={() => historyProps.push('/')} >Search Books to add to your favourite list</button> : null
-            }
+            user.favourite_books.length === 0 ? <h2>You have no favourite books saved - go find them!</h2>: null
+      }
             {
                 user.favourite_books.map(book => <BookCard
                 key={book.id}
