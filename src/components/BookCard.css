@@ -1,0 +1,88 @@
+.book-card {
+  margin: 25px;
+  height: 350px;
+  width: 200px;
+  padding: 0px;
+}
+
+.book-card-small {
+  height: 195px;
+  min-width: 125px;
+  max-width: 135px;
+  padding: 0px;
+  margin: 20px;
+}
+
+.book-image {
+  height: 85%;
+  width: auto;
+  cursor: pointer;
+}
+
+.book-image-small{
+  height: 100%; 
+  cursor: pointer;
+}
+
+.book-card-small, .book-card {
+  position: relative;
+}
+
+.btn-wanted {
+  border: #7DCEA0 solid 1px;
+  background-color: #80D681;
+  color: white
+}
+
+.btn-wanted:hover {
+  background-color: white;
+  color: #80D681;
+}
+
+.btn-green-show {
+  border: #7DCEA0 solid 1px;
+}
+
+.btn-green:hover {
+  background-color: #80D681;
+  color: white
+}
+
+.btn-favourite {
+  background-color: #F1948A ;
+  border: #EC7063 solid 1px;
+  color: white;
+}
+
+.btn-favourite:hover {
+  background-color: white;
+  color: #EC7063;
+}
+
+.btn-red {
+  border: #EC7063 solid 1px;
+  color: #EC7063;
+}
+
+.btn-red:hover {
+  background-color: #F1948A ;
+  color: white;
+}
+
+.remove-btn {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  font-size: 0.55rem;
+  font-weight: bold;
+  border: solid 1px grey;
+  border-radius: 8px;
+  width: 22px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background: #C93700;
+  color: white;
+  border: groove 1px white;
+}

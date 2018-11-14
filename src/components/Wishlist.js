@@ -1,16 +1,14 @@
 import React from 'react'
 import BookCard from './BookCard'
 
-const Wishlist = ({user, selectBook, selectedBook, handleRemove, historyProps}) => {
+const Wishlist = 
+({user, selectBook, selectedBook, handleRemove}) => {
 
     return (
 
         <div className="wishlist-container">
             <h2>Your Wishlist</h2>
-
-
             <div className="wishlist">
-           
           {
             user.wishlist.length === 0 ? <h2>You have no books on your wishlist - get searching!</h2> : null
           }

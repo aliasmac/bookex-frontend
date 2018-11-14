@@ -37,17 +37,7 @@ class TextFields extends React.Component {
 
   handleSubmit = () => {
     const { username, password } = this.state
-    API.signup(username, password)
-      .then(data => {
-          if (data.errmsg) {
-            console.log('Invalid signup caught')
-            this.props.history.push('/signup')
-          } else {
-            console.log(data)
-            this.props.login(data)
-          }
-        })
-      .catch(err => console.log('Invalid signup caught'))
+    this.props.signup(username, password)
     this.setState({
       username: "",
       password: ""

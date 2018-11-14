@@ -1,10 +1,11 @@
 import React from 'react'
+import './BookDetails.css'
 
 const BookDetails = ({ book, user, handleFavourite, 
     handleWant, deselectBook, currentlyReading, handleLoaned}) => {
 
-      console.log("BOOK DETAILS", book)
-      console.log(user)
+  const amazonUrl = 'https://www.amazon.co.uk/s/?search-alias=stripbooks&field-isbn='
+  const googleUrl = 'https://www.google.com/search?tbo=p&tbm=bks&q=isbn:'
 
       let favourite
       let wanted
@@ -23,58 +24,54 @@ const BookDetails = ({ book, user, handleFavourite,
            current = true
         }
 
+  return (
+      <div className="right-box book-details card"> 
+        <h2>{book.title}</h2>
+        <h3>Author(s): {book.author}</h3>
 
+        <div className='details-cols'>
 
-      return (
-          <div className="book-details"> 
-            <div>
-              <h2>{book.title}</h2>
-              <h3>Author(s): {book.author}</h3>
+          <div className='details-left-col'>
             <button onClick={() => currentlyReading(book)} 
-              className='card-btn btn-black'
-              disabled={current} >
-                  {!current ? "I'm currently reading this book!" : "You are currently reading this book" }
-                  </button>
-            <br /><br />
-              </div>
-              <div>
-                  <img src={
-                      book.image ?
-                      book.image :
-                      './comingsoon.jpeg'} 
-                      alt={book.title}
-                  />            
-              </div>
-              <div class="book-description">
-                  <p>{book.description}</p>
-              </div>
-              <div>
-                  <p>ISBN: {book.ISBN_13}</p>
-              </div>
+            className='main-btn btn-black details-btn'
+            disabled={current} >
+                {!current ? "I'm reading this!" : "You are reading this" }
+                </button>
+            <button className={'main-btn details-btn btn-black'} onClick={() => deselectBook()} >Close details</button>
+            <button
+              className={'main-btn details-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
+              onClick={() => handleFavourite(book)}
+              disabled={!user}>
+              {favourite ? 'De-favourite' : 'Add to favourites'}
+            </button>
+            <button
+              className={'main-btn details-btn ' + (wanted ? 'btn-wanted' : 'btn-green')}
+              onClick={() => handleWant(book)}
+              disabled={!user} >
+              {wanted ? 'Un-wishlist' : 'Add to wishlist'}
+            </button>
+          </div>
+          
+          <div className='details-right-col'>
+                <img src={
+                    book.image ?
+                    book.image :
+                    './comingsoon.jpeg'} 
+                    alt={book.title}
+                />            
+          </div>
 
-              <button className={'card-btn details-btn btn-black'} onClick={() => deselectBook()} >Close details</button>
+        </div>
 
-              <button
-                className={'card-btn details-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
-                onClick={() => handleFavourite(book)} 
-                disabled={!user}>
-                {favourite ? 'De-favourite' : 'Add to favourites'}
-                  </button>
-
-              <button
-                className={'card-btn details-btn ' + (wanted ? 'btn-wanted' : 'btn-green')}
-                onClick={() => handleWant(book)}
-                disabled={!user} >
-                {wanted ? 'Un-wishlist' : 'Add to wishlist'}
-              </button>
-
-              {/* <button
-                className={'card-btn details-btn ' + (loaned ? 'btn-loaned' : 'btn-orange')}
-                onClick={() => handleLoaned(book)}
-                disabled={!user} >
-                {loaned ? 'Loaned' : 'Loan'}
-              </button> */}
-
+        <div class='details-links'>
+          <a href={amazonUrl + book.ISBN_13} target="_blank" rel="noopener noreferrer">
+            Amazon
+                    </a>
+          <a href={googleUrl + book.ISBN_13} target="_blank" rel="noopener noreferrer">
+            Google Books
+                    </a>
+        </div>
+  
               <button
                 className={'card-btn details-btn btn-loaned'}
                 onClick={() => handleLoaned(book)}
@@ -84,9 +81,13 @@ const BookDetails = ({ book, user, handleFavourite,
               </button>
 
 
-              
-          </div>
-      )
+        <div class="book-description">
+            <p>{book.description}</p>
+        </div>
+
+      </div>
+  )
+
 
 }
 

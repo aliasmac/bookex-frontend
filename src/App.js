@@ -22,6 +22,21 @@ class App extends Component {
     loanedBooks: []
   }
 
+  signup = (username, password) => {
+    API.signup(username, password)
+      .then(user => {
+        if (user.errmsg) {
+          console.log('Invalid signup caught')
+        } else {
+          this.setState({user: user.user})
+          }
+      })
+      .catch(err => {
+        console.log('Invalid signup caught')
+        this.props.history.push('/signup') 
+      })
+  }
+
   login = (username, password) => {
     API.login(username, password)
       .then(user => {
@@ -108,7 +123,8 @@ class App extends Component {
     this.setState( {
       user: { ...this.state.user, [list]: newList }
     }, () => API.update(this.state.user)
-        .then(user => this.setState({ user: user.user })).catch(err => console.log('Error in adding book to list', err))
+        .then(user => this.setState({ user: user.user }))
+        .catch(err => console.log('Error in adding book to list', err))
     )
   }
 
@@ -164,7 +180,7 @@ class App extends Component {
         <Navbar user={user} login={this.login} logout={this.logout}
           submitSearch={this.submitSearch} />
         
-        <div className='main-content'>
+        <div className='main-container'>
         <Switch>
           {user &&
         
@@ -198,7 +214,7 @@ class App extends Component {
 
           <Route
             path='/signup'
-            render={(routerProps) =>  <SignupForm {...routerProps} login={this.login} /> }
+            render={(routerProps) =>  <SignupForm {...routerProps} signup={this.signup} /> }
           />
 
           <Route

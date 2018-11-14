@@ -1,4 +1,5 @@
 import React from 'react'
+import './SearchBar.css'
 
 class SearchBar extends React.Component {
 
@@ -28,7 +29,7 @@ class SearchBar extends React.Component {
                     value={this.state.searchQuery}
                     onChange={this.handleChange}
                 />
-                <button className='search-btn'>Search</button>
+                <button className='navbar-btn'>Search</button>
             </form>
         </div>
     )

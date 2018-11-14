@@ -1,0 +1,13 @@
+.popular-books {
+  display: flex;
+  flex-direction: column;
+}
+
+.popular-books h2 {
+  font-family: 'Roboto';
+}
+
+.popular-book-div p {
+  font-size: 0.8rem;
+  font-family: 'Roboto';
+}

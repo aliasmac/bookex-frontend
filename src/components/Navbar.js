@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LoginForm from './LoginForm'
 import SearchBar from './SearchBar'
+import './NavBar.css'
 
 const NavBar = ({user, login, logout, submitSearch}) => {
   return (
@@ -23,25 +24,23 @@ const NavBar = ({user, login, logout, submitSearch}) => {
             </div>
           :
             <div>
-            <NavLink to="/" className={'block-link'} >
-              Home
-            </NavLink> 
-            <NavLink to="/signup" className={'block-link'} >
-              Signup
-            </NavLink>
-
+              <NavLink to="/" className={'block-link'} >
+                Home
+              </NavLink> 
+              <NavLink to="/signup" className={'block-link'} >
+                Signup
+              </NavLink>
             </div>
         }
       </div>
       <div className='center-nav'>
-        <SearchBar className="search-bar"
-          submitSearch={submitSearch} />   
         {
           user ?
             `Hello, ${user.username}!`
             :
             `International Book Database`
         }
+        <SearchBar submitSearch={submitSearch} />   
 
       </div>
       <div className='right-nav'>
