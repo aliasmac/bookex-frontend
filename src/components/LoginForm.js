@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
           value={this.state.password}
           placeholder="Password"
         />
-        <button className='btn-black login-btn' onClick={this.handleSubmit}>
+        <button className='btn-black navbar-btn login-btn' onClick={this.handleSubmit}>
           Login
         </button>
       </form>

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './PopularBooks.css'
 
 class PopularBooks extends React.Component {
 
@@ -30,7 +30,7 @@ class PopularBooks extends React.Component {
         console.log("POPULARBOOKS:", this.state.popularBooks)
 
         return (
-            <div className="popular-books" >
+            <div className="right-box popular-books card" >
             <h2>Books trending in the IBDB Community</h2>
             {
                 this.state.popularBooks.map((book, idx) => 

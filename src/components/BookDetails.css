@@ -1,0 +1,62 @@
+.book-details img {
+  height: 90%;
+  width: auto;
+  margin: 5px;
+}
+
+.book-details h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0px;
+}
+
+.book-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.book-description {
+  background: pink;
+  min-height: 50%;
+  overflow: auto;
+}
+
+.details-btn {
+  width: 80%;
+  height: auto;
+  margin: 5%;
+}
+
+.details-btn:disabled {
+  background: whitesmoke;
+  color: grey;
+  border: black;
+  cursor: default;
+}
+
+.details-btn:disabled:hover {
+  border: grey;
+  color: black;
+}
+
+.details-links {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.details-cols {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.details-left-col {
+  width: 50%;
+}
+
+.details-right-col {
+  width: 50%
+}

@@ -8,34 +8,34 @@ class HomePage extends React.Component {
 
     render() {
         return(
-        <div className="main-body">
-            <div className="pop-books-div">
-              <PopularBooks />   
-            </div>
-        <div className="homepage" >
- 
-            {
-            this.props.selectedBook ? 
-            <BookDetails
-                book={this.props.selectedBook}
-                currentlyReading={this.props.currentlyReading}
-                deselectBook={this.props.deselectBook}
-                user={this.props.user}
-                handleWant={this.props.handleWant}
-                handleFavourite={this.props.handleFavourite}
-            /> : 
-            <BookResults
+        <React.Fragment>
+          <div className="left-container">
+              <BookResults
                 className="results"
                 books={this.props.bookResults}
                 selectBook={this.props.selectBook}
                 handleWant={this.props.handleWant}
                 handleFavourite={this.props.handleFavourite}
                 user={this.props.user}
-            /> 
-            }
-
-        </div>
-        </div>    
+              /> 
+          </div>
+          <div className='right-container'>
+              {
+              this.props.selectedBook ? 
+              <BookDetails
+                  book={this.props.selectedBook}
+                  currentlyReading={this.props.currentlyReading}
+                  deselectBook={this.props.deselectBook}
+                  user={this.props.user}
+                  handleWant={this.props.handleWant}
+                  handleFavourite={this.props.handleFavourite}
+              /> : 
+              <div className="pop-books-div">
+                <PopularBooks />
+              </div>
+              }
+          </div>
+        </React.Fragment>   
 
         )
       

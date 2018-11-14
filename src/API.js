@@ -59,8 +59,6 @@ class API {
       return fetch(this.baseUrl + '/users/logout', {
         method: 'POST',
         headers: { 'authorization': token },
-      }).then(resp => {
-        return resp.json()
       }).catch(err => console.log('Error in logout', err))
     }
 

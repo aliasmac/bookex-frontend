@@ -2,6 +2,7 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import comingSoon from './comingsoon.jpeg'
+import './BookCard.css'
 
 class BookCard extends React.Component {
   
@@ -38,13 +39,13 @@ class BookCard extends React.Component {
 
           <CardActions className="card-actions" >
 
-            <button className={'card-btn btn-black' + (listType ? ' hidden' : ' show')}
+            <button className={'main-btn btn-black' + (listType ? ' hidden' : ' show')}
                 onClick={() => this.props.selectBook(book)} >
                 Info
               </button>
 
             <button 
-            className={'card-btn ' + (favourite ? 'btn-favourite' : 'btn-red')
+            className={'main-btn ' + (favourite ? 'btn-favourite' : 'btn-red')
                 + (listType ? ' hidden' : ' show')}
               disabled={!user}
 
@@ -53,7 +54,7 @@ class BookCard extends React.Component {
             </button>
 
             <button 
-            className={'card-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) 
+            className={'main-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) 
                 + (listType ? ' hidden' : ' show')}
 
               disabled={!user}
