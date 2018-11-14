@@ -9,16 +9,18 @@ const BookDetails = ({ book, user, handleFavourite,
       let favourite
       let wanted
       let current
-      if (user && user.wishlist.some(x => x.ISBN_13 == book.ISBN_13)) {
-        wanted = true
-      }
-      if (user && user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
-        favourite = true
-      }
+      if (user && user.wishlist.find(x => 
+          parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
+           wanted = true
+        }
+      if (user && user.favourite_books.find(x => 
+          parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
+           favourite = true
+        }
       if (user && user.currently_reading &&
-          user.currently_reading.ISBN_13 == book.ISBN_13) {
-        current = true
-      }
+          parseInt(user.currently_reading.ISBN_13) === parseInt(book.ISBN_13)) {
+           current = true
+        }
 
   
 

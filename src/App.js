@@ -70,8 +70,8 @@ class App extends Component {
 
   handleWant = book => {
     console.log(book)
-    this.state.user.wishlist.some(
-      x => x.ISBN_13 == book.ISBN_13
+    this.state.user.wishlist.find(
+      x => parseInt(x.ISBN_13) === parseInt(book.ISBN_13)
     )
     ?
     this.removeBookFromList(book, 'wishlist')
@@ -80,8 +80,8 @@ class App extends Component {
   }
 
   handleFavourite = book => {
-    this.state.user.favourite_books.some(
-      x => x.ISBN_13 == book.ISBN_13
+    this.state.user.favourite_books.find(
+      x => parseInt(x.ISBN_13) === parseInt(book.ISBN_13)
     )
     ?
     this.removeBookFromList(book, 'favourite_books')
@@ -100,7 +100,8 @@ class App extends Component {
 
   removeBookFromList = (book, list) => { 
     let newList = [...this.state.user[list]]
-    newList = newList.filter(x => book.ISBN_13 != x.ISBN_13)
+    newList = newList.filter(x => 
+      parseInt(x.ISBN_13) !== parseInt(book.ISBN_13))
     this.setState({
       user: { ...this.state.user, [list]: newList },
       selectedBook: false

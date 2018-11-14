@@ -12,11 +12,12 @@ class BookCard extends React.Component {
       let favourite
       let wanted
 
-      if (user && user.wishlist.some(x => x.ISBN_13 == book.ISBN_13)) {
+      if (user && user.wishlist.find(x =>
+        parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
         wanted = true
       }
-      
-      if (user && user.favourite_books.some(x => x.ISBN_13 == book.ISBN_13)) {
+      if (user && user.favourite_books.find(x =>
+        parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
         favourite = true
       }
 
