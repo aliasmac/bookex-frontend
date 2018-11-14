@@ -19,7 +19,7 @@ const NavBar = ({user, login, logout, submitSearch}) => {
                 Profile
               </NavLink>
               <NavLink to="/loanshelf" className={'block-link'}>
-                IBDB Loan Shelf
+                Loan Shelf
               </NavLink>
             </div>
           :

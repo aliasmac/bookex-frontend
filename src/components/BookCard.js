@@ -8,7 +8,7 @@ class BookCard extends React.Component {
   
     render() {
 
-      const { book, handleWant, handleFavourite, handleRemove, user, listType } = this.props
+      const { book, handleWant, handleFavourite, handleRemove, user, listType, loanObject, loanShelf } = this.props
 
       let favourite
       let wanted
@@ -22,13 +22,14 @@ class BookCard extends React.Component {
         favourite = true
       }
 
+
       return (
 
         <Card className={(listType ? 'book-card-small' : 'book-card' )}>
 
             <img
               className={(listType ? 'book-image-small' : 'book-image' )}
-              onClick={() => this.props.selectBook(book)}
+              onClick={() => this.props.selectBook(book, loanObject)}
               src={
                     book.image ?
                     book.image :
@@ -39,14 +40,14 @@ class BookCard extends React.Component {
 
           <CardActions className="card-actions" >
 
-            <button className={'main-btn btn-black' + (listType ? ' hidden' : ' show')}
+            <button className={'main-btn btn-black' + (listType || loanShelf ? ' hidden' : ' show')}
                 onClick={() => this.props.selectBook(book)} >
                 Info
               </button>
 
             <button 
-            className={'main-btn ' + (favourite ? 'btn-favourite' : 'btn-red')
-                + (listType ? ' hidden' : ' show')}
+            className={'main-btn ' + (favourite  ? 'btn-favourite' : 'btn-red')
+                + (listType || loanShelf ? ' hidden' : ' show')}
               disabled={!user}
 
               onClick={() => handleFavourite(book)} >
@@ -54,8 +55,8 @@ class BookCard extends React.Component {
             </button>
 
             <button 
-            className={'main-btn ' + (wanted ? 'btn-wanted' : 'btn-green' ) 
-                + (listType ? ' hidden' : ' show')}
+            className={'main-btn ' + (wanted || loanShelf ? 'btn-wanted' : 'btn-green' ) 
+                + (listType || loanShelf ? ' hidden' : ' show')}
 
               disabled={!user}
               onClick={() => handleWant(book)} >
@@ -66,7 +67,8 @@ class BookCard extends React.Component {
           {listType  ?
                <button className="remove-btn" onClick={() => handleRemove(book, listType)}>X</button> :
                 null
-              }
+          }
+
 
         </Card>
       );

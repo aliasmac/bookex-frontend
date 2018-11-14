@@ -80,6 +80,17 @@ class API {
           .then(resp => resp.json())
     }
 
+    static userLoans(id) {
+      return fetch(this.baseUrl + `/loans/${id}`)
+        .then(resp => resp.json())
+    }
+
+    static deleteFromLoans(loanId) {
+      return fetch(this.baseUrl + `/loans/${loanId}`, {
+        method: 'DELETE',
+      })
+    }
+
   }
   
   window.API = API

@@ -8,9 +8,11 @@ import {
 
 import UserProfile from './containers/UserProfile'
 import HomePage from './containers/HomePage'
+import LoanShelf from './containers/LoanShelf'
+
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
-import LoanShelf from './components/LoanShelf'
+
 import API from './API'
 
 class App extends Component {
@@ -19,7 +21,8 @@ class App extends Component {
     user: null,
     selectedBook: null,
     bookResults: [],
-    loanedBooks: []
+    loanedBooks: [],
+    loanObj: null
   }
 
   signup = (username, password) => {
@@ -118,6 +121,22 @@ class App extends Component {
       .then(loans => this.setState({ loanedBooks: loans }))
   }
 
+  setLoanObject = (loanObject) => {
+    return this.state.loanedBooks.find(loanObject)
+  } 
+
+  removeLoaned = (loan) => {
+    // console.log("LOAN OBJECT ID:", loane.loans_id)
+    console.log("LOAN OBJECT LIST:", this.state.loanedBooks)
+    let newLoanList = [...this.state.loanedBooks.loans]
+    newLoanList = newLoanList.filter(x => x._id !== loan._id)
+    this.setState({
+      loanedBooks: newLoanList
+    })
+    API.deleteFromLoans(loan._id)
+  }
+
+
   addBookToList = (book, list) => { 
     const newList = [...this.state.user[list], book]
     this.setState( {
@@ -157,8 +176,17 @@ class App extends Component {
   }
 
   // BOOK DETAILS 
-  selectBook = selectedBook => {
-    this.setState({ selectedBook }) 
+  selectBook = (selectedBook, loanObj) => {
+    console.log("SELECTBOOK IN APP:", loanObj)
+    if (loanObj) {
+      this.setState({ 
+        selectedBook,
+        loanObj
+       })
+    } else {
+      this.setState({ selectedBook }) 
+    }
+    
   }
 
   deselectBook = () => {
@@ -208,6 +236,9 @@ class App extends Component {
                   handleWant={this.handleWant}
                   handleFavourite={this.handleFavourite}
                   user={user}
+                  removeLoaned={this.removeLoaned}
+                  findLoanObject={this.findLoanObject}
+                  loanObject={this.state.loanObj}
                 />
               }
             />
@@ -222,9 +253,7 @@ class App extends Component {
             render={(routerProps) =>
               <HomePage {...routerProps}
                 bookResults={bookResults}
-
                 currentlyReading={this.currentlyReading}
-
                 selectedBook={selectedBook}
                 selectBook={this.selectBook}
                 deselectBook={this.deselectBook}
@@ -232,6 +261,7 @@ class App extends Component {
                 handleFavourite={this.handleFavourite}
                 updateResults={this.updateResults}
                 user={user}
+                handleLoaned={this.handleLoaned}
               /> }
             />
 
