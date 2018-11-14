@@ -95,7 +95,7 @@ class App extends Component {
       user: { ...this.state.user, [list]: newList }
     }, () => API.update(this.state.user)
         .then(user => this.setState({ user: user.user }))
-    )
+    ).catch(err => console.log('Error in adding book to list', err))
   }
 
   removeBookFromList = (book, list) => { 
