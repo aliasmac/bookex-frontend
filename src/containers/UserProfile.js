@@ -18,14 +18,16 @@ class UserProfile extends React.Component {
 
     render() {
 
-      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite, currentlyReading, historyProps} = this.props
+      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite, currentlyReading, handleLoaned} = this.props
 
         return (
+
           <React.Fragment>
             <div className="left-container">
               {
               user && 
               <React.Fragment>
+
 
                       <Wishlist
                           user={user}

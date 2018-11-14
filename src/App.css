@@ -81,6 +81,12 @@ body {
   color: grey;
 }
 
+.btn-loaned {
+  background-color: orange ;
+  border: orange solid 1px;
+  color: white;
+}
+
 .hidden {
   display: none;
 }

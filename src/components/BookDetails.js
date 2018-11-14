@@ -2,29 +2,27 @@ import React from 'react'
 import './BookDetails.css'
 
 const BookDetails = ({ book, user, handleFavourite, 
-    handleWant, deselectBook, currentlyReading}) => {
+    handleWant, deselectBook, currentlyReading, handleLoaned}) => {
 
   const amazonUrl = 'https://www.amazon.co.uk/s/?search-alias=stripbooks&field-isbn='
   const googleUrl = 'https://www.google.com/search?tbo=p&tbm=bks&q=isbn:'
 
-  console.log("BOOK DETAILS", book)
-  console.log(user)
+      let favourite
+      let wanted
+      let current
 
-  let favourite
-  let wanted
-  let current
-  if (user && user.wishlist.find(x => 
-      parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
-        wanted = true
-    }
-  if (user && user.favourite_books.find(x => 
-      parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
-        favourite = true
-    }
-  if (user && user.currently_reading &&
-      parseInt(user.currently_reading.ISBN_13) === parseInt(book.ISBN_13)) {
-        current = true
-    }
+      if (user && user.wishlist.find(x => 
+          parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
+           wanted = true
+        }
+      if (user && user.favourite_books.find(x => 
+          parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
+           favourite = true
+        }
+      if (user && user.currently_reading &&
+          parseInt(user.currently_reading.ISBN_13) === parseInt(book.ISBN_13)) {
+           current = true
+        }
 
   return (
       <div className="right-box book-details card"> 
@@ -73,6 +71,15 @@ const BookDetails = ({ book, user, handleFavourite,
             Google Books
                     </a>
         </div>
+  
+              <button
+                className={'card-btn details-btn btn-loaned'}
+                onClick={() => handleLoaned(book)}
+                disabled={!user} >
+                {/* {loaned ? 'Loaned' : 'Loan'} */}
+                Loan Book
+              </button>
+
 
         <div class="book-description">
             <p>{book.description}</p>
@@ -80,6 +87,7 @@ const BookDetails = ({ book, user, handleFavourite,
 
       </div>
   )
+
 
 }
 
