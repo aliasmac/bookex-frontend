@@ -1,7 +1,7 @@
 import React from 'react'
 
 const BookDetails = ({ book, user, handleFavourite, 
-    handleWant, deselectBook, currentlyReading}) => {
+    handleWant, deselectBook, currentlyReading, handleLoaned}) => {
 
       console.log("BOOK DETAILS", book)
       console.log(user)
@@ -9,6 +9,7 @@ const BookDetails = ({ book, user, handleFavourite,
       let favourite
       let wanted
       let current
+
       if (user && user.wishlist.find(x => 
           parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
            wanted = true
@@ -22,7 +23,7 @@ const BookDetails = ({ book, user, handleFavourite,
            current = true
         }
 
-  
+
 
       return (
           <div className="book-details"> 
@@ -66,6 +67,24 @@ const BookDetails = ({ book, user, handleFavourite,
                 disabled={!user} >
                 {wanted ? 'Un-wishlist' : 'Add to wishlist'}
               </button>
+
+              {/* <button
+                className={'card-btn details-btn ' + (loaned ? 'btn-loaned' : 'btn-orange')}
+                onClick={() => handleLoaned(book)}
+                disabled={!user} >
+                {loaned ? 'Loaned' : 'Loan'}
+              </button> */}
+
+              <button
+                className={'card-btn details-btn btn-loaned'}
+                onClick={() => handleLoaned(book)}
+                disabled={!user} >
+                {/* {loaned ? 'Loaned' : 'Loan'} */}
+                Loan Book
+              </button>
+
+
+              
           </div>
       )
 

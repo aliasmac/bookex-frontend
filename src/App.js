@@ -10,6 +10,7 @@ import UserProfile from './containers/UserProfile'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import SignupForm from './components/SignupForm'
+import LoanShelf from './components/LoanShelf'
 import API from './API'
 
 class App extends Component {
@@ -17,7 +18,8 @@ class App extends Component {
   state = {
     user: null,
     selectedBook: null,
-    bookResults: []
+    bookResults: [],
+    loanedBooks: []
   }
 
   login = (username, password) => {
@@ -50,6 +52,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(this.state.user)
     console.log("IBDB ONLINE")
     if (!localStorage.getItem('authorization')) return 
     API.getUser()
@@ -58,6 +61,7 @@ class App extends Component {
         this.setState({ user: user.user })
       })
       .catch(error => this.props.history.push('/'))
+    this.getLoanedBooks()  
   }
 
   currentlyReading = book => {
@@ -89,13 +93,23 @@ class App extends Component {
     this.addBookToList(book, 'favourite_books')
   }
 
+  handleLoaned = book => {
+    API.loan(book, this.state.user._id) 
+      // .then(loan => this.setState({ userLoanedBooks: [...this.state.userLoanedBooks], loan }))
+  }
+
+  getLoanedBooks = () => {
+    API.getAllLoanedBooks()
+      .then(loans => this.setState({ loanedBooks: loans }))
+  }
+
   addBookToList = (book, list) => { 
     const newList = [...this.state.user[list], book]
     this.setState( {
       user: { ...this.state.user, [list]: newList }
     }, () => API.update(this.state.user)
-        .then(user => this.setState({ user: user.user }))
-    ).catch(err => console.log('Error in adding book to list', err))
+        .then(user => this.setState({ user: user.user })).catch(err => console.log('Error in adding book to list', err))
+    )
   }
 
   removeBookFromList = (book, list) => { 
@@ -139,8 +153,9 @@ class App extends Component {
 
 
     console.log("USER:", this.state.user)
+    console.log("LOANED:", this.state.loanedBooks)
 
-    const { user, selectedBook, bookResults } = this.state
+    const { user, selectedBook, bookResults, loanedBooks } = this.state
 
     return (
     
@@ -152,6 +167,7 @@ class App extends Component {
         <div className='main-content'>
         <Switch>
           {user &&
+        
             <Route path='/profile' render={(routerProps) => 
               <UserProfile {...routerProps}
               user={user}
@@ -161,9 +177,24 @@ class App extends Component {
               selectBook={this.selectBook}
               selectedBook={selectedBook}
               deselectBook={this.deselectBook}
+              handleLoaned={this.handleLoaned}
               /> }
             />
+            
           }
+          <Route
+              path='/loanshelf'
+              render={(routerProps) => 
+                <LoanShelf {...routerProps}
+                  loanedBooks={loanedBooks}
+                  selectBook={this.selectBook}
+                  selectedBook={selectedBook}
+                  handleWant={this.handleWant}
+                  handleFavourite={this.handleFavourite}
+                  user={user}
+                />
+              }
+            />
 
           <Route
             path='/signup'
@@ -187,6 +218,8 @@ class App extends Component {
                 user={user}
               /> }
             />
+
+            
         </Switch>
 
         </div>

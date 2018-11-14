@@ -64,8 +64,27 @@ class API {
       }).catch(err => console.log('Error in logout', err))
     }
 
+    static loan(book, id) {
+      return fetch(this.baseUrl + '/loans', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ 
+          user: id,
+          book: book
+         })
+      }).then(resp => {
+        return resp.json()
+      }).catch(err => console.log('Error in loaning', err))
+    }
+
+    static getAllLoanedBooks() {
+      return fetch(this.baseUrl + '/loans')
+          .then(resp => resp.json())
+    }
+
   }
   
   window.API = API
   
   export default API
+

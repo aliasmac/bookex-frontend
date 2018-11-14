@@ -238,6 +238,14 @@ box-shadow: -5px -4px 5px 0px rgba(0,0,0,0.75); */
   color: black;
 }
 
+.btn-loaned {
+  background-color: orange ;
+  border: orange solid 1px;
+  color: white;
+}
+
+
+
 .hidden {
   display: none;
 }

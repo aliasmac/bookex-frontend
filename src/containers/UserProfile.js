@@ -17,7 +17,7 @@ class UserProfile extends React.Component {
 
     render() {
 
-      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite, currentlyReading, historyProps} = this.props
+      const {selectedBook, selectBook, deselectBook, user, handleWant, handleFavourite, currentlyReading, handleLoaned} = this.props
 
         return (
             <div  className="user-profile-main" >
@@ -31,7 +31,7 @@ class UserProfile extends React.Component {
                                  handleRemove={this.handleRemove}
                                  selectedBook={selectedBook}
                                  selectBook={selectBook}
-                                 historyProps={historyProps}
+                     
                              />
     
                              <Favourites
@@ -39,7 +39,7 @@ class UserProfile extends React.Component {
                                  handleRemove={this.handleRemove}
                                  selectedBook={selectedBook}
                                  selectBook={selectBook}
-                                 historyProps={historyProps}
+                         
                              /> 
                      </React.Fragment>
            
@@ -55,6 +55,7 @@ class UserProfile extends React.Component {
                         currentlyReading={currentlyReading}
                         handleWant={handleWant}
                         handleFavourite={handleFavourite}
+                        handleLoaned={handleLoaned}
                     /> :
 
                     <ProfileBox
