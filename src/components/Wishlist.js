@@ -8,7 +8,7 @@ const Wishlist =
 
         <div className="wishlist-container">
             <h2>Your Wishlist</h2>
-            <div className="wishlist">
+            <div className="wishlist card">
           {
             user.wishlist.length === 0 ? <h2>You have no books on your wishlist - get searching!</h2> : null
           }

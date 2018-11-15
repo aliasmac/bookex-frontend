@@ -18,6 +18,7 @@
 .block-link {
   color: black;
   text-decoration: none;
+  height: 100%;
   padding: 10px;
   border-radius: 5px;
   -webkit-transition-duration: 0.2s; 
@@ -33,13 +34,12 @@
 }
 
 .left-nav {
-  width: 25%;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
 }
 
 .center-nav {
-  width: 50%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,9 +47,13 @@
 }
 
 .right-nav {
-  width: 25%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   font-size: 1rem;
+}
+
+.navbar-username {
+  font-size: 1.2rem;
 }
 

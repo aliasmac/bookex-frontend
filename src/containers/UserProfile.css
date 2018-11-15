@@ -1,17 +1,12 @@
-.wishlist-container {
-  margin: 1.5rem;
-}
-
 .favourites-list-container, .wishlist-container {
-  background: lightblue;
-  margin-left: 2rem;
-  width: 100%;
+  margin: 2rem;
+  margin-left: 40px;
+  width: 90%;
   height: 19rem;
 }
 
 .favourites-list, .wishlist {
   display: flex;
   overflow-x: scroll;
-  background: orange;
   width: 100%;
 }

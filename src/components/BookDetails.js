@@ -32,12 +32,12 @@ const BookDetails = ({ book, user, handleFavourite,
         <div className='details-cols'>
 
           <div className='details-left-col'>
+            <button className={'main-btn details-btn close-button'} onClick={() => deselectBook()} >Close details</button>
             <button onClick={() => currentlyReading(book)} 
             className='main-btn btn-black details-btn'
-            disabled={current} >
+            disabled={current || !user} >
                 {!current ? "I'm reading this!" : "You are reading this" }
-                </button>
-            <button className={'main-btn details-btn btn-black'} onClick={() => deselectBook()} >Close details</button>
+            </button>
             <button
               className={'main-btn details-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
               onClick={() => handleFavourite(book)}
@@ -49,6 +49,13 @@ const BookDetails = ({ book, user, handleFavourite,
               onClick={() => handleWant(book)}
               disabled={!user} >
               {wanted ? 'Un-wishlist' : 'Add to wishlist'}
+            </button>
+            <button
+              className={'main-btn details-btn btn-loaned'}
+              onClick={() => handleLoaned(book)}
+              disabled={!user} >
+              {/* {loaned ? 'Loaned' : 'Loan'} */}
+              Loan Book
             </button>
           </div>
           
@@ -66,20 +73,12 @@ const BookDetails = ({ book, user, handleFavourite,
         <div class='details-links'>
           <a href={amazonUrl + book.ISBN_13} target="_blank" rel="noopener noreferrer">
             Amazon
-                    </a>
+          </a>
+                    <span>|</span>
           <a href={googleUrl + book.ISBN_13} target="_blank" rel="noopener noreferrer">
             Google Books
-                    </a>
+          </a>
         </div>
-  
-              <button
-                className={'card-btn details-btn btn-loaned'}
-                onClick={() => handleLoaned(book)}
-                disabled={!user} >
-                {/* {loaned ? 'Loaned' : 'Loan'} */}
-                Loan Book
-              </button>
-
 
         <div class="book-description">
             <p>{book.description}</p>

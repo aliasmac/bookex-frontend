@@ -27,25 +27,20 @@ class UserProfile extends React.Component {
               {
               user && 
               <React.Fragment>
+                 <Wishlist
+                    user={user}
+                    handleRemove={this.handleRemove}
+                    selectedBook={selectedBook}
+                    selectBook={selectBook}
+                  />
 
-
-                      <Wishlist
-                          user={user}
-                          handleRemove={this.handleRemove}
-                          selectedBook={selectedBook}
-                          selectBook={selectBook}
-                          historyProps={historyProps}
-                      />
-
-                      <Favourites
-                          user={user}
-                          handleRemove={this.handleRemove}
-                          selectedBook={selectedBook}
-                          selectBook={selectBook}
-                          historyProps={historyProps}
-                      /> 
+                  <Favourites
+                    user={user}
+                    handleRemove={this.handleRemove}
+                    selectedBook={selectedBook}
+                    selectBook={selectBook}
+                  /> 
               </React.Fragment>
-          
               }
             </div>
               <div className='right-container'>
@@ -61,7 +56,10 @@ class UserProfile extends React.Component {
                   /> :
 
                   <ProfileBox
-                      user={user}  
+                    user={user}
+                    handleRemove={this.handleRemove}
+                    selectedBook={selectedBook}
+                    selectBook={selectBook}
                   /> 
               }
               </div>       

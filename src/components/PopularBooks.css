@@ -1,13 +1,28 @@
-.popular-books {
+.popular-box {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.popular-books {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px;
+  padding-top: 0px;
+  margin: 0 auto;
 }
 
 .popular-books h2 {
-  font-family: 'Roboto';
+  font-family: 'Karla';
+  width: 80%;
 }
 
-.popular-book-div p {
-  font-size: 0.8rem;
-  font-family: 'Roboto';
+.popular-reader-count {
+  font-size: 1.1rem;
+  font-weight: bold;
 }
+
