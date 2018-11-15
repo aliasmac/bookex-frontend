@@ -9,8 +9,6 @@ class HomePage extends React.Component {
 
   render() {
 
-    console.log(this.props.renderSignUp)
-
     return(
 
       <React.Fragment>
@@ -30,7 +28,8 @@ class HomePage extends React.Component {
             {
             this.props.renderSignUp
             ? 
-            <SignupForm signup={this.props.signup} />
+            <SignupForm setUser={this.props.setUser} history={this.props.history}
+                        />
             :
             this.props.selectedBook
               ? 

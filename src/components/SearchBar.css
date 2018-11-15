@@ -1,5 +1,8 @@
 .search {
-  display: inline;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
 }
 
 .search input {
@@ -10,36 +13,8 @@
   border-radius: 6px;
 }
 
-.login-input {
-  font-size: 0.8rem;
-  margin: 5px;
-  border: 1px solid grey;
-  border-radius: 4px;
-}
-
-.login-input {
-  width: 60px;
-  padding: 5px;
-}
-
-.navbar-btn {
-  background: #E0ECE9;
+.search input:focus {
+  background-color: rgb(242, 253, 179);
   outline: none;
-  padding: 8px;
-  font-size: 0.8rem;
-  margin: 3px;
-  border: 1px solid grey;
-  border-radius: 6px;
-  cursor: pointer;
-  width: 65px;
-}
-
-.navbar-btn:hover {
-  background-color: #2480B8;
-  color: white;
-}
-
-.login-btn {
-  padding: 4px;
 }
 

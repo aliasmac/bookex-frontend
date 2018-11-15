@@ -1,4 +1,5 @@
 import React from 'react';
+import './LoginForm.css'
 
 class LoginForm extends React.Component {
   
@@ -23,27 +24,32 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form noValidate autoComplete="off">
-        <input
-          name="username"
-          type="text"
-          className={'login-input'}
-          onChange={this.handleChange}
-          value={this.state.username}
-          placeholder="Username"
-        />
-        <input
-          name="password"
-          type="password"
-          className={'login-input'}
-          onChange={this.handleChange}
-          value={this.state.password}
-          placeholder="Password"
-        />
-        <button className='btn-black navbar-btn login-btn' onClick={this.handleSubmit}>
-          Login
-        </button>
-      </form>
+      <div class='login-form-container'>
+        <div>
+        <form className='login-form' noValidate autoComplete="off" >
+            <span class='login-error-msg'>{this.props.error}</span>
+          <input
+            name="username"
+            type="text"
+            className='login-input'
+            onChange={this.handleChange}
+            value={this.state.username}
+            placeholder="Username"
+          />
+          <input
+            name="password"
+            type="password"
+            className='login-input'
+            onChange={this.handleChange}
+            value={this.state.password}
+            placeholder="Password"
+          />
+          <button className='btn-black login-btn' onClick={this.handleSubmit}>
+            Login
+          </button>
+        </form>
+        </div>
+      </div>
     );
   }
 }

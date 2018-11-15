@@ -37,13 +37,16 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-direction: row;
+  white-space: nowrap;
 }
 
 .center-nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   font-size: 1.3rem;
+  flex-wrap: nowrap;
 }
 
 .right-nav {
@@ -51,9 +54,28 @@
   justify-content: flex-end;
   align-items: center;
   font-size: 1rem;
+  white-space: nowrap;
 }
 
 .navbar-username {
   font-size: 1.2rem;
 }
+
+.navbar-btn {
+  background: #E0ECE9;
+  outline: none;
+  padding: 8px;
+  font-size: 0.8rem;
+  margin: 3px;
+  border: 1px solid grey;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 65px;
+}
+
+.navbar-btn:hover {
+  background-color: #2480B8;
+  color: white;
+}
+
 

@@ -23,28 +23,16 @@ class App extends Component {
     loanedBooks: [],
     loanObj: null,
     suggestions: true,
-    renderSignUp: false
-
+    renderSignUp: false,
+    userTaken: ""
   }
 
   renderSignUp = () => {
     this.setState({renderSignUp: true})
   }
 
-  signup = userObj => {
-    API.signup(userObj)
-      .then(user => {
-        if (user.errmsg) {
-          console.log('Invalid signup caught')
-        } else {
-          this.setState({user: user.user}, 
-            () => this.props.history.push('/profile'))
-          }
-      })
-      .catch(err => {
-        console.log('Invalid signup caught', err)
-        this.props.history.push('/signup') 
-      })
+  setUser = user => {
+    this.setState({user})
   }
 
   login = (username, password) => {
@@ -56,7 +44,7 @@ class App extends Component {
       })
       .catch(err => {
         console.log('Invalid login caught', err)
-        // do something to alert the user
+        this.setState({loginError: 'Invalid login'})
       })
   }
 
@@ -72,25 +60,22 @@ class App extends Component {
     this.setState({
       bookResults,
       suggestions: false
-    }).catch(err => console.log('Error updating book results', err))
+    })
   }
 
   componentDidMount() {
     console.log(this.state.user)
-    console.log("IBDB ONLINE")
     this.getSuggestions()
     this.getLoanedBooks()  
     if (!localStorage.getItem('authorization')) return 
     API.getUser()
       .then(user => {
-        console.log("Component did mount:", user)
         this.setState({ user: user.user })
       })
       .catch(err => {
         console.log('Error in getting user', err)
         this.props.history.push('/')
       })
-
   }
 
   getSuggestions() {
@@ -158,7 +143,6 @@ class App extends Component {
     API.deleteFromLoans(loan._id)
   }
 
-
   addBookToList = (book, list) => { 
     const newList = [...this.state.user[list], book]
     this.setState( {
@@ -174,8 +158,7 @@ class App extends Component {
     newList = newList.filter(x => 
       parseInt(x.ISBN_13) !== parseInt(book.ISBN_13))
     this.setState({
-      user: { ...this.state.user, [list]: newList },
-      selectedBook: false
+      user: { ...this.state.user, [list]: newList }
     }, () => API.update(this.state.user)
           .then(user => this.setState({ user: user.user }))
           .catch(err => console.log('Error in removing book from list', err))
@@ -217,7 +200,6 @@ class App extends Component {
    
   }
 
-
   deselectBook = () => {
     this.setState({ selectedBook: null })
     this.scrollDown()
@@ -240,13 +222,12 @@ class App extends Component {
     }
   }
 
-
   render() {
 
     console.log("USER:", this.state.user)
     console.log("LOANED:", this.state.loanedBooks)
 
-    const { user, selectedBook, bookResults, loanedBooks, suggestions, renderSignUp, signup }
+    const { user, selectedBook, bookResults, loanedBooks, suggestions, renderSignUp, loginError}
      = this.state
 
     return (
@@ -255,6 +236,7 @@ class App extends Component {
         <Navbar user={user} login={this.login} logout={this.logout}
           submitSearch={this.submitSearch} 
           renderSignUp={this.renderSignUp}
+          loginError={loginError}
         />
         
         <div className='main-container'>
@@ -289,7 +271,7 @@ class App extends Component {
               }
             />
           <Route
-            path='/'
+            exact path='/'
             render={(routerProps) =>
               <HomePage {...routerProps}
                 bookResults={bookResults}
@@ -300,7 +282,7 @@ class App extends Component {
                 handleWant={this.handleWant}
                 handleFavourite={this.handleFavourite}
                 renderSignUp={renderSignUp}
-                signup={this.signup}
+                setUser={this.setUser}
                 suggestions={suggestions}
                 updateResults={this.updateResults}
                 user={user}

@@ -10,7 +10,7 @@ class API {
       body: JSON.stringify(userObj)
     }).then(resp =>  {  
         let token = resp.headers.get("authorization")
-        localStorage.setItem('authorization', token)
+        token && localStorage.setItem('authorization', token)
         return resp.json()
     }).catch(err => console.log('Error in signup', err))
   }
@@ -60,8 +60,6 @@ class API {
   }
 
 
-
-
   // BOOK ROUTES
   static loan(book, id) {
     return fetch(this.baseUrl + '/loans', {
@@ -77,17 +75,16 @@ class API {
 
   }
 
-    static userLoans(id) {
-      return fetch(this.baseUrl + `/loans/${id}`)
-        .then(resp => resp.json())
-    }
+  static userLoans(id) {
+    return fetch(this.baseUrl + `/loans/${id}`)
+      .then(resp => resp.json())
+  }
 
-    static deleteFromLoans(loanId) {
-      return fetch(this.baseUrl + `/loan/${loanId}`, {
-        method: 'DELETE'
-      })
-    }
-
+  static deleteFromLoans(loanId) {
+    return fetch(this.baseUrl + `/loan/${loanId}`, {
+      method: 'DELETE'
+    })
+  }
 
   static getAllLoanedBooks() {
     return fetch(this.baseUrl + '/loans')

@@ -4,7 +4,7 @@ import LoginForm from './LoginForm'
 import SearchBar from './SearchBar'
 import './NavBar.css'
 
-const NavBar = ({user, login, logout, submitSearch, renderSignUp}) => {
+const NavBar = ({user, login, logout, loginError, submitSearch, renderSignUp}) => {
   return (
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px', zIndex: 1 }}>
       <div className='left-nav'>
@@ -34,14 +34,7 @@ const NavBar = ({user, login, logout, submitSearch, renderSignUp}) => {
         }
       </div>
       <div className='center-nav'>
-        {/* {
-          user ?
-            `Hello, ${user.username}!`
-            :
-            `International Book Database`
-        } */}
         <SearchBar submitSearch={submitSearch} />   
-
       </div>
       <div className='right-nav'>
         {
@@ -51,7 +44,8 @@ const NavBar = ({user, login, logout, submitSearch, renderSignUp}) => {
               <span onClick={logout} className={'block-link'}>Sign out</span>
             </div>
             :
-            <LoginForm login={login} />
+            <LoginForm login={login}
+                       error={loginError} />
         }
       </div>
     </div>
