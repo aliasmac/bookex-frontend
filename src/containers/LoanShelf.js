@@ -7,40 +7,37 @@ import './LoanShelf.css'
 
 class LoanShelf extends React.Component {
 
-
     render() {
 
-        const {loanedBooks, user, selectBook, selectedBook, handleRemove, handleWant, handleFavourite, handleLoaned, setLoanObject, removeLoaned, loanObject} = this.props
+        const {loanedBooks, user, selectBook, selectedBook, deselectBook, currentlyReading, handleWant, handleFavourite, handleLoaned, setLoanObject, removeLoaned, loanObject} = this.props
 
         return (
             <React.Fragment>
-                <div className="left-container loan-shelf">
-                {console.log("HELLO FROM LOAN SHELF")}
-                    <OnLoanBooks
+                <div className="left-container">
+                  <OnLoanBooks
                         loanedBooks={loanedBooks}
                         selectedBook={selectedBook}
                         selectBook={selectBook}
                         setLoanObject={setLoanObject}
                     />
                 </div>
-                <div className='right-container loan-shelf'>
+                <div className='right-container'>
                 {selectedBook && 
                   <BookDetails
                       book={selectedBook}
-                    //   deselectBook={deselectBook}
+                      deselectBook={deselectBook}
                       user={user}
-                    //   currentlyReading={currentlyReading}
+                      currentlyReading={currentlyReading}
                       handleWant={handleWant}
                       handleFavourite={handleFavourite}
                       handleLoaned={handleLoaned}
                       loanShelf
                       loanObject={loanObject}
                       removeLoaned={removeLoaned}
-                        loanedBooks={loanedBooks}
+                      loanedBooks={loanedBooks}
                   />}
                 </div>      
             </React.Fragment>
-
         )
     }
 }

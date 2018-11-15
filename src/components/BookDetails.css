@@ -64,3 +64,24 @@
   background: #F93F3F;
   color: whitesmoke; 
 }
+
+.btn-loaned {
+  background-color: #3693EA;
+  border: #3693EA solid 1px;
+  color: white;
+}
+
+.btn-loaned:hover {
+  background-color: white;
+  color: black
+}
+
+.btn-loan {
+  border: #3693EA solid 1px;
+  color: black;
+}
+
+.btn-loan:hover {
+  background-color: #3693EA ;
+  color: white;
+}

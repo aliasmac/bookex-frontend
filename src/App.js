@@ -132,10 +132,16 @@ class App extends Component {
     this.addBookToList(book, 'favourite_books')
   }
 
-  handleLoaned = book => {
-    let newLoanBookedList = [...this.state.loanedBooks, book]
-    this.setState({ loanedBooks: newLoanBookedList })
-    API.loan(book, this.state.user._id) 
+  handleLoaned = (book, user) => {
+    let foundLoan = this.state.loanedBooks.find(x => 
+      x.book._id === book._id && x.user._id === user._id)
+    if (foundLoan) {
+      this.removeLoaned(foundLoan)
+      this.deselectBook()
+    } else {
+      API.loan(book, user._id) 
+        .then(resp => this.getLoanedBooks())
+    }
   }
 
   getLoanedBooks = () => {
@@ -144,20 +150,13 @@ class App extends Component {
       .catch(err => console.log('Error caught in get loaned books', err))
   }
 
-  setLoanObject = (loanObject) => {
-    return this.state.loanedBooks.find(loanObject)
-  } 
-
   removeLoaned = (loan) => {
-    // console.log("LOAN OBJECT ID:", loane.loans_id)
-    console.log("LOAN OBJECT LIST:", this.state.loanedBooks)
     API.deleteFromLoans(loan._id)
     let newLoanList = [...this.state.loanedBooks]
     newLoanList = newLoanList.filter(x => x._id !== loan._id)
     this.setState({
       loanedBooks: newLoanList
-    }, () => console.log("LOAN OBJECT LIST:", this.state.loanedBooks))  
-    
+    })
   }
 
   addBookToList = (book, list) => { 
@@ -219,7 +218,6 @@ class App extends Component {
     this.getBooks(query)
   }
 
-  // BOOK DETAILS 
   selectBook = (selectedBook, loanObj) => {
     console.log("SELECTBOOK IN APP:", loanObj)
     if (loanObj) {
@@ -227,12 +225,13 @@ class App extends Component {
         selectedBook,
         loanObj,
         lastScroll: document.documentElement.scrollTop,
-      renderSignUp: false
+        renderSignUp: false
     }, this.scrollUp) 
     } else {
-      this.setState({ selectedBook, 
-      lastScroll: document.documentElement.scrollTop,
-      renderSignUp: false
+      this.setState({ 
+        selectedBook, 
+        lastScroll: document.documentElement.scrollTop,
+        renderSignUp: false
     }, this.scrollUp) 
     }
    
@@ -286,6 +285,7 @@ class App extends Component {
               currentlyReading={this.currentlyReading}
               handleWant={this.handleWant}
               handleFavourite={this.handleFavourite}
+              loanedBooks={loanedBooks}
               selectBook={this.selectBook}
               selectedBook={selectedBook}
               deselectBook={this.deselectBook}
@@ -298,8 +298,11 @@ class App extends Component {
               render={(routerProps) => 
                 <LoanShelf {...routerProps}
                   loanedBooks={loanedBooks}
+                  currentlyReading={this.currentlyReading}
+                  deselectBook={this.deselectBook}
                   selectBook={this.selectBook}
                   selectedBook={selectedBook}
+                  handleLoaned={this.handleLoaned}
                   handleWant={this.handleWant}
                   handleFavourite={this.handleFavourite}
                   user={user}

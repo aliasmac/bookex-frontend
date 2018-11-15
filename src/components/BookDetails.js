@@ -25,41 +25,31 @@ const BookDetails = ({ book, user, handleFavourite,
           current = true
           }
 
-      // if (user && loanShelf && loanedBooks.find(x => 
-      //   x._id === loanObject._id )) {
-      //     loan = true 
-      //   }
-       
-     
-
-        
+      if (loanedBooks.find(x =>
+          parseInt(x.book.ISBN_13) === parseInt(book.ISBN_13) &&
+           x.user._id === user._id)
+          ) {
+          loan = true
+        }
 
   return (
       <div className="right-box book-details card"> 
         <h2>{book.title}</h2>
         <h3>Author(s): {book.author}</h3>
-        
+        {loanObject &&
+          <div className="loan-message">{loanObject.user.name || loanObject.user.username} has this to loan!</div>
+        }
         <div className='details-cols'>
 
           <div className='details-left-col'>
             <button className={'main-btn details-btn close-button'} onClick={() => deselectBook()} >Close details</button>
             
-            {
-              !loanShelf &&
-              <button onClick={() => currentlyReading(book)} 
-              className='main-btn btn-black details-btn'
-              disabled={current || !user} >
-                  {!current ? "I'm reading this!" : "You are reading this" }
-  
-                  </button>
-            }
-            
-            
-            {
-              !loanShelf &&
-              <button className={'main-btn details-btn btn-black'} onClick={() => deselectBook()} >Close details</button>
-            }    
-            
+            <button onClick={() => currentlyReading(book)} 
+            className='main-btn btn-black details-btn'
+            disabled={current || !user} >
+                {!current ? "I'm reading this!" : "You are reading this" }
+
+            </button>
 
             <button
               className={'main-btn details-btn ' + (favourite ? 'btn-favourite' : 'btn-red')}
@@ -67,6 +57,7 @@ const BookDetails = ({ book, user, handleFavourite,
               disabled={!user}>
               {favourite ? 'De-favourite' : 'Add to favourites'}
             </button>
+
             <button
               className={'main-btn details-btn ' + (wanted ? 'btn-wanted' : 'btn-green')}
               onClick={() => handleWant(book)}
@@ -75,28 +66,13 @@ const BookDetails = ({ book, user, handleFavourite,
             </button>
 
             {
-              !loanShelf && 
               <button
-              className={'main-btn details-btn btn-loaned'}
-              onClick={() => handleLoaned(book)}
+              className={'main-btn details-btn ' + (loan ? 'btn-loaned' : 'btn-loan')}
+              onClick={() => handleLoaned(book, user)}
               disabled={!user} >
-              Loan Book
+               {loan ? 'Take off loan shelf' : 'Offer for loan'}
               </button>
             }
-
-            {
-              loanObject && 
-              <button
-                className={'main-btn details-btn btn-loaned'}
-                onClick={() => {
-                removeLoaned(loanObject)  
-              }}
-              disabled={!user} >
-                Remove from loanShelf
-              </button>
-            }
-
-            
           </div>
           
           <div className='details-right-col'>
@@ -114,22 +90,12 @@ const BookDetails = ({ book, user, handleFavourite,
           <a href={amazonUrl + book.ISBN_13} target="_blank" rel="noopener noreferrer">
             Amazon
           </a>
-                    <span>|</span>
+          <span>|</span>
           <a href={googleUrl + book.ISBN_13} target="_blank" rel="noopener noreferrer">
             Google Books
           </a>
         </div>
 
-  
-        {/* { !loanShelf &&
-          <button
-          className={'card-btn details-btn btn-loaned'}
-          onClick={() => handleLoaned(book)}
-          disabled={!user} >
-            Loan Book
-          </button>
-        } */}
-        
         <div class="book-description">
             <p>{book.description}</p>
         </div>

@@ -59,7 +59,6 @@ class API {
     })
   }
 
-
   // BOOK ROUTES
   static loan(book, id) {
     return fetch(this.baseUrl + '/loans', {
@@ -72,9 +71,14 @@ class API {
     }).then(resp => {
       return resp.json()
     }).catch(err => console.log('Error in loaning', err))
-
   }
 
+  static getSuggestions() {
+    return fetch(this.baseUrl + '/books/suggestions')
+      .then(resp => resp.json())
+  }
+
+  // LOAN ROUTES
   static userLoans(id) {
     return fetch(this.baseUrl + `/loans/${id}`)
       .then(resp => resp.json())
@@ -88,11 +92,6 @@ class API {
 
   static getAllLoanedBooks() {
     return fetch(this.baseUrl + '/loans')
-      .then(resp => resp.json())
-  }
-
-  static getSuggestions() {
-    return fetch(this.baseUrl + '/books/suggestions')
       .then(resp => resp.json())
   }
 
