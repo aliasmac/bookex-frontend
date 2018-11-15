@@ -86,8 +86,8 @@ class API {
     }
 
     static deleteFromLoans(loanId) {
-      return fetch(this.baseUrl + `/loans/${loanId}`, {
-        method: 'DELETE',
+      return fetch(this.baseUrl + `/loan/${loanId}`, {
+        method: 'DELETE'
       })
     }
 
