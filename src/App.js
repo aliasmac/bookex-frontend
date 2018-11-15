@@ -137,7 +137,6 @@ class App extends Component {
       x.book._id === book._id && x.user._id === user._id)
     if (foundLoan) {
       this.removeLoaned(foundLoan)
-      this.deselectBook()
     } else {
       API.loan(book, user._id) 
         .then(resp => this.getLoanedBooks())
