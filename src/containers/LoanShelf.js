@@ -14,7 +14,8 @@ class LoanShelf extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="left-container">
+                <div className="left-container loan-shelf">
+                {console.log("HELLO FROM LOAN SHELF")}
                     <OnLoanBooks
                         loanedBooks={loanedBooks}
                         selectedBook={selectedBook}
@@ -22,7 +23,7 @@ class LoanShelf extends React.Component {
                         setLoanObject={setLoanObject}
                     />
                 </div>
-                <div className='right-container'>
+                <div className='right-container loan-shelf'>
                 {selectedBook && 
                   <BookDetails
                       book={selectedBook}
@@ -31,11 +32,11 @@ class LoanShelf extends React.Component {
                     //   currentlyReading={currentlyReading}
                       handleWant={handleWant}
                       handleFavourite={handleFavourite}
-            
                       handleLoaned={handleLoaned}
                       loanShelf
                       loanObject={loanObject}
                       removeLoaned={removeLoaned}
+                        loanedBooks={loanedBooks}
                   />}
                 </div>      
             </React.Fragment>

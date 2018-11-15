@@ -28,12 +28,12 @@ class BookCard extends React.Component {
       return (
 
         <Card className={(popular ? 'book-card-smallest' : 
-          (listType || profileBook ? 'book-card-small' : 'book-card' ) 
+          (listType || profileBook || loanShelf ? 'book-card-small' : 'book-card' ) 
            )}>
 
             <img
 
-              className={(listType || profileBook || popular  ? 'book-image-small' : 'book-image' )}
+              className={(listType || profileBook || popular || loanShelf ? 'book-image-small' : 'book-image' )}
               onClick={() => this.props.selectBook(book, loanObject)}
 
               src={
@@ -64,7 +64,7 @@ class BookCard extends React.Component {
 
             <button 
 
-            className={'main-btn ' + (wanted || loanShelf  ? 'btn-wanted' : 'btn-green' ) 
+            className={'main-btn ' + ( wanted || loanShelf  ? 'btn-wanted' : 'btn-green' ) 
                 + (listType || loanShelf || popular ? ' hidden' : ' show')}
 
 

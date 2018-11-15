@@ -2,7 +2,7 @@ import React from 'react'
 import './BookDetails.css'
 
 const BookDetails = ({ book, user, handleFavourite, 
-    handleWant, deselectBook, currentlyReading, handleLoaned, loanShelf, removeLoaned, loanObject}) => {
+    handleWant, deselectBook, currentlyReading, handleLoaned, loanShelf, removeLoaned, loanObject, loanedBooks}) => {
 
   const amazonUrl = 'https://www.amazon.co.uk/s/?search-alias=stripbooks&field-isbn='
   const googleUrl = 'https://www.google.com/search?tbo=p&tbm=bks&q=isbn:'
@@ -10,6 +10,7 @@ const BookDetails = ({ book, user, handleFavourite,
       let favourite
       let wanted
       let current
+      let loan
 
       if (user && user.wishlist.find(x => 
           parseInt(x.ISBN_13) === parseInt(book.ISBN_13))) {
@@ -21,14 +22,19 @@ const BookDetails = ({ book, user, handleFavourite,
         }
       if (user && user.currently_reading &&
           parseInt(user.currently_reading.ISBN_13) === parseInt(book.ISBN_13)) {
-           current = true
-        }
+          current = true
+          }
+
+      // if (user && loanShelf && loanedBooks.find(x => 
+      //   x._id === loanObject._id )) {
+      //     loan = true 
+      //   }
+       
+     
 
         
 
   return (
-
-      
       <div className="right-box book-details card"> 
         <h2>{book.title}</h2>
         <h3>Author(s): {book.author}</h3>
@@ -37,14 +43,21 @@ const BookDetails = ({ book, user, handleFavourite,
 
           <div className='details-left-col'>
             <button className={'main-btn details-btn close-button'} onClick={() => deselectBook()} >Close details</button>
-            <button onClick={() => currentlyReading(book)} 
-            className='main-btn btn-black details-btn'
-            disabled={current || !user} >
-                {!current ? "I'm reading this!" : "You are reading this" }
-
-                </button>
+            
             {
-              !loanShelf && <button className={'main-btn details-btn btn-black'} onClick={() => deselectBook()} >Close details</button>
+              !loanShelf &&
+              <button onClick={() => currentlyReading(book)} 
+              className='main-btn btn-black details-btn'
+              disabled={current || !user} >
+                  {!current ? "I'm reading this!" : "You are reading this" }
+  
+                  </button>
+            }
+            
+            
+            {
+              !loanShelf &&
+              <button className={'main-btn details-btn btn-black'} onClick={() => deselectBook()} >Close details</button>
             }    
             
 
@@ -60,13 +73,30 @@ const BookDetails = ({ book, user, handleFavourite,
               disabled={!user} >
               {wanted ? 'Un-wishlist' : 'Add to wishlist'}
             </button>
-            <button
+
+            {
+              !loanShelf && 
+              <button
               className={'main-btn details-btn btn-loaned'}
               onClick={() => handleLoaned(book)}
               disabled={!user} >
-              {/* {loaned ? 'Loaned' : 'Loan'} */}
               Loan Book
-            </button>
+              </button>
+            }
+
+            {
+              loanObject && 
+              <button
+                className={'main-btn details-btn btn-loaned'}
+                onClick={() => {
+                removeLoaned(loanObject)  
+              }}
+              disabled={!user} >
+                Remove from loanShelf
+              </button>
+            }
+
+            
           </div>
           
           <div className='details-right-col'>
@@ -91,26 +121,15 @@ const BookDetails = ({ book, user, handleFavourite,
         </div>
 
   
-        { !loanShelf &&
+        {/* { !loanShelf &&
           <button
           className={'card-btn details-btn btn-loaned'}
           onClick={() => handleLoaned(book)}
           disabled={!user} >
             Loan Book
           </button>
-        }
-        {
-          loanObject && 
-          <button
-          className={'card-btn details-btn btn-loaned'}
-          onClick={() => {
-            console.log("BOOK DETAILS OBJECT:", loanObject)
-            removeLoaned(loanObject)
-          }}
-          disabled={!user} >
-            Remove from loanShelf
-          </button>
-        }
+        } */}
+        
         <div class="book-description">
             <p>{book.description}</p>
         </div>

@@ -21,6 +21,15 @@ body {
   width: 28%;
 }
 
+.left-container.loan-shelf {
+  width: 60%;
+}
+
+.right-container.loan-shelf {
+  width: 33%;
+}
+
+
 .right-box {
   display: flex;
   flex-direction: column;

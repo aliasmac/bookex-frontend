@@ -40,8 +40,9 @@ class HomePage extends React.Component {
                   user={this.props.user}
                   handleWant={this.props.handleWant}
                   handleFavourite={this.props.handleFavourite}
-
                   handleLoaned={this.props.handleLoaned}
+                  loanedBooks={this.props.loanedBooks}
+                  loanObject={this.props.loanObject}
               /> : 
               <PopularBooks 
                   selectBook={this.props.selectBook}

@@ -133,13 +133,14 @@ class App extends Component {
   }
 
   handleLoaned = book => {
+    let newLoanBookedList = [...this.state.loanedBooks, book]
+    this.setState({ loanedBooks: newLoanBookedList })
     API.loan(book, this.state.user._id) 
-      // .then(loan => this.setState({ userLoanedBooks: [...this.state.userLoanedBooks], loan }))
   }
 
   getLoanedBooks = () => {
     API.getAllLoanedBooks()
-      .then(loans => this.setState({ loanedBooks: loans }))
+      .then(loans => this.setState({ loanedBooks: loans.loans }))
       .catch(err => console.log('Error caught in get loaned books', err))
   }
 
@@ -150,12 +151,13 @@ class App extends Component {
   removeLoaned = (loan) => {
     // console.log("LOAN OBJECT ID:", loane.loans_id)
     console.log("LOAN OBJECT LIST:", this.state.loanedBooks)
-    let newLoanList = [...this.state.loanedBooks.loans]
+    API.deleteFromLoans(loan._id)
+    let newLoanList = [...this.state.loanedBooks]
     newLoanList = newLoanList.filter(x => x._id !== loan._id)
     this.setState({
       loanedBooks: newLoanList
-    })
-    API.deleteFromLoans(loan._id)
+    }, () => console.log("LOAN OBJECT LIST:", this.state.loanedBooks))  
+    
   }
 
   addBookToList = (book, list) => { 
@@ -269,6 +271,7 @@ class App extends Component {
     return (
   
       <div >
+        {console.log("LOANED OBJ APPPPPP", this.state.loanObj)}
         <Navbar user={user} login={this.login} logout={this.logout}
           submitSearch={this.submitSearch} 
           renderSignUp={this.renderSignUp}
@@ -323,6 +326,8 @@ class App extends Component {
                 updateResults={this.updateResults}
                 user={user}
                 handleLoaned={this.handleLoaned}
+                loanedBooks={loanedBooks}
+                loanObject={this.state.loanObj}
               /> }
             />
             
