@@ -1,23 +1,22 @@
 .book-details img {
-  height: 90%;
+  height: 95%;
   width: auto;
   margin: 5px;
 }
 
 .book-details h2 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin-bottom: 0px;
 }
 
 .book-details h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 20px;
 }
 
 .book-description {
-  background: pink;
-  min-height: 50%;
-  overflow: auto;
+  text-align: justify;
+  padding: 5px;
 }
 
 .details-btn {
@@ -35,13 +34,12 @@
 
 .details-btn:disabled:hover {
   border: grey;
-  color: black;
 }
 
 .details-links {
-  width: 50%;
   display: flex;
   justify-content: space-around;
+  min-width: 70%;
   margin-bottom: 10px;
 }
 
@@ -51,6 +49,7 @@
   justify-content: center;
   align-items: center;
   padding: 10px;
+  margin-bottom: 10px;
 }
 
 .details-left-col {
@@ -59,4 +58,9 @@
 
 .details-right-col {
   width: 50%
+}
+
+.close-button:hover {
+  background: #F93F3F;
+  color: whitesmoke; 
 }

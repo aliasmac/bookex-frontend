@@ -8,7 +8,9 @@ class BookCard extends React.Component {
   
     render() {
 
-      const { book, handleWant, handleFavourite, handleRemove, user, listType, loanObject, loanShelf } = this.props
+
+      const { book, handleWant, handleFavourite, handleRemove, user, listType, loanObject, loanShelf, profileBook, popular } = this.props
+
 
       let favourite
       let wanted
@@ -25,11 +27,15 @@ class BookCard extends React.Component {
 
       return (
 
-        <Card className={(listType ? 'book-card-small' : 'book-card' )}>
+        <Card className={(popular ? 'book-card-smallest' : 
+          (listType || profileBook ? 'book-card-small' : 'book-card' ) 
+           )}>
 
             <img
-              className={(listType ? 'book-image-small' : 'book-image' )}
+
+              className={(listType || profileBook || popular  ? 'book-image-small' : 'book-image' )}
               onClick={() => this.props.selectBook(book, loanObject)}
+
               src={
                     book.image ?
                     book.image :
@@ -40,14 +46,16 @@ class BookCard extends React.Component {
 
           <CardActions className="card-actions" >
 
-            <button className={'main-btn btn-black' + (listType || loanShelf ? ' hidden' : ' show')}
+            <button className={'main-btn btn-black' + (listType || loanShelf || popular ? ' hidden' : ' show')}
+
                 onClick={() => this.props.selectBook(book)} >
                 Info
               </button>
 
             <button 
             className={'main-btn ' + (favourite  ? 'btn-favourite' : 'btn-red')
-                + (listType || loanShelf ? ' hidden' : ' show')}
+                + (listType || loanShelf || popular ? ' hidden' : ' show')}
+
               disabled={!user}
 
               onClick={() => handleFavourite(book)} >
@@ -55,8 +63,10 @@ class BookCard extends React.Component {
             </button>
 
             <button 
-            className={'main-btn ' + (wanted || loanShelf ? 'btn-wanted' : 'btn-green' ) 
-                + (listType || loanShelf ? ' hidden' : ' show')}
+
+            className={'main-btn ' + (wanted || loanShelf  ? 'btn-wanted' : 'btn-green' ) 
+                + (listType || loanShelf || popular ? ? ' hidden' : ' show')}
+
 
               disabled={!user}
               onClick={() => handleWant(book)} >
@@ -64,7 +74,7 @@ class BookCard extends React.Component {
             </button>
           </CardActions>
 
-          {listType  ?
+          {listType ?
                <button className="remove-btn" onClick={() => handleRemove(book, listType)}>X</button> :
                 null
           }

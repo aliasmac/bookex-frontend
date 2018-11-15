@@ -1,4 +1,5 @@
 import React from 'react'
+import BookCard from './BookCard'
 import './PopularBooks.css'
 
 class PopularBooks extends React.Component {
@@ -27,18 +28,29 @@ class PopularBooks extends React.Component {
 
     render() {
 
-        console.log("POPULARBOOKS:", this.state.popularBooks)
-
+      const {selectBook, selectedBook, user} = this.props
         return (
-            <div className="right-box popular-books card" >
-            <h2>Books trending in the IBDB Community</h2>
+        <React.Fragment>
+
+          <div className="right-box popular-box card" >
+              <h2>Popular books</h2>
+            <div className="popular-books">
             {
                 this.state.popularBooks.map((book, idx) => 
                 <div key={idx} className="popular-book-div">
-                    <p>{book.readers} IBDB'r (s) currently reading {book.book.title}</p>
+                  <BookCard
+                    book={book.book}
+                    selectBook={selectBook}
+                    selectedBook={selectedBook}
+                    user={user}
+                    popular
+                  />
+                  <p className='popular-reader-count'>{book.readers} reader(s)</p>
                 </div>)
             }
-        </div>
+            </div>
+          </div>
+        </React.Fragment>
         )
     }
 

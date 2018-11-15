@@ -13,6 +13,12 @@
   margin: 20px;
 }
 
+.book-card-smallest {
+  height: 150px;
+  width: 100px;
+  margin: 20px;
+}
+
 .book-image {
   height: 85%;
   width: auto;
@@ -39,7 +45,7 @@
   color: #80D681;
 }
 
-.btn-green-show {
+.btn-green {
   border: #7DCEA0 solid 1px;
 }
 
@@ -85,4 +91,8 @@
   background: #C93700;
   color: white;
   border: groove 1px white;
+}
+
+.book-card button:disabled {
+  background: white;
 }

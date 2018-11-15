@@ -7,7 +7,7 @@ const Favourites = ({ user, handleRemove, selectBook, selectedBook, historyProps
     return (
         <div className="favourites-list-container">
             <h2>Your Favourites:</h2>
-            <div className="favourites-list">
+            <div className="favourites-list card">
             {
             user.favourite_books.length === 0 ? <h2>You have no favourite books saved - go find them!</h2>: null
       }
