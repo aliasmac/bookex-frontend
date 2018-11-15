@@ -33,6 +33,10 @@
   color: #5AA753;
 }
 
+.active-route {
+  color: #5AA753;
+}
+
 .left-nav {
   display: flex;
   justify-content: flex-start;

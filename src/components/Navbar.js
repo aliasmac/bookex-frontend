@@ -4,7 +4,7 @@ import LoginForm from './LoginForm'
 import SearchBar from './SearchBar'
 import './NavBar.css'
 
-const NavBar = ({user, login, logout, loginError, submitSearch, renderSignUp}) => {
+const NavBar = ({user, login, logout, loginError, submitSearch, renderSignUp, location}) => {
   return (
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px', zIndex: 1 }}>
       <div className='left-nav'>
@@ -12,13 +12,14 @@ const NavBar = ({user, login, logout, loginError, submitSearch, renderSignUp}) =
           user 
           ?
             <div> 
-              <NavLink to="/" className={'block-link'} >
+              <NavLink to="/" className={'block-link ' + 
+              (location.pathname === '/' ? ' active-route' : null) } >
                 Home
               </NavLink> 
-              <NavLink to="/profile" className={'block-link'} >
+              <NavLink to="/profile" className={'block-link ' + (location.pathname === '/profile' ? ' active-route' : null) } >
                 Profile
               </NavLink>
-              <NavLink to="/loanshelf" className={'block-link'}>
+              <NavLink to="/loanshelf" className={'block-link ' + (location.pathname === '/loanshelf' ? ' active-route' : null)}>
                 Loan Shelf
               </NavLink>
             </div>

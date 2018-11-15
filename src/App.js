@@ -271,10 +271,13 @@ class App extends Component {
   
       <div >
         {console.log("LOANED OBJ APPPPPP", this.state.loanObj)}
-        <Navbar user={user} login={this.login} logout={this.logout}
-          submitSearch={this.submitSearch} 
-          renderSignUp={this.renderSignUp}
-          loginError={loginError}
+        <Route path='/' render={(routerProps) => 
+          <Navbar {...routerProps} 
+            user={user} login={this.login} logout={this.logout}
+            submitSearch={this.submitSearch} 
+            renderSignUp={this.renderSignUp}
+            loginError={loginError}
+          /> }
         />
         
         <div className='main-container'>
