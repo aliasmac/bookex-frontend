@@ -59,6 +59,9 @@ class API {
     })
   }
 
+
+
+
   // BOOK ROUTES
   static loan(book, id) {
     return fetch(this.baseUrl + '/loans', {
@@ -71,7 +74,20 @@ class API {
     }).then(resp => {
       return resp.json()
     }).catch(err => console.log('Error in loaning', err))
+
   }
+
+    static userLoans(id) {
+      return fetch(this.baseUrl + `/loans/${id}`)
+        .then(resp => resp.json())
+    }
+
+    static deleteFromLoans(loanId) {
+      return fetch(this.baseUrl + `/loan/${loanId}`, {
+        method: 'DELETE'
+      })
+    }
+
 
   static getAllLoanedBooks() {
     return fetch(this.baseUrl + '/loans')

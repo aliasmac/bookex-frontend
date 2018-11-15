@@ -7,8 +7,10 @@ import {
 
 import UserProfile from './containers/UserProfile'
 import HomePage from './containers/HomePage'
+import LoanShelf from './containers/LoanShelf'
+
 import Navbar from './components/Navbar'
-import LoanShelf from './components/LoanShelf'
+
 import API from './API'
 
 class App extends Component {
@@ -18,9 +20,14 @@ class App extends Component {
     selectedBook: null,
     lastScroll: 0,
     bookResults: [],
-    suggestions: true,
+
     loanedBooks: [],
+    loanObj: null
+
+    suggestions: true,
+
     renderSignUp: false
+
   }
 
   renderSignUp = () => {
@@ -139,6 +146,22 @@ class App extends Component {
       .catch(err => console.log('Error caught in get loaned books', err))
   }
 
+  setLoanObject = (loanObject) => {
+    return this.state.loanedBooks.find(loanObject)
+  } 
+
+  removeLoaned = (loan) => {
+    // console.log("LOAN OBJECT ID:", loane.loans_id)
+    console.log("LOAN OBJECT LIST:", this.state.loanedBooks)
+    let newLoanList = [...this.state.loanedBooks.loans]
+    newLoanList = newLoanList.filter(x => x._id !== loan._id)
+    this.setState({
+      loanedBooks: newLoanList
+    })
+    API.deleteFromLoans(loan._id)
+  }
+
+
   addBookToList = (book, list) => { 
     const newList = [...this.state.user[list], book]
     this.setState( {
@@ -179,12 +202,23 @@ class App extends Component {
   }
 
   // BOOK DETAILS 
-  selectBook = selectedBook => {
-    this.setState({ 
-      selectedBook,
+  selectBook = (selectedBook, loanObj) => {
+    console.log("SELECTBOOK IN APP:", loanObj)
+    if (loanObj) {
+      this.setState({ 
+        selectedBook,
+        loanObj,
+        lastScroll: document.documentElement.scrollTop,
+      renderSignUp: false
+    }, this.scrollUp) 
+       })
+    } else {
+      this.setState({ selectedBook, 
       lastScroll: document.documentElement.scrollTop,
       renderSignUp: false
     }, this.scrollUp) 
+    }
+   
   }
 
 
@@ -252,6 +286,9 @@ class App extends Component {
                   handleWant={this.handleWant}
                   handleFavourite={this.handleFavourite}
                   user={user}
+                  removeLoaned={this.removeLoaned}
+                  findLoanObject={this.findLoanObject}
+                  loanObject={this.state.loanObj}
                 />
               }
             />
@@ -271,6 +308,7 @@ class App extends Component {
                 suggestions={suggestions}
                 updateResults={this.updateResults}
                 user={user}
+                handleLoaned={this.handleLoaned}
               /> }
             />
             

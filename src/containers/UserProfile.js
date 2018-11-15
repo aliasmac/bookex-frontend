@@ -40,6 +40,7 @@ class UserProfile extends React.Component {
                     selectedBook={selectedBook}
                     selectBook={selectBook}
                   /> 
+
               </React.Fragment>
               }
             </div>
@@ -53,6 +54,7 @@ class UserProfile extends React.Component {
                       currentlyReading={currentlyReading}
                       handleWant={handleWant}
                       handleFavourite={handleFavourite}
+                      handleLoaned={handleLoaned}
                   /> :
 
                   <ProfileBox
