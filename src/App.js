@@ -22,7 +22,10 @@ class App extends Component {
     bookResults: [],
     loanedBooks: [],
     loanObj: null,
+    pauseScroll: false,
+    searchQuery: "",
     suggestions: true,
+    resultsOffset: 0,
     renderSignUp: false,
     userTaken: ""
   }
@@ -76,6 +79,18 @@ class App extends Component {
         console.log('Error in getting user', err)
         this.props.history.push('/')
       })
+    window.onscroll = this.scrollWatcher
+  }
+
+  scrollWatcher = () => {
+    if (this.state.suggestions || this.state.pauseScroll || 
+      this.props.match.url !== '/')
+      { return }
+    const doc = document.documentElement
+    if ((doc.clientHeight + doc.scrollTop) > (doc.scrollHeight - 500)) {
+      this.setState({pauseScroll: true})
+      this.getMoreBooks()
+    }
   }
 
   getSuggestions() {
@@ -165,14 +180,35 @@ class App extends Component {
     )
   } 
 
-  // Search
   getBooks = query => {
     fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)
       .then(resp => resp.json())
       .then(books => {
-        this.deselectBook()
         this.updateResults(books)
+        this.setState({ 
+          lastScroll: 0,
+          searchQuery: query,
+          resultsOffset: 40
+        }, this.scrollUp)
         this.props.history.push('/')
+      })
+      .catch(err => err)
+  }
+
+  getMoreBooks = () => {
+    const {resultsOffset} = this.state
+    fetch(`https://still-plateau-95838.herokuapp.com/books?q=${this.state.searchQuery}&start=${resultsOffset}`)
+      .then(resp => resp.json())
+      .then(books => {
+        let moreBooks = [...this.state.bookResults, ...books]
+        this.updateResults(moreBooks)
+        this.setState({ 
+          resultsOffset: resultsOffset + 40,
+          pauseScroll: true 
+        }, () => setTimeout( () => 
+            this.setState({pauseScroll: false}),
+            1500
+        ))
       })
       .catch(err => err)
   }

@@ -14,7 +14,7 @@ class LoanShelf extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="left-container loan-shelf">
+                <div className="left-container">
                     <OnLoanBooks
                         loanedBooks={loanedBooks}
                         selectedBook={selectedBook}
@@ -22,7 +22,7 @@ class LoanShelf extends React.Component {
                         setLoanObject={setLoanObject}
                     />
                 </div>
-                <div className='right-container loan-shelf'>
+                <div className='right-container'>
                 {selectedBook && 
                   <BookDetails
                       book={selectedBook}

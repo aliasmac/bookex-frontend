@@ -5,7 +5,10 @@ import BookCard from './BookCard'
 const onLoanBooks = ({loanedBooks, user, selectBook, selectedBook, handleRemove, handleWant, handleFavourite}) => {
 
     return (      
-        <div>
+      
+      <div>
+        <h2 style={{"margin-left": "50px"}}>Books available to borrow</h2>
+        <div className='loan-shelf card'>
             {   loanedBooks.loans &&
                 loanedBooks.loans.map((loan, idx) => <BookCard 
                     key={idx}
@@ -22,6 +25,7 @@ const onLoanBooks = ({loanedBooks, user, selectBook, selectedBook, handleRemove,
             }
             
         </div>
+      </div>
     )
 
 }
