@@ -20,12 +20,9 @@ class App extends Component {
     selectedBook: null,
     lastScroll: 0,
     bookResults: [],
-
     loanedBooks: [],
-    loanObj: null
-
+    loanObj: null,
     suggestions: true,
-
     renderSignUp: false
 
   }
@@ -211,7 +208,6 @@ class App extends Component {
         lastScroll: document.documentElement.scrollTop,
       renderSignUp: false
     }, this.scrollUp) 
-       })
     } else {
       this.setState({ selectedBook, 
       lastScroll: document.documentElement.scrollTop,

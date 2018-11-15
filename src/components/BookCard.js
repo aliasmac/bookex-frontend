@@ -65,7 +65,7 @@ class BookCard extends React.Component {
             <button 
 
             className={'main-btn ' + (wanted || loanShelf  ? 'btn-wanted' : 'btn-green' ) 
-                + (listType || loanShelf || popular ? ? ' hidden' : ' show')}
+                + (listType || loanShelf || popular ? ' hidden' : ' show')}
 
 
               disabled={!user}
