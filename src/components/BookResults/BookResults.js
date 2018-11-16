@@ -1,6 +1,5 @@
 import React from 'react'
-
-import BookCard from './BookCard'
+import BookCard from '../BookCard/BookCard'
 
 const BookResults = ({selectBook, handleWant, handleFavourite, books, user}) => {
 

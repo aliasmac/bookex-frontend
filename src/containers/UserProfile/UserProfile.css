@@ -1,11 +1,11 @@
-.favourites-list-container, .wishlist-container {
+.list-container {
   margin: 2rem;
   margin-left: 40px;
   width: 90%;
   margin-top: 0px;
 }
 
-.favourites-list, .wishlist {
+.list {
   display: flex;
   overflow-x: scroll;
   width: 100%;

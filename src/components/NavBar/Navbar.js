@@ -1,13 +1,15 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LoginForm from './LoginForm'
-import SearchBar from './SearchBar'
+import LoginForm from '../LoginForm/LoginForm'
+import SearchBar from '../SearchBar/SearchBar'
 import './NavBar.css'
+import logo from '../../logo.png'
 
 const NavBar = ({user, login, logout, loginError, submitSearch, renderSignUp, location}) => {
   return (
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px', zIndex: 1 }}>
       <div className='left-nav'>
+        <NavLink to="/"><img src={logo} className='logo' alt='logo'/></NavLink>
         {
           user 
           ?

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import BookResults from '../components/BookResults'
-import BookDetails from '../components/BookDetails'
-import PopularBooks from '../components/PopularBooks'
-import SignupForm from '../components/SignupForm'
+import BookResults from '../../components/BookResults/BookResults'
+import BookDetails from '../../components/BookDetails/BookDetails'
+import PopularBooks from '../../components/PopularBooks/PopularBooks'
+import SignupForm from '../../components/SignupForm/SignupForm'
 
 class HomePage extends React.Component {
 
@@ -12,7 +12,6 @@ class HomePage extends React.Component {
     return(
 
       <React.Fragment>
-
         <div className="left-container">
           <BookResults
             className="results"

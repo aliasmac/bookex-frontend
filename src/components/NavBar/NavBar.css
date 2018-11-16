@@ -9,7 +9,7 @@
   height: 60px;
   padding: 12px;
   box-sizing: border-box;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   color: black;
   background: #D1DFD1;
@@ -80,6 +80,15 @@
 .navbar-btn:hover {
   background-color: #2480B8;
   color: white;
+}
+
+.logo {
+  height: 30px;
+  width: auto;
+  position: relative;
+  top: 4px;
+  margin-left: 5px;
+  margin-right: 10px;
 }
 
 

@@ -60,17 +60,10 @@ class API {
   }
 
   // BOOK ROUTES
-  static loan(book, id) {
-    return fetch(this.baseUrl + '/loans', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ 
-        user: id,
-        book: book
-        })
-    }).then(resp => {
-      return resp.json()
-    }).catch(err => console.log('Error in loaning', err))
+  static getBooks(query, resultsOffset=0) {
+    return fetch(this.baseUrl +
+         `/books?q=${query}&start=${resultsOffset}`)
+      .then(resp => resp.json())
   }
 
   static getSuggestions() {
@@ -79,6 +72,19 @@ class API {
   }
 
   // LOAN ROUTES
+  static loan(book, id) {
+    return fetch(this.baseUrl + '/loans', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        user: id,
+        book: book
+      })
+    }).then(resp => {
+      return resp.json()
+    }).catch(err => console.log('Error in loaning', err))
+  }
+
   static userLoans(id) {
     return fetch(this.baseUrl + `/loans/${id}`)
       .then(resp => resp.json())

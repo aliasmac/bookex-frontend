@@ -5,11 +5,11 @@ import {
   withRouter,
 } from 'react-router-dom';
 
-import UserProfile from './containers/UserProfile'
-import HomePage from './containers/HomePage'
-import LoanShelf from './containers/LoanShelf'
+import UserProfile from './containers/UserProfile/UserProfile'
+import HomePage from './containers/HomePage/HomePage'
+import LoanShelf from './containers/LoanShelf/LoanShelf'
 
-import Navbar from './components/Navbar'
+import Navbar from './components/NavBar/Navbar'
 
 import API from './API'
 
@@ -41,7 +41,6 @@ class App extends Component {
   login = (username, password) => {
     API.login(username, password)
       .then(user => {
-        console.log("LOGIN:", user)
         this.setState({ user: user.user })
         this.props.history.push('/profile')
       })
@@ -59,15 +58,7 @@ class App extends Component {
     }).catch(err => console.log('Error logging out', err))
   }
 
-  updateResults = bookResults => {
-    this.setState({
-      bookResults,
-      suggestions: false
-    })
-  }
-
   componentDidMount() {
-    console.log(this.state.user)
     this.getSuggestions()
     this.getLoanedBooks()  
     if (!localStorage.getItem('authorization')) return 
@@ -181,9 +172,10 @@ class App extends Component {
   } 
 
   getBooks = query => {
-    fetch(`https://still-plateau-95838.herokuapp.com/books?q=${query}`)
-      .then(resp => resp.json())
+    console.log(query)
+    API.getBooks(query)
       .then(books => {
+        console.log(books)
         this.updateResults(books)
         this.setState({ 
           lastScroll: 0,
@@ -196,9 +188,8 @@ class App extends Component {
   }
 
   getMoreBooks = () => {
-    const {resultsOffset} = this.state
-    fetch(`https://still-plateau-95838.herokuapp.com/books?q=${this.state.searchQuery}&start=${resultsOffset}`)
-      .then(resp => resp.json())
+    const {resultsOffset, searchQuery} = this.state
+    API.getBooks(searchQuery, resultsOffset)
       .then(books => {
         let moreBooks = [...this.state.bookResults, ...books]
         this.updateResults(moreBooks)
@@ -213,12 +204,18 @@ class App extends Component {
       .catch(err => err)
   }
 
+  updateResults = bookResults => {
+    this.setState({
+      bookResults,
+      suggestions: false
+    })
+  }
+
   submitSearch = query => {
     this.getBooks(query)
   }
 
   selectBook = (selectedBook, loanObj) => {
-    console.log("SELECTBOOK IN APP:", loanObj)
     if (loanObj) {
       this.setState({ 
         selectedBook,
@@ -260,16 +257,12 @@ class App extends Component {
 
   render() {
 
-    console.log("USER:", this.state.user)
-    console.log("LOANED:", this.state.loanedBooks)
-
     const { user, selectedBook, bookResults, loanedBooks, suggestions, renderSignUp, loginError}
      = this.state
 
     return (
   
       <div >
-        {console.log("LOANED OBJ APPPPPP", this.state.loanObj)}
         <Route path='/' render={(routerProps) => 
           <Navbar {...routerProps} 
             user={user} login={this.login} logout={this.logout}

@@ -1,7 +1,7 @@
 import React from 'react'
 
-import OnLoanBooks from '../components/OnLoanBooks'
-import BookDetails from '../components/BookDetails'
+import OnLoanBooks from '../../components/OnLoanBooks/OnLoanBooks'
+import BookDetails from '../../components/BookDetails/BookDetails'
 
 import './LoanShelf.css'
 

@@ -1,9 +1,8 @@
 import React from 'react'
 
-import Wishlist from '../components/Wishlist'
-import ProfileBox from '../components/ProfileBox'
-import BookDetails from '../components/BookDetails'
-import Favourites from '../components/Favourites'
+import ProfileBox from '../../components/ProfileBox/ProfileBox'
+import BookDetails from '../../components/BookDetails/BookDetails'
+import ProfileList from './ProfileList'
 import './UserProfile.css'
 
 class UserProfile extends React.Component {
@@ -27,18 +26,20 @@ class UserProfile extends React.Component {
               {
               user && 
               <React.Fragment>
-                 <Wishlist
+                 <ProfileList
                     user={user}
                     handleRemove={this.handleRemove}
                     selectedBook={selectedBook}
                     selectBook={selectBook}
+                    wishlist={true}
                   />
-
-                  <Favourites
+                
+                  <ProfileList
                     user={user}
                     handleRemove={this.handleRemove}
                     selectedBook={selectedBook}
                     selectBook={selectBook}
+                    wishlist={false}
                   /> 
 
               </React.Fragment>

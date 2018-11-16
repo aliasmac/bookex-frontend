@@ -1,5 +1,5 @@
 import React from 'react'
-import BookCard from './BookCard'
+import BookCard from '../BookCard/BookCard'
 
 
 const onLoanBooks = ({loanedBooks, user, currentlyReading, selectBook, deselectBook, selectedBook, handleFavourite}) => {

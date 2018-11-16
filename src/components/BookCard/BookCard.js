@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
-import comingSoon from './comingsoon.jpeg'
+import comingSoon from '../comingsoon.jpeg'
 import './BookCard.css'
 
 class BookCard extends React.Component {

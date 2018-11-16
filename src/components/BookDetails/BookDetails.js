@@ -2,7 +2,7 @@ import React from 'react'
 import './BookDetails.css'
 
 const BookDetails = ({ book, user, handleFavourite, 
-    handleWant, deselectBook, currentlyReading, handleLoaned, loanShelf, removeLoaned, loanObject, loanedBooks}) => {
+    handleWant, deselectBook, currentlyReading, handleLoaned, loanObject, loanedBooks}) => {
 
   const amazonUrl = 'https://www.amazon.co.uk/s/?search-alias=stripbooks&field-isbn='
   const googleUrl = 'https://www.google.com/search?tbo=p&tbm=bks&q=isbn:'

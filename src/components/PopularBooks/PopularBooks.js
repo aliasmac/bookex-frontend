@@ -1,5 +1,5 @@
 import React from 'react'
-import BookCard from './BookCard'
+import BookCard from '../BookCard/BookCard'
 import './PopularBooks.css'
 
 class PopularBooks extends React.Component {
@@ -10,7 +10,6 @@ class PopularBooks extends React.Component {
 
     // LIVE FETCHING OF POPULAR BOOKS
     componentDidMount() { 
-        console.log("FETCHING")
         this.getPopularBooks()
         this.interval = setInterval(this.getPopularBooks, 10000)
     }
