@@ -5,11 +5,11 @@ import SearchBar from '../SearchBar/SearchBar'
 import './NavBar.css'
 import logo from '../../logo.png'
 
-const NavBar = ({user, login, logout, loginError, submitSearch, renderSignUp, location}) => {
+const NavBar = ({user, login, logout, loginError, submitSearch, renderSignUp, location, getSuggestions}) => {
   return (
     <div className={'navbar'} style={{ borderBottom: '2px solid black', paddingBottom: '10px', marginBottom: '12px', zIndex: 1 }}>
       <div className='left-nav'>
-        <NavLink to="/"><img src={logo} className='logo' alt='logo'/></NavLink>
+        <img src={logo} className='logo' alt='logo' onClick={() => getSuggestions()} />
         {
           user 
           ?

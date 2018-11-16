@@ -78,17 +78,15 @@ class App extends Component {
       this.props.match.url !== '/')
       { return }
     const doc = document.documentElement
-    if ((doc.clientHeight + doc.scrollTop) > (doc.scrollHeight - 500)) {
+    if ((doc.clientHeight + doc.scrollTop) > (doc.scrollHeight - 700)) {
       this.setState({pauseScroll: true})
       this.getMoreBooks()
     }
   }
 
-  getSuggestions() {
-    console.log('here')
+  getSuggestions = () => {
     API.getSuggestions()
       .then(books => {
-        console.log(books)
         this.updateResults(books)
         this.setState({suggestions: true})
       }).catch(err => 
@@ -199,7 +197,7 @@ class App extends Component {
           pauseScroll: true 
         }, () => setTimeout( () => 
             this.setState({pauseScroll: false}),
-            1500
+            1000
         ))
       })
       .catch(err => err)
@@ -270,6 +268,7 @@ class App extends Component {
             submitSearch={this.submitSearch} 
             renderSignUp={this.renderSignUp}
             loginError={loginError}
+            getSuggestions={this.getSuggestions}
           /> }
         />
         
