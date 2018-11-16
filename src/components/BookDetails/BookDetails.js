@@ -76,7 +76,7 @@ const BookDetails = ({ book, user, handleFavourite,
           </div>
           
           <div className='details-right-col'>
-                <img src={
+                <img className='details-img' src={
                     book.image ?
                     book.image :
                     './comingsoon.jpeg'} 
@@ -86,7 +86,7 @@ const BookDetails = ({ book, user, handleFavourite,
 
         </div>
 
-        <div class='details-links'>
+        <div className='details-links'>
           <a href={amazonUrl + book.ISBN_13} target="_blank" rel="noopener noreferrer">
             Amazon
           </a>

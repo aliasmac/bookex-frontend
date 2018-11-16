@@ -5,11 +5,14 @@ import {
   withRouter,
 } from 'react-router-dom';
 
-import UserProfile from './containers/UserProfile/UserProfile'
-import HomePage from './containers/HomePage/HomePage'
-import LoanShelf from './containers/LoanShelf/LoanShelf'
-
-import Navbar from './components/NavBar/Navbar'
+import UserProfile from './components/UserProfile/UserProfile'
+import ProfileBox from './components/ProfileBox/ProfileBox'
+import BookResults from './components/BookResults/BookResults'
+import PopularBooks from './components/PopularBooks/PopularBooks'
+import LoanShelf from './components/LoanShelf/LoanShelf'
+import SignupForm from './components/SignupForm/SignupForm'
+import BookDetails from './components/BookDetails/BookDetails'
+import Navbar from './components/NavBar/NavBar'
 
 import API from './API'
 
@@ -21,7 +24,7 @@ class App extends Component {
     lastScroll: 0,
     bookResults: [],
     loanedBooks: [],
-    loanObj: null,
+    loanObject: null,
     pauseScroll: false,
     searchQuery: "",
     suggestions: true,
@@ -46,8 +49,10 @@ class App extends Component {
       })
       .catch(err => {
         console.log('Invalid login caught', err)
-        this.setState({loginError: 'Invalid login'})
-      })
+        this.setState({loginError: 'Invalid login'}, () =>
+        setTimeout(() => this.setState({loginError: false}), 2000)
+      )
+    })
   }
 
   logout = () => {
@@ -214,11 +219,11 @@ class App extends Component {
     this.getBooks(query)
   }
 
-  selectBook = (selectedBook, loanObj) => {
-    if (loanObj) {
+  selectBook = (selectedBook, loanObject) => {
+    if (loanObject) {
       this.setState({ 
         selectedBook,
-        loanObj,
+        loanObject,
         lastScroll: document.documentElement.scrollTop,
         renderSignUp: false
     }, this.scrollUp) 
@@ -226,7 +231,7 @@ class App extends Component {
       this.setState({ 
         selectedBook, 
         lastScroll: document.documentElement.scrollTop,
-        loanObj: null,
+        loanObject: null,
         renderSignUp: false
     }, this.scrollUp) 
     }
@@ -257,82 +262,100 @@ class App extends Component {
 
   render() {
 
-    const { user, selectedBook, bookResults, loanedBooks, suggestions, renderSignUp, loginError}
+    const { user, selectedBook, bookResults, loanedBooks, loanObject, renderSignUp, loginError}
      = this.state
 
     return (
-  
-      <div >
+      <div>
         <Route path='/' render={(routerProps) => 
           <Navbar {...routerProps} 
-            user={user} login={this.login} logout={this.logout}
+            user={user}
+            login={this.login}
+            logout={this.logout}
+            loginError={loginError}
             submitSearch={this.submitSearch} 
             renderSignUp={this.renderSignUp}
-            loginError={loginError}
             getSuggestions={this.getSuggestions}
           /> }
         />
-        
         <div className='main-container'>
           {user &&
             <Route exact path='/profile' render={(routerProps) => 
               <UserProfile {...routerProps}
               user={user}
-              currentlyReading={this.currentlyReading}
               handleWant={this.handleWant}
               handleFavourite={this.handleFavourite}
-              loanedBooks={loanedBooks}
               selectBook={this.selectBook}
               selectedBook={selectedBook}
-              deselectBook={this.deselectBook}
-              handleLoaned={this.handleLoaned}
               /> }
             />
           }
-          <Route
-              exact path='/loanshelf'
-              render={(routerProps) => 
-                <LoanShelf {...routerProps}
-                  loanedBooks={loanedBooks}
-                  currentlyReading={this.currentlyReading}
-                  deselectBook={this.deselectBook}
-                  selectBook={this.selectBook}
-                  selectedBook={selectedBook}
-                  handleLoaned={this.handleLoaned}
-                  handleWant={this.handleWant}
-                  handleFavourite={this.handleFavourite}
-                  user={user}
-                  removeLoaned={this.removeLoaned}
-                  findLoanObject={this.findLoanObject}
-                  loanObject={this.state.loanObj}
-                />
+          <Route exact path='/loanshelf' render={(routerProps) => 
+            <LoanShelf {...routerProps}
+              loanedBooks={loanedBooks}
+              selectBook={this.selectBook}
+              handleWant={this.handleWant}
+              handleFavourite={this.handleFavourite}
+              user={user}
+              loanObject={loanObject}
+            />
               }
             />
-          <Route
-            exact path='/'
-            render={(routerProps) =>
-              <HomePage {...routerProps}
-                bookResults={bookResults}
-                currentlyReading={this.currentlyReading}
-                selectedBook={selectedBook}
+            <Route exact path='/' render={(routerProps) =>
+              <BookResults
+                className="results"
+                books={bookResults}
                 selectBook={this.selectBook}
-                deselectBook={this.deselectBook}
                 handleWant={this.handleWant}
                 handleFavourite={this.handleFavourite}
-                renderSignUp={renderSignUp}
-                setUser={this.setUser}
-                suggestions={suggestions}
-                updateResults={this.updateResults}
                 user={user}
-                handleLoaned={this.handleLoaned}
-                loanedBooks={loanedBooks}
-                loanObject={this.state.loanObj}
-              /> }
+              />  }
             />
-            
+        <div className='right-container'>
+          {
+          renderSignUp  
+          ?
+          <SignupForm setUser={this.setUser} renderSignUp={this.renderSignUp}
+            history={this.props.history}
+          />
+          :
+          selectedBook
+          ?
+          <BookDetails
+              book={selectedBook}
+              deselectBook={this.deselectBook}
+              user={user}
+              currentlyReading={this.currentlyReading}
+              handleWant={this.handleWant}
+              handleFavourite={this.handleFavourite}
+              handleLoaned={this.handleLoaned}
+              loanedBooks={loanedBooks}
+              loanObject={loanObject}
+            />
+          :
+          <React.Fragment>
+            {user && <Route exact path='/profile'
+              render={() =>
+              <ProfileBox
+                user={user}
+                handleRemove={this.handleRemove}
+                selectedBook={selectedBook}
+                selectBook={this.selectBook}
+              />
+              }
+             />
+            }
+            <Route exact path='/' render={() =>
+              <PopularBooks
+                selectBook={this.selectBook}
+                user={user} />
+              } 
+              /> 
+          </React.Fragment>
+          }
+          </div>      
         </div>
-      </div>
-      
+      </div> 
     );
   }
 }

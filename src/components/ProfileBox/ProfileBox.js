@@ -2,7 +2,7 @@ import React from 'react'
 import BookCard from '../BookCard/BookCard'
 import './ProfileBox.css'
 
-const ProfileBox = ({handleRemove, selectBook, selectedBook, user}) => {
+const ProfileBox = ({selectBook, user}) => {
   
   const book = user.currently_reading
 

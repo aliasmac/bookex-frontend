@@ -50,6 +50,7 @@ class SignupForm extends React.Component {
             }}, this.refs.username.select())
         }}
       else {
+        console.log(user)
         this.props.setUser(user.user)
         this.setState({
           userTaken: ""

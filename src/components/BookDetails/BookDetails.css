@@ -1,6 +1,6 @@
-.book-details img {
-  height: 95%;
-  width: auto;
+.details-img {
+  height: auto;
+  width: 80%;
   margin: 5px;
 }
 

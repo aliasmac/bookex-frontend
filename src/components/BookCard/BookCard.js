@@ -8,7 +8,7 @@ class BookCard extends React.Component {
   
     render() {
 
-      const { book, handleWant, handleFavourite, handleRemove, user, listType, loanObject, loanShelf, profileBook, popular } = this.props
+      const { book, handleWant, handleFavourite, handleRemove, user, listType, loanObject, loanShelf, profileBook, popular, selectBook } = this.props
 
       let favourite
       let wanted
@@ -30,7 +30,7 @@ class BookCard extends React.Component {
 
             <img
               className={(listType || profileBook || popular || loanShelf ? 'book-image-small' : 'book-image' )}
-              onClick={() => this.props.selectBook(book, loanObject)}
+              onClick={() => selectBook(book, loanObject)}
               src={
                     book.image ?
                     book.image :

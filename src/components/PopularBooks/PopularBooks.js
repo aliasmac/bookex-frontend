@@ -8,10 +8,9 @@ class PopularBooks extends React.Component {
       popularBooks: []
     }  
 
-    // LIVE FETCHING OF POPULAR BOOKS
     componentDidMount() { 
         this.getPopularBooks()
-        this.interval = setInterval(this.getPopularBooks, 10000)
+        this.interval = setInterval(this.getPopularBooks, 20000)
     }
 
     componentWillUnmount() {
