@@ -20,8 +20,8 @@
 }
 
 .book-image {
-  height: auto;
-  width: 100%;
+  height: 85%;
+  width: auto;
   cursor: pointer;
 }
 

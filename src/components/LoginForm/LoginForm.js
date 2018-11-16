@@ -24,10 +24,10 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <div class='login-form-container'>
+      <div className='login-form-container'>
         <div>
         <form className='login-form' noValidate autoComplete="off" >
-            <span class='login-error-msg'>{this.props.error}</span>
+            <span className='login-error-msg'>{this.props.error}</span>
           <input
             name="username"
             type="text"

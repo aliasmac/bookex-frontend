@@ -85,8 +85,10 @@ class App extends Component {
   }
 
   getSuggestions() {
+    console.log('here')
     API.getSuggestions()
       .then(books => {
+        console.log(books)
         this.updateResults(books)
         this.setState({suggestions: true})
       }).catch(err => 
@@ -175,7 +177,6 @@ class App extends Component {
     console.log(query)
     API.getBooks(query)
       .then(books => {
-        console.log(books)
         this.updateResults(books)
         this.setState({ 
           lastScroll: 0,
