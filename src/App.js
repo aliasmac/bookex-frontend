@@ -255,11 +255,12 @@ class App extends Component {
 
   scrollDown = () => {
     let currentScroll = document.documentElement.scrollTop
-    if (currentScroll + 20 < this.state.lastScroll) {
-      window.requestAnimationFrame(this.scrollDown)
-      window.scrollTo(0, 
-        currentScroll + ((this.state.lastScroll - currentScroll) / 6))
+    if (!(currentScroll + 100 < this.state.lastScroll)) {
+      return this.setState({lastScroll: 0})
     }
+    window.requestAnimationFrame(this.scrollDown)
+    window.scrollTo(0, 
+        currentScroll + ((this.state.lastScroll - currentScroll) / 6))
   }
 
   render() {
