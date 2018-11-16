@@ -38,7 +38,10 @@ class App extends Component {
   }
 
   setUser = user => {
-    this.setState({user})
+    this.setState({
+      user,
+      renderSignUp: false
+    })
   }
 
   login = (username, password) => {
@@ -177,7 +180,6 @@ class App extends Component {
   } 
 
   getBooks = query => {
-    console.log(query)
     API.getBooks(query)
       .then(books => {
         this.updateResults(books)
@@ -246,17 +248,17 @@ class App extends Component {
   scrollUp = () => {
    let currentScroll = document.documentElement.scrollTop
     if (currentScroll > 0) {
-      window.requestAnimationFrame(this.scrollUp);
+      window.requestAnimationFrame(this.scrollUp)
       window.scrollTo(0, currentScroll - (currentScroll / 5))
     }
   }
 
   scrollDown = () => {
     let currentScroll = document.documentElement.scrollTop
-    if (currentScroll < this.state.lastScroll) {
-      window.requestAnimationFrame(this.scrollDown);
+    if (currentScroll + 20 < this.state.lastScroll) {
+      window.requestAnimationFrame(this.scrollDown)
       window.scrollTo(0, 
-        currentScroll + (this.state.lastScroll / 20  ))
+        currentScroll + ((this.state.lastScroll - currentScroll) / 6))
     }
   }
 
@@ -285,6 +287,7 @@ class App extends Component {
               user={user}
               handleWant={this.handleWant}
               handleFavourite={this.handleFavourite}
+              deselectBook={this.deselectBook}
               selectBook={this.selectBook}
               selectedBook={selectedBook}
               /> }

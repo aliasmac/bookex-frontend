@@ -85,3 +85,12 @@
   background-color: #3693EA ;
   color: white;
 }
+
+.btn-loan:disabled {
+  color: grey
+}
+
+.btn-loan:disabled:hover {
+  color: grey;
+  background-color: white;
+}

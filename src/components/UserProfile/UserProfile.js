@@ -1,6 +1,5 @@
 import React from 'react'
-import ProfileList from './ProfileList'
-import './UserProfile.css'
+import ProfileList from '../ProfileList/ProfileList'
 
 class UserProfile extends React.Component {
 
@@ -10,6 +9,10 @@ class UserProfile extends React.Component {
       } else if (listType === 'favourite_books') {
         this.props.handleFavourite(book)
       }
+    }
+
+    componentDidMount() {
+      this.props.deselectBook()
     }
 
     render() {

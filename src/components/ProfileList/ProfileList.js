@@ -1,5 +1,6 @@
 import React from 'react'
-import BookCard from '../../components/BookCard/BookCard'
+import BookCard from '../BookCard/BookCard'
+import './ProfileList.css'
 
 const ProfileList = 
 ({user, selectBook, selectedBook, handleRemove, wishlist}) => {

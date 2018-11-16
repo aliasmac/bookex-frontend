@@ -21,19 +21,23 @@ const ProfileBox = ({selectBook, user}) => {
         </tr>
         </tbody>
       </table>
-      <tbody className='profile-reading-header'>
-        <td>
-          Currently Reading 
+      <table>
+        <tbody className='profile-reading-header'>
+          <tr>
+            <td>
+            Currently Reading 
 
-      { book ? <BookCard
-          book={book}
-          selectBook={selectBook}
-          user={user}
-          profileBook
-        />
-        : <h4>nothing yet!</h4> }
-        </td>
-      </tbody>
+        { book ? <BookCard
+            book={book}
+            selectBook={selectBook}
+            user={user}
+            profileBook
+          />
+          : <h4>nothing yet!</h4> }
+          </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     )
 

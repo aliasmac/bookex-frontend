@@ -31,7 +31,7 @@ const BookDetails = ({ book, user, handleFavourite,
           ) {
           loan = true
         }
-        console.log(loanObject)
+
   return (
       <div className="right-box book-details card"> 
         <h2>{book.title}</h2>
@@ -96,7 +96,7 @@ const BookDetails = ({ book, user, handleFavourite,
           </a>
         </div>
 
-        <div class="book-description">
+        <div className="book-description">
             <p>{book.description}</p>
         </div>
 
