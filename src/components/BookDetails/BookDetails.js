@@ -25,18 +25,18 @@ const BookDetails = ({ book, user, handleFavourite,
           current = true
           }
 
-      if (loanedBooks.find(x =>
+      if (user && loanedBooks.find(x =>
           parseInt(x.book.ISBN_13) === parseInt(book.ISBN_13) &&
            x.user._id === user._id)
           ) {
           loan = true
         }
-
+        console.log(loanObject)
   return (
       <div className="right-box book-details card"> 
         <h2>{book.title}</h2>
         <h3>Author(s): {book.author}</h3>
-        {loanObject &&
+        {loanObject && 
           <div className="loan-message">{loanObject.user.name || loanObject.user.username} has this to loan!</div>
         }
         <div className='details-cols'>

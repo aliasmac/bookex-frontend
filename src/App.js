@@ -226,6 +226,7 @@ class App extends Component {
       this.setState({ 
         selectedBook, 
         lastScroll: document.documentElement.scrollTop,
+        loanObj: null,
         renderSignUp: false
     }, this.scrollUp) 
     }
