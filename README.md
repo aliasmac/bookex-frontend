@@ -1,44 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#Booked Frontend
+Allows users to search books, add books to their favourites or wishlist, indicate which book they are currently reading, and offer up books for loan (and see which books other users are offering for loan). Backend here: https://github.com/CiaranMn/bookex-backend
 
-## Available Scripts
+##Core functionality for users
+- On app load the home page displays a selection of books users have added to their favourites and wishlists, and on the right shows a leaderboard of books people are currently reading, and how many readers each has.
+- Without being logged in, users can search for books, and click for more details.
+- When logged in users can add books to their favourites or wishlist, indicate they are currently reading a book, and offer a book up for loan (or remove it from availability for loan)
+- From the loan shelf page, users can see what books are available for loan, and click on any to see which user has it available.
+- From their profile page, users can view and remove books on their wishlist and favourite lists.
 
-In the project directory, you can run:
+![](demo.gif)
 
-### `npm start`
+##Frontend Structure
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Written in React. 
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+`npm install && npm run start` to start the frontend in development mode. 
 
-### `npm test`
+The backend is live on Heroku and the frontend will get data from and post data to that server unless told otherwise (in API.js). Backend code is here: https://github.com/thexyman/bookex-backend
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#Todo
+Refocus the app on the **'loan shelf' function** - the world probably doesn't need another Goodreads but building/company intranets could maybe use a book exchange:
 
-### `npm run build`
+- Loans to be associated with locations, and users to be shown loans available in their location only
+- Facility for users to message people with loans on offer expressing interest (with email alert to recipient)
+- Loan offerers to record when they have lent a book out, and see in their profile who it was given to and when
+- Feature to log when a book is returned, and have it go back on the loan shelf (unless the owner doesn't want it to)
+- Wishlist feature to be tweaked to tie in to loan exchange concept, e.g. 'user is looking to borrow this book if anyone has it'
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+###Improvements
+Both the book cards in search results and user lists (which appear on the left) and the book details page (on the right) need to know what books are on which lists for a current user, to allow them to add/remove books to lists directly from the search results or book details depending on their preference. This has led to the state and logic relating to adding and removing from lists living in App, a lot of drilling down props, and makes the application a prime candidate for refactoring to use Redux.
