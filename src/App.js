@@ -12,7 +12,7 @@ import PopularBooks from './components/PopularBooks/PopularBooks'
 import LoanShelf from './components/LoanShelf/LoanShelf'
 import SignupForm from './components/SignupForm/SignupForm'
 import BookDetails from './components/BookDetails/BookDetails'
-import Navbar from './components/NavBar/NavBar'
+import NavBar from './components/NavBar/NavBar'
 
 import API from './API'
 
@@ -221,23 +221,13 @@ class App extends Component {
     this.getBooks(query)
   }
 
-  selectBook = (selectedBook, loanObject) => {
-    if (loanObject) {
+  selectBook = (selectedBook, loanObject=false) => {
       this.setState({ 
         selectedBook,
         loanObject,
         lastScroll: document.documentElement.scrollTop,
         renderSignUp: false
-    }, this.scrollUp) 
-    } else {
-      this.setState({ 
-        selectedBook, 
-        lastScroll: document.documentElement.scrollTop,
-        loanObject: null,
-        renderSignUp: false
-    }, this.scrollUp) 
-    }
-   
+      }, this.scrollUp) 
   }
 
   deselectBook = () => {
@@ -271,7 +261,7 @@ class App extends Component {
     return (
       <div>
         <Route path='/' render={(routerProps) => 
-          <Navbar {...routerProps} 
+          <NavBar {...routerProps} 
             user={user}
             login={this.login}
             logout={this.logout}
